@@ -8,4 +8,5 @@ namespace ThirdSemesterProject.DAL.Model;
 
 public class Product
 {
+
 }
