@@ -9,12 +9,12 @@ namespace ThirdSemesterProject.DAL.Model;
 
 public class Product : Component
 {
-    public int Product_id { get; set; }
+    public int ProductId { get; set; }
     public string Size { get; set; }
 
-    public Product(int product_id, string size, string name, string description, double weight) : base(name, description, weight)
+    public Product(int productId, string size, string name, string description, double weight) : base(name, description, weight)
     {
-        Product_id = product_id;
+        ProductId = productId;
         Size = size;
     }
 
