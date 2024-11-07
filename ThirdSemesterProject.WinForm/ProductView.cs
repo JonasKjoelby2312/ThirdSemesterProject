@@ -30,9 +30,8 @@ namespace ThirdSemesterProject.WinForm
 
         private void ConfirmClicked()
         {
-            //Product product = new Product();
-            var request = new RestRequest("products", Method.Post);
-            //request.AddJsonBody();
+            _restClient.SaveProduct();
+
         }
     }
 }
