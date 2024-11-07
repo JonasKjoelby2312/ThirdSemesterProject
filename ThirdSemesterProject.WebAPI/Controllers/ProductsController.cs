@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ThirdSemesterProject.DAL.DAOs;
 using ThirdSemesterProject.DAL.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,7 +10,7 @@ namespace ThirdSemesterProject.WebSite.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        IProductsDAO _productsDAO;
+        IDAO<Product> _productsDAO;
 
         public ProductsController(IDAO<Product> dao)
         {

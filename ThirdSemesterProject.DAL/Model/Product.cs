@@ -12,17 +12,19 @@ public class Product : Component
     public int ProductId { get; set; }
     public string Size { get; set; }
     public int CurrentStock { get; set; }
+    public required decimal SalesPrice { get; set; }
 
-    public Product(int productId, string size, int currentStock, string name, string description, double weight) : base(name, description, weight)
+    public Product(int productId, string size, int currentStock, decimal salesPrice, string name, string description, double weight) : base(name, description, weight)
     {
         ProductId = productId;
         Size = size;
         CurrentStock = currentStock;
+        SalesPrice = salesPrice;
     }
 
     public override string ToString()
     {
-        return $"Product Size: {Size}, product name: {Name}, description: {Description}, weight: {Weight}, stock: {CurrentStock}";
+        return $"Product Size: {Size}, product name: {Name}, description: {Description}, weight: {Weight}, stock: {CurrentStock}, price: {SalesPrice}";
     }
 
 
