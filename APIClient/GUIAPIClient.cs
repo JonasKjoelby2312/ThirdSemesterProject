@@ -41,7 +41,7 @@ public class GUIAPIClient : IAPIClient
     //Skal ikke bruges pt. vi vil gerne kunne få 10 producter via Id
     public async Task<IEnumerable<Product>> GetAllProductsAsync()
     {
-        var response = await _restClient.RequestAsync<IEnumerable<Product>>(Method.Get, $"products");
+        var response = await _restClient.RequestAsync<IEnumerable<Product>>(Method.Get, $"Products");
         if (!response.IsSuccessful)
         {
             throw new Exception($"Error Retriving Product. Message was {response.Content}");
@@ -62,7 +62,7 @@ public class GUIAPIClient : IAPIClient
 
     public async Task<bool> UpdateProductAsync(Product entity)
     {
-        var response = await _restClient.RequestAsync(Method.Put, $"products/{entity.Id}", entity);
+        var response = await _restClient.RequestAsync(Method.Put, $"products/{entity.ProductId}", entity);
         if (response.StatusCode == HttpStatusCode.OK)
         {
             return true;

@@ -1,4 +1,7 @@
 
+using ThirdSemesterProject.DAL.DAOs;
+using ThirdSemesterProject.DAL.Model;
+
 namespace ThirdSemesterProject.WebAPI
 {
     public class Program
@@ -13,6 +16,8 @@ namespace ThirdSemesterProject.WebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSingleton<IDAO<Product>, ProductDAOStub>();
 
             var app = builder.Build();
 
