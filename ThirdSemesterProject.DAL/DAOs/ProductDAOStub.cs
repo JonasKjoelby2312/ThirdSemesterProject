@@ -28,7 +28,7 @@ public class ProductDAOStub : IDAO<Product>
     //The new product gets the nextAvailableId as ProductID
     //The newly created product get added to the list
     //The method return the nextAvailableId
-    public int Create(Product entity)
+    public int CreateAsync(Product entity)
     {
         var nextAvailableId = _products.Max(entity => entity.ProductId) + 1;
         entity.ProductId = nextAvailableId;
@@ -41,13 +41,13 @@ public class ProductDAOStub : IDAO<Product>
         throw new NotImplementedException();
     }
     //Returns the whole list of products
-    public IEnumerable<Product> GetAll()
+    public IEnumerable<Product> GetAllAsync()
     {
         return _products;
     }
 //The method gets an id in the paramaters, and uses that to look through the list of products,
 //to find the one that matches the one sent in the parameters
-    public Product GetById(int id)
+    public Product GetByIdAsync(int id)
     {
         return _products.First(product => product.ProductId == id);
     }

@@ -1,3 +1,4 @@
+using APIClient;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ThirdSemesterProject.WebSite.Models;
@@ -8,14 +9,20 @@ namespace ThirdSemesterProject.WebSite.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private IAPIClient _client;
+
+
+        public HomeController(ILogger<HomeController> logger, IAPIClient client)
         {
             _logger = logger;
+            _client = client;
         }
+
+        
 
         public IActionResult Index()
         {
-            return View();
+            return View(_client.GetAllProductsAsync());
         }
 
         public IActionResult Privacy()

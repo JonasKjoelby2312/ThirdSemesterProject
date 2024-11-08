@@ -18,9 +18,9 @@ namespace ThirdSemesterProject.WebSite.Controllers
         }
         // GET: api/<ProductsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<Product>> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_productsDAO.GetAllAsync());
         }
 
         // GET api/<ProductsController>/5
@@ -32,9 +32,9 @@ namespace ThirdSemesterProject.WebSite.Controllers
 
         // POST api/<ProductsController>
         [HttpPost]
-        public void Post([FromBody] Product product)
+        public async Task<ActionResult<int>> Post([FromBody] Product product)
         {
-            _productsDAO.Create(product);
+            return Ok( _productsDAO.CreateAsync(product));
         }
 
         // PUT api/<ProductsController>/5
