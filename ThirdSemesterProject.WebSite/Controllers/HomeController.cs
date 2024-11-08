@@ -20,9 +20,10 @@ namespace ThirdSemesterProject.WebSite.Controllers
 
         
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_client.GetAllProductsAsync());
+            var products = await _client.GetAllProductsAsync();
+            return View(products);
         }
 
         public IActionResult Privacy()
