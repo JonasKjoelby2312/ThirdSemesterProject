@@ -22,7 +22,7 @@ namespace ThirdSemesterProject.WebSite.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_client.GetAllProductsAsync());
         }
 
         public IActionResult Privacy()
