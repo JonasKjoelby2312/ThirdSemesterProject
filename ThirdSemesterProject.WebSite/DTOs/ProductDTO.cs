@@ -7,5 +7,7 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public string Weight { get; set; }
+        public decimal SalesPrice { get; set; }
+        public int CurrentStock { get; set; }
     }
 }

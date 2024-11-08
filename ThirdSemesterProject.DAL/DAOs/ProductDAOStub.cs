@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.DAL.DAOs;
-//A static list gets created to hold our products. 
+//A static list gets created to hold the products. 
 //10 products gets created, and added to the list. 
 public class ProductDAOStub : IDAO<Product>
 {
