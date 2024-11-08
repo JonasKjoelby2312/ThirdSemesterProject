@@ -12,7 +12,7 @@ public class Product : Component
     public int ProductId { get; set; }
     public string Size { get; set; }
     public int CurrentStock { get; set; }
-    public required decimal SalesPrice { get; set; }
+    public decimal SalesPrice { get; set; }
 
     public Product(int productId, string size, int currentStock, decimal salesPrice, string name, string description, double weight) : base(name, description, weight)
     {
