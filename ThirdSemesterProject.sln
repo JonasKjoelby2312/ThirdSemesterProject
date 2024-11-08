@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThirdSemesterProject.NUnitT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThirdSemesterProject.WinForm", "ThirdSemesterProject.WinForm\ThirdSemesterProject.WinForm.csproj", "{E5FBF01E-9738-4A97-AB33-045961651DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIClient", "APIClient\APIClient.csproj", "{1ED514EB-1451-4625-9390-28434B019B68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThirdSemesterProject.APIClient", "APIClient\ThirdSemesterProject.APIClient.csproj", "{1ED514EB-1451-4625-9390-28434B019B68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
