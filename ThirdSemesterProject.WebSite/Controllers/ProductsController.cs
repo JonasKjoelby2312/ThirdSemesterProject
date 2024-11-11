@@ -13,7 +13,7 @@ public class ProductsController : Controller
         _client = client;
     }
 
-
+    //HEJ CHRISTIAN
     // GET: ProductsController
     public ActionResult Index()
     {
