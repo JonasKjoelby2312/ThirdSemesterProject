@@ -17,7 +17,8 @@ public class ProductsController : Controller
     // GET: ProductsController
     public ActionResult Index()
     {
-        return View(_client.GetAllProductsAsync());
+        var products = _client.GetAllProductsAsync();
+        return View(products);
     }
 
     // GET: ProductsController/Details/5
