@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ThirdSemesterProject.APIClient.DTOs;
 
-public class Product
+public class ProductDTO
 {
     #region Properties 
     public int ProductId { get; set; }

@@ -9,6 +9,13 @@ namespace ThirdSemesterProject.DAL.DAOs;
 
 public class SaleOrderDAOStub : IDAO<SaleOrder>
 {
+    List<SaleOrder> _saleOrders;
+
+    public SaleOrderDAOStub()
+    {
+        _saleOrders = new List<SaleOrder>();
+    }
+
     public int CreateAsync(SaleOrder entity)
     {
         throw new NotImplementedException();
