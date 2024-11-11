@@ -49,6 +49,8 @@ public class GUIAPIClient : IAPIClient
         return response.Data;
     }
 
+    
+
     public async Task<Product> GetProductByIdAsync(int id)
     {
         var response = await _restClient.RequestAsync<Product>(Method.Get, $"products/{id}");

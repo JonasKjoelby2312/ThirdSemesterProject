@@ -17,6 +17,7 @@ namespace APIClient.DTOs
         public double Weight { get; set; }
         public decimal SalesPrice { get; set; }
         public int CurrentStock { get; set; }
+        public string ProductType { get; set; }
         #endregion
     }
 }

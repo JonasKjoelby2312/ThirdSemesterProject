@@ -9,6 +9,9 @@ namespace ThirdSemesterProject.DAL.DAOs;
 public interface IDAO<T>
 {
     IEnumerable<T> GetAllAsync();
+    IEnumerable<T> GetAllEquipment();
+    IEnumerable<T> GetAllClothes();
+
     T GetByIdAsync(int id);
     int CreateAsync(T entity);
     bool Update(T entity);

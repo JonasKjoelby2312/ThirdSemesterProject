@@ -13,11 +13,12 @@ public class ProductsController : Controller
         _client = client;
     }
 
-    //HEJ CHRISTIAN
+    
     // GET: ProductsController
-    public ActionResult Index()
+    
+    public async Task<ActionResult> Index()
     {
-        var products = _client.GetAllProductsAsync();
+        var products = await _client.GetAllProductsAsync();
         return View(products);
     }
 

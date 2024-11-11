@@ -13,13 +13,15 @@ public class Product : Component
     public string Size { get; set; }
     public int CurrentStock { get; set; }
     public decimal SalesPrice { get; set; }
+    public string ProductType { get; set; }
 
-    public Product(int productId, string size, int currentStock, decimal salesPrice, string name, string description, double weight) : base(name, description, weight)
+    public Product(int productId, string size, int currentStock, decimal salesPrice, string productType, string name, string description, double weight) : base(name, description, weight)
     {
         ProductId = productId;
         Size = size;
         CurrentStock = currentStock;
         SalesPrice = salesPrice;
+        ProductType = productType;
     }
 
     public override string ToString()
