@@ -30,18 +30,12 @@
         {
             tableLayoutPanel1 = new TableLayoutPanel();
             panel1 = new Panel();
-            panel10 = new Panel();
-            lblPlacement = new Label();
-            txtPlacement = new TextBox();
             panel9 = new Panel();
             lblCurrStock = new Label();
             txtCurrStock = new TextBox();
             panel8 = new Panel();
-            lblMaxStock = new Label();
-            txtMaxStock = new TextBox();
-            panel7 = new Panel();
-            lblMinStock = new Label();
-            txtMinStock = new TextBox();
+            lblProductType = new Label();
+            txtProductType = new TextBox();
             panel6 = new Panel();
             lblPrice = new Label();
             txtPrice = new TextBox();
@@ -63,10 +57,8 @@
             btnConfirm = new Button();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
-            panel10.SuspendLayout();
             panel9.SuspendLayout();
             panel8.SuspendLayout();
-            panel7.SuspendLayout();
             panel6.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
@@ -88,15 +80,13 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(800, 598);
+            tableLayoutPanel1.Size = new Size(800, 483);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
-            panel1.Controls.Add(panel10);
             panel1.Controls.Add(panel9);
             panel1.Controls.Add(panel8);
-            panel1.Controls.Add(panel7);
             panel1.Controls.Add(panel6);
             panel1.Controls.Add(panel5);
             panel1.Controls.Add(panel4);
@@ -105,44 +95,15 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(514, 592);
+            panel1.Size = new Size(514, 477);
             panel1.TabIndex = 0;
-            // 
-            // panel10
-            // 
-            panel10.Controls.Add(lblPlacement);
-            panel10.Controls.Add(txtPlacement);
-            panel10.Dock = DockStyle.Top;
-            panel10.Location = new Point(0, 535);
-            panel10.Name = "panel10";
-            panel10.Padding = new Padding(5);
-            panel10.Size = new Size(514, 60);
-            panel10.TabIndex = 9;
-            // 
-            // lblPlacement
-            // 
-            lblPlacement.AutoSize = true;
-            lblPlacement.Dock = DockStyle.Top;
-            lblPlacement.Location = new Point(5, 5);
-            lblPlacement.Name = "lblPlacement";
-            lblPlacement.Size = new Size(81, 20);
-            lblPlacement.TabIndex = 1;
-            lblPlacement.Text = "Placement:";
-            // 
-            // txtPlacement
-            // 
-            txtPlacement.Dock = DockStyle.Bottom;
-            txtPlacement.Location = new Point(5, 28);
-            txtPlacement.Name = "txtPlacement";
-            txtPlacement.Size = new Size(504, 27);
-            txtPlacement.TabIndex = 0;
             // 
             // panel9
             // 
             panel9.Controls.Add(lblCurrStock);
             panel9.Controls.Add(txtCurrStock);
             panel9.Dock = DockStyle.Top;
-            panel9.Location = new Point(0, 475);
+            panel9.Location = new Point(0, 416);
             panel9.Name = "panel9";
             panel9.Padding = new Padding(5);
             panel9.Size = new Size(514, 60);
@@ -165,71 +126,44 @@
             txtCurrStock.Name = "txtCurrStock";
             txtCurrStock.Size = new Size(504, 27);
             txtCurrStock.TabIndex = 0;
+            txtCurrStock.Text = "1";
             // 
             // panel8
             // 
-            panel8.Controls.Add(lblMaxStock);
-            panel8.Controls.Add(txtMaxStock);
+            panel8.Controls.Add(lblProductType);
+            panel8.Controls.Add(txtProductType);
             panel8.Dock = DockStyle.Top;
-            panel8.Location = new Point(0, 415);
+            panel8.Location = new Point(0, 356);
             panel8.Name = "panel8";
             panel8.Padding = new Padding(5);
             panel8.Size = new Size(514, 60);
             panel8.TabIndex = 7;
             // 
-            // lblMaxStock
+            // lblProductType
             // 
-            lblMaxStock.AutoSize = true;
-            lblMaxStock.Dock = DockStyle.Top;
-            lblMaxStock.Location = new Point(5, 5);
-            lblMaxStock.Name = "lblMaxStock";
-            lblMaxStock.Size = new Size(118, 20);
-            lblMaxStock.TabIndex = 1;
-            lblMaxStock.Text = "Maximum Stock:";
+            lblProductType.AutoSize = true;
+            lblProductType.Dock = DockStyle.Top;
+            lblProductType.Location = new Point(5, 5);
+            lblProductType.Name = "lblProductType";
+            lblProductType.Size = new Size(98, 20);
+            lblProductType.TabIndex = 1;
+            lblProductType.Text = "Product Type:";
             // 
-            // txtMaxStock
+            // txtProductType
             // 
-            txtMaxStock.Dock = DockStyle.Bottom;
-            txtMaxStock.Location = new Point(5, 28);
-            txtMaxStock.Name = "txtMaxStock";
-            txtMaxStock.Size = new Size(504, 27);
-            txtMaxStock.TabIndex = 0;
-            // 
-            // panel7
-            // 
-            panel7.Controls.Add(lblMinStock);
-            panel7.Controls.Add(txtMinStock);
-            panel7.Dock = DockStyle.Top;
-            panel7.Location = new Point(0, 355);
-            panel7.Name = "panel7";
-            panel7.Padding = new Padding(5);
-            panel7.Size = new Size(514, 60);
-            panel7.TabIndex = 6;
-            // 
-            // lblMinStock
-            // 
-            lblMinStock.AutoSize = true;
-            lblMinStock.Dock = DockStyle.Top;
-            lblMinStock.Location = new Point(5, 5);
-            lblMinStock.Name = "lblMinStock";
-            lblMinStock.Size = new Size(115, 20);
-            lblMinStock.TabIndex = 1;
-            lblMinStock.Text = "Minimum Stock:";
-            // 
-            // txtMinStock
-            // 
-            txtMinStock.Dock = DockStyle.Bottom;
-            txtMinStock.Location = new Point(5, 28);
-            txtMinStock.Name = "txtMinStock";
-            txtMinStock.Size = new Size(504, 27);
-            txtMinStock.TabIndex = 0;
+            txtProductType.Dock = DockStyle.Bottom;
+            txtProductType.Location = new Point(5, 28);
+            txtProductType.Name = "txtProductType";
+            txtProductType.Size = new Size(504, 27);
+            txtProductType.TabIndex = 0;
+            txtProductType.Text = "1";
             // 
             // panel6
             // 
             panel6.Controls.Add(lblPrice);
             panel6.Controls.Add(txtPrice);
             panel6.Dock = DockStyle.Top;
-            panel6.Location = new Point(0, 295);
+            panel6.Location = new Point(0, 296);
             panel6.Name = "panel6";
             panel6.Padding = new Padding(5);
             panel6.Size = new Size(514, 60);
@@ -252,13 +186,14 @@
             txtPrice.Name = "txtPrice";
             txtPrice.Size = new Size(504, 27);
             txtPrice.TabIndex = 0;
+            txtPrice.Text = "1";
             // 
             // panel5
             // 
             panel5.Controls.Add(lblSize);
             panel5.Controls.Add(txtSize);
             panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(0, 235);
+            panel5.Location = new Point(0, 236);
             panel5.Name = "panel5";
             panel5.Padding = new Padding(5);
             panel5.Size = new Size(514, 60);
@@ -281,13 +216,14 @@
             txtSize.Name = "txtSize";
             txtSize.Size = new Size(504, 27);
             txtSize.TabIndex = 0;
+            txtSize.Text = "1";
             // 
             // panel4
             // 
             panel4.Controls.Add(lblWeight);
             panel4.Controls.Add(txtWeight);
             panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 175);
+            panel4.Location = new Point(0, 176);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(5);
             panel4.Size = new Size(514, 60);
@@ -310,13 +246,14 @@
             txtWeight.Name = "txtWeight";
             txtWeight.Size = new Size(504, 27);
             txtWeight.TabIndex = 0;
+            txtWeight.Text = "1";
             // 
             // panel3
             // 
             panel3.Controls.Add(lblDescription);
             panel3.Controls.Add(txtDescription);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(0, 60);
+            panel3.Location = new Point(0, 61);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(5);
             panel3.Size = new Size(514, 115);
@@ -340,6 +277,7 @@
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(504, 81);
             txtDescription.TabIndex = 0;
+            txtDescription.Text = "1";
             // 
             // panel2
             // 
@@ -349,7 +287,7 @@
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(5);
-            panel2.Size = new Size(514, 60);
+            panel2.Size = new Size(514, 61);
             panel2.TabIndex = 1;
             // 
             // lblName
@@ -365,10 +303,11 @@
             // txtName
             // 
             txtName.Dock = DockStyle.Bottom;
-            txtName.Location = new Point(5, 28);
+            txtName.Location = new Point(5, 29);
             txtName.Name = "txtName";
             txtName.Size = new Size(504, 27);
             txtName.TabIndex = 0;
+            txtName.Text = "1";
             // 
             // panel11
             // 
@@ -376,7 +315,7 @@
             panel11.Dock = DockStyle.Fill;
             panel11.Location = new Point(523, 3);
             panel11.Name = "panel11";
-            panel11.Size = new Size(274, 592);
+            panel11.Size = new Size(274, 477);
             panel11.TabIndex = 1;
             // 
             // panel12
@@ -384,7 +323,7 @@
             panel12.Controls.Add(btnCancel);
             panel12.Controls.Add(btnConfirm);
             panel12.Dock = DockStyle.Bottom;
-            panel12.Location = new Point(0, 542);
+            panel12.Location = new Point(0, 427);
             panel12.Name = "panel12";
             panel12.Padding = new Padding(5);
             panel12.Size = new Size(274, 50);
@@ -416,20 +355,16 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 598);
+            ClientSize = new Size(800, 483);
             Controls.Add(tableLayoutPanel1);
             Name = "ProductView";
             Text = "Form1";
             tableLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
-            panel10.ResumeLayout(false);
-            panel10.PerformLayout();
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
             panel5.ResumeLayout(false);
@@ -462,11 +397,9 @@
         private Label lblCurrStock;
         private TextBox txtCurrStock;
         private Panel panel8;
-        private Label lblMaxStock;
-        private TextBox txtMaxStock;
+        private Label lblProductType;
+        private TextBox txtProductType;
         private Panel panel7;
-        private Label lblMinStock;
-        private TextBox txtMinStock;
         private Panel panel6;
         private Label lblPrice;
         private TextBox txtPrice;
