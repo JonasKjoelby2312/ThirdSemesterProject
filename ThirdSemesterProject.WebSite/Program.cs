@@ -1,4 +1,5 @@
-using APIClient;
+
+using ThirdSemesterProject.APIClient;
 
 namespace ThirdSemesterProject.WebSite
 {
@@ -10,7 +11,7 @@ namespace ThirdSemesterProject.WebSite
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<IAPIClient> ((_) => new GUIAPIClient("https://localhost:7027/api/"));
+            builder.Services.AddSingleton((Func<IServiceProvider, IAPIClient>)((_) => new APIClient.APIClient("https://localhost:7027/api/")));
 
             var app = builder.Build();
 

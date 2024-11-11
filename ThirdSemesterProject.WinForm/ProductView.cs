@@ -1,6 +1,6 @@
-using APIClient;
-using APIClient.DTOs;
 using RestSharp;
+using ThirdSemesterProject.APIClient;
+using ThirdSemesterProject.APIClient.DTOs;
 
 namespace ThirdSemesterProject.WinForm
 {
@@ -12,7 +12,7 @@ namespace ThirdSemesterProject.WinForm
         public ProductView(string baseApiUrl, Product product)
         {
             InitializeComponent();
-            _apiClient = new GUIAPIClient(baseApiUrl);
+            _apiClient = new APIClient.APIClient(baseApiUrl);
             CurrProduct = product;
         }
 

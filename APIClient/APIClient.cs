@@ -1,18 +1,18 @@
-﻿using APIClient.DTOs;
-using RestSharp;
+﻿using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using ThirdSemesterProject.APIClient.DTOs;
 
-namespace APIClient;
+namespace ThirdSemesterProject.APIClient;
 
-public class GUIAPIClient : IAPIClient
+public class APIClient : IAPIClient
 {
     private RestClient _restClient;
-    public GUIAPIClient(string baseUrl) => _restClient = new RestClient(baseUrl);
+    public APIClient(string baseUrl) => _restClient = new RestClient(baseUrl);
 
 
     public async Task<int> CreateProductAsync(Product entity)
