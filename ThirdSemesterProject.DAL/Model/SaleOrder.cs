@@ -2,6 +2,7 @@
 
 public class SaleOrder 
 {
+    public int SaleOrderId { get; set; }
     public DateTime OrderDate { get; set; }
     public decimal Total {  get; set; }
     public Customer Customer {  get; set; }

@@ -19,6 +19,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\APIClient\ThirdSemesterProject.APIClient.csproj" />
+    <ProjectReference Include="..\ThirdSemesterProject.DAL\ThirdSemesterProject.DAL.csproj" />
+    <ProjectReference Include="..\ThirdSemesterProject.WebAPI\ThirdSemesterProject.WebAPI.csproj" />
+    <ProjectReference Include="..\ThirdSemesterProject.WebSite\ThirdSemesterProject.WebSite.csproj" />
   </ItemGroup>
 
   <ItemGroup>

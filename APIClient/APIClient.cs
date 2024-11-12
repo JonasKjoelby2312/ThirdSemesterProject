@@ -25,9 +25,14 @@ public class APIClient : IAPIClient
         return response.Data;
     }
 
-    public Task<int> CreateSaleOrder(SaleOrderDTO entity)
+    public async Task<int> CreateSaleOrderAsync(SaleOrderDTO entity)
     {
-        throw new NotImplementedException();
+        var response = await _restClient.RequestAsync<int>(Method.Post, "saleOrders", entity);
+        if (!response.IsSuccessful)
+        {
+            throw new Exception($"Error Creating Product. Message was {response.Content}");
+        }
+        return response.Data;
     }
 
     public async Task<bool> DeleteProductAsync(int id)

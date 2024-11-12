@@ -1,22 +1,30 @@
-using NUnit.Framework.Constraints;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using ThirdSemesterProject.APIClient;
+using ThirdSemesterProject.APIClient.DTOs;
+using ThirdSemesterProject.DAL.Model;
 
-namespace ThirdSemesterProject.NUnitTest;
-
-public class Tests
+public class SaleOrderTests
 {
+    private Customer customer;
+    private SaleOrderDTO _saleOrder;
     private IAPIClient _client;
+    private SaleOrder _sale;
+
     [SetUp]
-    public void Setup()
+    public async Task SetupAsync()
     {
+        
 
     }
 
     [Test]
-    public void TestCreateSaleOrder()
+    public async Task TestSaleOrder()
     {
-        var product = _client.GetProductByIdAsync(1);
-        var product1 = _client.GetProductByIdAsync(2);
-        Assert.Pass();
+        int number = await _client.CreateSaleOrderAsync(_saleOrder);
+
     }
+
+
 }

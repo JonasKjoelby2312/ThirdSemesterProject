@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ThirdSemesterProject.DAL.DAOs;
+using ThirdSemesterProject.DAL.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +10,14 @@ namespace ThirdSemesterProject.WebAPI.Controllers;
 [ApiController]
 public class SaleOrdersController : ControllerBase
 {
+    IDAO<SaleOrder> _saleOrderDAO;
+
+    public SaleOrdersController(IDAO<SaleOrder> saleOrderDAO)
+    {
+        _saleOrderDAO = saleOrderDAO;
+    }
+
+
     // GET: api/<SaleOrdersController>
     [HttpGet]
     public IEnumerable<string> Get()
@@ -24,8 +34,9 @@ public class SaleOrdersController : ControllerBase
 
     // POST api/<SaleOrdersController>
     [HttpPost]
-    public void Post([FromBody] string value)
+    public async Task<ActionResult<int>> Post([FromBody] SaleOrder saleOrder)
     {
+        return Ok(_saleOrderDAO.CreateAsync(saleOrder));
     }
 
     // PUT api/<SaleOrdersController>/5
