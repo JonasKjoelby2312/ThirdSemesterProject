@@ -18,10 +18,12 @@ public class SaleOrderDAOStub : IDAO<SaleOrder>
 
     public int CreateAsync(SaleOrder entity)
     {
+
         var nextAvailableId = _saleOrders.Max(entity => entity.SaleOrderId) + 1;
         entity.SaleOrderId = nextAvailableId;
         _saleOrders.Add(entity);
         return entity.SaleOrderId;
+
     }
 
     public bool Delete(SaleOrder entity)
