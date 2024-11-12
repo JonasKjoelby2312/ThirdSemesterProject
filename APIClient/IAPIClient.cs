@@ -9,11 +9,13 @@ namespace ThirdSemesterProject.APIClient;
 
 public interface IAPIClient
 {
-    Task<int> CreateProductAsync(Product entity);
-    Task<Product> GetProductByIdAsync(int id);
-    Task<bool> UpdateProductAsync(Product entity);
+    Task<int> CreateProductAsync(ProductDTO entity);
+    Task<ProductDTO> GetProductByIdAsync(int id);
+    Task<bool> UpdateProductAsync(ProductDTO entity);
     Task<bool> DeleteProductAsync(int id);
-    Task<IEnumerable<Product>> GetAllProductsAsync();
+    Task<IEnumerable<ProductDTO>> GetAllProductsAsync();
+
+    Task<int> CreateSaleOrder(SaleOrderDTO entity);
 
 
 

@@ -15,7 +15,7 @@ public class APIClient : IAPIClient
     public APIClient(string baseUrl) => _restClient = new RestClient(baseUrl);
 
 
-    public async Task<int> CreateProductAsync(Product entity)
+    public async Task<int> CreateProductAsync(ProductDTO entity)
     {
         var response = await _restClient.RequestAsync<int>(Method.Post, "products", entity);
         if (!response.IsSuccessful)
@@ -23,6 +23,11 @@ public class APIClient : IAPIClient
             throw new Exception($"Error Creating Product. Message was {response.Content}");
         }
         return response.Data;
+    }
+
+    public Task<int> CreateSaleOrder(SaleOrderDTO entity)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<bool> DeleteProductAsync(int id)
@@ -39,9 +44,9 @@ public class APIClient : IAPIClient
     }
 
     //Skal ikke bruges pt. vi vil gerne kunne få 10 producter via Id
-    public async Task<IEnumerable<Product>> GetAllProductsAsync()
+    public async Task<IEnumerable<ProductDTO>> GetAllProductsAsync()
     {
-        var response = await _restClient.RequestAsync<IEnumerable<Product>>(Method.Get, $"Products");
+        var response = await _restClient.RequestAsync<IEnumerable<ProductDTO>>(Method.Get, $"Products");
         if (!response.IsSuccessful)
         {
             throw new Exception($"Error Retriving Product. Message was {response.Content}");
@@ -51,9 +56,9 @@ public class APIClient : IAPIClient
 
     
 
-    public async Task<Product> GetProductByIdAsync(int id)
+    public async Task<ProductDTO> GetProductByIdAsync(int id)
     {
-        var response = await _restClient.RequestAsync<Product>(Method.Get, $"products/{id}");
+        var response = await _restClient.RequestAsync<ProductDTO>(Method.Get, $"products/{id}");
         if (!response.IsSuccessful)
         {
             throw new Exception($"Error Getting Product by id = {id}. Message was {response.Content}");
@@ -62,7 +67,7 @@ public class APIClient : IAPIClient
         return response.Data;
     }
 
-    public async Task<bool> UpdateProductAsync(Product entity)
+    public async Task<bool> UpdateProductAsync(ProductDTO entity)
     {
         var response = await _restClient.RequestAsync(Method.Put, $"products/{entity.ProductId}", entity);
         if (response.StatusCode == HttpStatusCode.OK)
