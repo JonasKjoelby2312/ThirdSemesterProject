@@ -31,60 +31,61 @@ namespace ThirdSemesterProject.WinForm
             }
         }
 
-            private void btnCancel_Click(object sender, EventArgs e)
-            {
-                CancelClicked();
-            }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            CancelClicked();
+        }
 
-            private void CancelClicked()
-            {
-                Dispose();
-                Close();
-            }
+        private void CancelClicked()
+        {
+            Dispose();
+            Close();
+        }
 
-            private void btnConfirm_Click(object sender, EventArgs e)
-            {
-                ConfirmClicked();
-            }
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            ConfirmClickedAsync();
+        }
 
-            private void ConfirmClicked()
+        private async void ConfirmClickedAsync()
+        {
+            if (CurrProduct != null)
             {
-                if (CurrProduct != null)
-                {
-                    EditProduct();
-                }
-                else
-                {
-                    NewProduct();
-                }
-                _apiClient.CreateProductAsync(CurrProduct);
-                CancelClicked();
+                EditProduct();
             }
+            else
+            {
+                NewProduct();
+            }
+            int givenId = await _apiClient.CreateProductAsync(CurrProduct);
+            CurrProduct.ProductId = givenId;
+            CancelClicked();
+        }
 
-            private void NewProduct()
+        private void NewProduct()
+        {
+            Product res = new Product()
             {
-                Product res = new Product()
-                {
-                    Name = txtName.Text,
-                    Description = txtDescription.Text,
-                    Size = txtSize.Text,
-                    Weight = Convert.ToDouble(txtWeight.Text),
-                    SalesPrice = Convert.ToDecimal(txtPrice.Text),
-                    ProductType = txtProductType.Text,
-                    CurrentStock = Convert.ToInt32(txtCurrStock.Text)
-                };
-                CurrProduct = res;
-            }
+                Name = txtName.Text,
+                Description = txtDescription.Text,
+                Size = txtSize.Text,
+                Weight = Convert.ToDouble(txtWeight.Text),
+                SalesPrice = Convert.ToDecimal(txtPrice.Text),
+                ProductType = txtProductType.Text,
+                CurrentStock = Convert.ToInt32(txtCurrStock.Text)
+            };
+            CurrProduct = res;
+        }
 
-            private void EditProduct()
-            {
-                CurrProduct.Name = txtName.Text;
-                CurrProduct.Description = txtDescription.Text;
-                CurrProduct.Size = txtSize.Text;
-                CurrProduct.Weight = Convert.ToDouble(txtWeight.Text);
-                CurrProduct.SalesPrice = Convert.ToDecimal(txtPrice.Text);
-                CurrProduct.ProductType = txtProductType.Text;
-                CurrProduct.CurrentStock = Convert.ToInt32(txtCurrStock.Text);
-            }
+        private void EditProduct()
+        {
+            CurrProduct.Name = txtName.Text;
+            CurrProduct.Description = txtDescription.Text;
+            CurrProduct.Size = txtSize.Text;
+            CurrProduct.Weight = Convert.ToDouble(txtWeight.Text);
+            CurrProduct.SalesPrice = Convert.ToDecimal(txtPrice.Text);
+            CurrProduct.ProductType = txtProductType.Text;
+            CurrProduct.CurrentStock = Convert.ToInt32(txtCurrStock.Text);
         }
     }
+}
