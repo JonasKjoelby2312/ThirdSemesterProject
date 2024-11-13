@@ -28,15 +28,16 @@ public class ProductDAOStub : IDAO<Product>
     //The new product gets the nextAvailableId as ProductID
     //The newly created product get added to the list
     //The method return the nextAvailableId
-    public int CreateAsync(Product entity)
+    public async Task<int> IDAO<Product>.CreateAsync(Product entity)
     {
         var nextAvailableId = _products.Max(entity => entity.ProductId) + 1;
         entity.ProductId = nextAvailableId;
         _products.Add(entity);
         return entity.ProductId;
+         
     }
 
-    public bool Delete(Product entity)
+    public Task<bool> Delete(Product entity)
     {
         throw new NotImplementedException();
     }
@@ -62,8 +63,15 @@ public class ProductDAOStub : IDAO<Product>
         return _products.First(product => product.ProductId == id);
     }
 
-    public bool Update(Product entity)
+    public Task<bool> Update(Product entity)
     {
         throw new NotImplementedException();
     }
+
+    Task<Product> IDAO<Product>.GetByIdAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+ 
 }
