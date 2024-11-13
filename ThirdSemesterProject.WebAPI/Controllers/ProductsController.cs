@@ -25,9 +25,10 @@ namespace ThirdSemesterProject.WebAPI.Controllers
 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Customer>> Get(int id)
         {
-            return "value";
+            var foundProductById = _productsDAO.GetById(id);
+            return Ok(foundProductById);
         }
 
         // POST api/<ProductsController>
