@@ -50,7 +50,9 @@ public class ProductDAO : BaseDAO, IDAOAsync<Product>
 
     public async Task<IEnumerable<Product>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        using var connection = CreateConnection();
+        var products = await connection.QueryAsync<Product>(GET_ALL_PRODUCTS);
+        return products;
     }
 
     public async Task<IEnumerable<Product>> GetAllClothes()

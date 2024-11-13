@@ -10,29 +10,29 @@ namespace ThirdSemesterProject.WebAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        IDAO<Product> _productsDAO;
+        IDAOAsync<Product> _productsDAO;
 
-        public ProductsController(IDAO<Product> dao)
+        public ProductsController(IDAOAsync<Product> dao)
         {
             _productsDAO = dao;
         }
         // GET: api/<ProductsController>
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetAll()
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllAsync()
         {
-            return Ok(_productsDAO.GetAll());
+            return Ok(await _productsDAO.GetAllAsync());
         }
 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> Get([FromRoute] int id)
         {
-            var foundProductById = _productsDAO.GetById(id);
+            var foundProductById = _productsDAO.GetByIdAsync(id);
             if (foundProductById == null)
             {
                 return NotFound();
             }
-            foundProductById.ProductId = id;
+            
             return Ok(foundProductById);
         }
 
@@ -40,7 +40,7 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> Post([FromBody] Product product)
         {
-            return Ok( _productsDAO.Create(product));
+            return Ok( _productsDAO.CreateAsync(product));
         }
 
         // PUT api/<ProductsController>/5

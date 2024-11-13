@@ -10,9 +10,9 @@ public abstract class Component
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public double Weight { get; set; }
+    public decimal Weight { get; set; }
 
-    protected Component(string name, string description, double weight)
+    protected Component(string name, string description, decimal weight)
     {
         Name = name;
         Description = description;

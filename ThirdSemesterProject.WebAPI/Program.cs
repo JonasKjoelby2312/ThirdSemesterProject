@@ -17,8 +17,9 @@ namespace ThirdSemesterProject.WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddSingleton<IDAO<Product>, ProductDAOStub>();
-
+            /*builder.Services.AddSingleton<IDAO<Product>, ProductDAOStub>();*/
+            const string connectionString = "Data Source=.;Initial Catalog=webshop;Integrated Security=True";
+            builder.Services.AddSingleton<IDAOAsync<Product>>((_) => (IDAOAsync<Product>) new ProductDAO(connectionString));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

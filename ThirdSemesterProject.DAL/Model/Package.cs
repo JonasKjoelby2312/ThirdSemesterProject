@@ -14,7 +14,7 @@ public class Package : Component
     public List<Component> Components { get; set; } = new List<Component>();
 
     //constructer with base to initialize 
-    public Package(string name, string description, double weight) : base(name, description, weight)
+    public Package(string name, string description, decimal weight) : base(name, description, weight)
     {
     }
 
@@ -28,9 +28,9 @@ public class Package : Component
         return Components.Remove(component); 
     }
 
-    public double GetTotalWeight()
+    public decimal GetTotalWeight()
     {
-        double totalWeight = Weight;
+        decimal totalWeight = Weight;
         foreach (Component component in Components)
         {
             totalWeight += component.Weight;
