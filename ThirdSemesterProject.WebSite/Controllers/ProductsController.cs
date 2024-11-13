@@ -23,9 +23,10 @@ public class ProductsController : Controller
     }
 
     // GET: ProductsController/Details/5
-    public ActionResult Details(int id)
+    public async Task<ActionResult> Details(int id)
     {
-        return View();
+        var product = await _client.GetProductByIdAsync(id);
+        return View(product);
     }
 
     // GET: ProductsController/Create

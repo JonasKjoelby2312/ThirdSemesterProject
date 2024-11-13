@@ -60,8 +60,11 @@ public class ProductDAOStub : IDAO<Product>
 //to find the one that matches the one sent in the parameters
     public Product GetById(int id)
     {
-        return _products.First(product => product.ProductId == id);
+        Product productToReturn = _products.FirstOrDefault(product => product.ProductId == id);
+        return productToReturn;
     }
+
+    
 
     public bool Update(Product entity)
     {
