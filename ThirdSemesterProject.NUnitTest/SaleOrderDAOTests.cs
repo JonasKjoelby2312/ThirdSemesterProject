@@ -17,7 +17,7 @@ public class SaleOrderDAOTests
     [SetUp]
     public void Setup()
     {
-        saleOrderDAO = new SaleOrderDAO(""); //TODO CONNECTION STRING
+        saleOrderDAO = new SaleOrderDAO("Data Source=.;Initial Catalog=webshop;Integrated Security=True");
 
         Customer c = new Customer(99, "Epstein", "epstein@island.org", "12345678", "unr34d4bl3");
         _sale = new SaleOrder(c);
