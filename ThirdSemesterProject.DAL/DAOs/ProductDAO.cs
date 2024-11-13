@@ -9,7 +9,7 @@ using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.DAL.DAOs;
 
-public class ProductDAO : BaseDAO, IDAO<Product>
+public class ProductDAO : BaseDAO, IDAOAsync<Product>
 {
     private readonly string GET_ALL_PRODUCTS = "SELECT component_id, name, description, weight, size, color, current_stock from component RIGHT OUTER JOIN product on fk_component_id = component_id;";
     private readonly string INSERT_PRODUCT = "INSERT INTO product values size = @size, color = @color, current_stock = @current_stock;";
@@ -33,6 +33,8 @@ public class ProductDAO : BaseDAO, IDAO<Product>
             int componentId = await connection.ExecuteScalarAsync<int>(INSERT_COMPONENT, entity, transaction);
 
             int productId = await connection.ExecuteScalarAsync<int>(INSERT_PRODUCT, entity, transaction);
+
+            return componentId;
         }
         catch (Exception ex)
         {
@@ -41,32 +43,32 @@ public class ProductDAO : BaseDAO, IDAO<Product>
         }
     }
 
-    public Task<bool> Delete(Product entity)
+    public async Task<bool> Delete(Product entity)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Product> GetAllAsync()
+    public async Task<IEnumerable<Product>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Product> GetAllClothes()
+    public async Task<IEnumerable<Product>> GetAllClothes()
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Product> GetAllEquipment()
+    public async Task<IEnumerable<Product>> GetAllEquipment()
     {
         throw new NotImplementedException();
     }
 
-    public Task<Product> GetByIdAsync(int id)
+    public async Task<Product> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> Update(Product entity)
+    public async Task<bool> Update(Product entity)
     {
         throw new NotImplementedException();
     }

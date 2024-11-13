@@ -42,7 +42,7 @@ public class SaleOrder
         decimal res = 0;
         foreach (OrderLine orderLine in OrderLines)
         {
-            res += orderLine.SubTotal;
+            res += orderLine.Quantity * orderLine.UnitPrice;
         }
         return res;
     }

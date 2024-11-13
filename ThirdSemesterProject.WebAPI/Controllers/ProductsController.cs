@@ -20,7 +20,7 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetAll()
         {
-            return Ok(_productsDAO.GetAllAsync());
+            return Ok(_productsDAO.GetAll());
         }
 
         // GET api/<ProductsController>/5
@@ -34,7 +34,7 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> Post([FromBody] Product product)
         {
-            return Ok( _productsDAO.CreateAsync(product));
+            return Ok( _productsDAO.Create(product));
         }
 
         // PUT api/<ProductsController>/5

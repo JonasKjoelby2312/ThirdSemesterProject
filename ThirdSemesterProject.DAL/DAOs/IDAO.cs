@@ -8,10 +8,10 @@ namespace ThirdSemesterProject.DAL.DAOs;
 
 public interface IDAO<T>
 {
-    IEnumerable<T> GetAllAsync();
-    Task<T> GetByIdAsync(int id);
-    Task<int> CreateAsync(T entity);
-    Task<bool> Update(T entity);
-    Task<bool> Delete(T entity);
+    IEnumerable<T> GetAll();
+    T GetById(int id);
+    int Create(T entity);
+    bool Update(T entity);
+    bool Delete(T entity);
 
 }

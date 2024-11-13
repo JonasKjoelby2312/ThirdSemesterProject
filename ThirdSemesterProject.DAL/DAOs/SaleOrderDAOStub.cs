@@ -16,7 +16,7 @@ public class SaleOrderDAOStub : IDAO<SaleOrder>
         _saleOrders = new List<SaleOrder>();
     }
 
-    public int CreateAsync(SaleOrder entity)
+    public int Create(SaleOrder entity)
     {
 
         var nextAvailableId = _saleOrders.Max(entity => entity.SaleOrderId) + 1;
@@ -31,7 +31,7 @@ public class SaleOrderDAOStub : IDAO<SaleOrder>
         throw new NotImplementedException();
     }
 
-    public IEnumerable<SaleOrder> GetAllAsync()
+    public IEnumerable<SaleOrder> GetAll()
     {
         throw new NotImplementedException();
     }
@@ -46,7 +46,7 @@ public class SaleOrderDAOStub : IDAO<SaleOrder>
         throw new NotImplementedException();
     }
 
-    public SaleOrder GetByIdAsync(int id)
+    public SaleOrder GetById(int id)
     {
         throw new NotImplementedException();
     }

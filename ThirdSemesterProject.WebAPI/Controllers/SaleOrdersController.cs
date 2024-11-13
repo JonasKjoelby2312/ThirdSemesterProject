@@ -36,7 +36,7 @@ public class SaleOrdersController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<int>> Post([FromBody] SaleOrder saleOrder)
     {
-        return Ok(_saleOrderDAO.CreateAsync(saleOrder));
+        return Ok(_saleOrderDAO.Create(saleOrder));
     }
 
     // PUT api/<SaleOrdersController>/5
