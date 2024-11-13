@@ -9,5 +9,5 @@ namespace ThirdSemesterProject.APIClient.DTOs;
 public class OrderLineDTO
 {
     public int Quantity { get; set; }
-    public decimal SubTotal { get; set; }
+    public decimal UnitPrice { get; set; }
 }
