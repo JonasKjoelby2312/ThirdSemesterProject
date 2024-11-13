@@ -9,13 +9,13 @@ using ThirdSemesterProject.DAL.Model;
 //Testing of the SaleOrderDAO class.
 public class SaleOrderDAOTests
 {
-    private SaleOrderDao saleOrderDAO;
+    private SaleOrderDAO saleOrderDAO;
     private SaleOrder _sale;
 
     [SetUp]
     public void Setup()
     {
-        
+        saleOrderDAO = new SaleOrderDAO();
 
     }
 

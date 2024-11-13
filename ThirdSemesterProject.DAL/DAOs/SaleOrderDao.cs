@@ -10,12 +10,12 @@ using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.DAL.DAOs
 {
-    public class SaleOrderDao : BaseDAO, IDAO<SaleOrder>
+    public class SaleOrderDAO : BaseDAO, IDAO<SaleOrder>
     {
         private readonly string INSERT_SALEORDER = "INSERT INTO saleOrder VALUES(order_date = @OrderDate, total = @Total);";
         private readonly string INSERT_ORDERLINES = "INSERT INTO orderLine VALUES(quantity = @Quantity, unit_price = @UnitPrice, fk_sale_order_id = @FKSaleOrderId, fk_product_id = @FKProductId);";
 
-        public SaleOrderDao(string connectionstring) : base(connectionstring)
+        public SaleOrderDAO(string connectionstring) : base(connectionstring)
         {
         }
 
