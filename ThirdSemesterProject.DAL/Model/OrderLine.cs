@@ -10,5 +10,12 @@ public class OrderLine
 {
     public int OrderLineId { get; set; }
     public int Quantity { get; set; }
-    public decimal SubTotal { get; set; }
+    public required Product Product { get; set; }
+    public decimal UnitPrice { get; set; }
+
+    public OrderLine(Product product, int quantity)
+    {
+        Quantity = quantity;
+        Product = product;
+    }
 }
