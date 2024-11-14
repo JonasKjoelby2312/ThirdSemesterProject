@@ -63,7 +63,7 @@ public class APIClient : IAPIClient
 
     public async Task<ProductDTO> GetProductByIdAsync(int id)
     {
-        var response = await _restClient.RequestAsync<ProductDTO>(Method.Get, $"products/{id}", null);
+        var response = await _restClient.RequestAsync<ProductDTO>(Method.Get, $"products/{id}");
         if (!response.IsSuccessful)
         {
             throw new Exception($"Error Getting Product by id = {id}. Message was {response.Content}");

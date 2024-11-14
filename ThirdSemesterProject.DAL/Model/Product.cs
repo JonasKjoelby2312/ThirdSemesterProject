@@ -12,8 +12,8 @@ public class Product : Component
     public int ProductId { get; set; }
     public string Size { get; set; }
     public int CurrentStock { get; set; }
-    //public decimal SalesPrice { get; set; }
-    //public string Color { get; set; }
+    public decimal SalesPrice { get; set; }
+    public string Color { get; set; }
     public string ProductType { get; set; }
     public int Fk_componentId { get; set; }
 

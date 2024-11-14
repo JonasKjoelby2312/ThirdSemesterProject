@@ -12,6 +12,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\APIClient\ThirdSemesterProject.APIClient.csproj" />
+    <ProjectReference Include="..\ThirdSemesterProject.DAL\ThirdSemesterProject.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
 
 </Project>
