@@ -12,10 +12,11 @@ public abstract class Component
     public string Description { get; set; }
     public decimal Weight { get; set; }
 
-    protected Component(string name, string description, decimal weight)
-    {
-        Name = name;
-        Description = description;
-        Weight = weight;
-    }
+    //protected Component(string name, string description, decimal weight)
+    //{
+    //    Name = name;
+    //    Description = description;
+    //    Weight = weight;
+    //}
+
 }

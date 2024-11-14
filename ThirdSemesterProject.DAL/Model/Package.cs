@@ -14,9 +14,9 @@ public class Package : Component
     public List<Component> Components { get; set; } = new List<Component>();
 
     //constructer with base to initialize 
-    public Package(string name, string description, decimal weight) : base(name, description, weight)
-    {
-    }
+    //public Package(string name, string description, decimal weight) : base(name, description, weight)
+    //{
+    //}
 
     public void AddComponent(Component component) 
     {  
