@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ThirdSemesterProject.APIClient.DTOs.ProductDTO>
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -12,7 +13,9 @@
 <table class="table">
     <thead>
         <tr>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -31,6 +34,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </th>
              
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -39,15 +45,20 @@
                 @Html.DisplayFor(modelItem => item.Size)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SalesPrice) KR. 
+                @Html.DisplayFor(modelItem => item.SalesPrice) DKK.
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CurrentStock)
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("See More", "Details", new { id=item.ProductId }) 
+
+
+                    <a class="btn-sm btn-primary" href="@Url.Action("Add", "Cart", new { id = item.ProductId, quantity = 1 })">Add to cart 
+                        <span class="bi-cart-plus" style="margin-left:0px;"></span></a>
+               @*  @Html.ActionLink("Add To Cart", "Cart", new { id = item.ProductId, quantity = 1 }) *@
+                | @Html.ActionLink("See More", "Details", new { id=item.ProductId }) 
                 @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+                
             </td>
         </tr>
 }
