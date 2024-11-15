@@ -18,11 +18,11 @@ public class Cart
             if (ProductQuantities[productQuantity.Id].Quantity <= 0)
             {
                 ProductQuantities.Remove(productQuantity.Id);
-            } 
-            else
-            {
-                ProductQuantities[productQuantity.Id] = productQuantity;
             }
+        }
+        else
+        {
+            ProductQuantities[productQuantity.Id] = productQuantity;
         }
     }
 
