@@ -22,7 +22,7 @@ public class Cart
         }
         else
         {
-            ProductQuantities[productQuantity.Id] = productQuantity;
+            ProductQuantities.Add(productQuantity.Id, productQuantity);
         }
     }
 
