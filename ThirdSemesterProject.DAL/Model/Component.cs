@@ -8,11 +8,12 @@ namespace ThirdSemesterProject.DAL.Model;
 
 public abstract class Component
 {
+    public int ComponentId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public decimal Weight { get; set; }
 
-    //protected Component(string name, string description, decimal weight)
+    //public Component(string name, string description, decimal weight)
     //{
     //    Name = name;
     //    Description = description;

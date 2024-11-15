@@ -9,7 +9,7 @@ namespace ThirdSemesterProject.DAL.Model;
 
 public class Package : Component
 {
-    
+    public string PackageId { get; set; }
     //Holds the componets within the package
     public List<Component> Components { get; set; } = new List<Component>();
 

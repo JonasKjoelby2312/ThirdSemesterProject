@@ -8,9 +8,12 @@ namespace ThirdSemesterProject.DAL.Model;
 
 public class Customer : Person
 {
-   
 
-    public Customer(int personId, string name, string email, string phoneNO, string passwordHash) : base(personId, name, email, phoneNO, passwordHash)
+
+    //public Customer(int personId, string name, string email, string phoneNO, string passwordHash, string personType) : base(personId, name, email, phoneNO, passwordHash, personType)
+    //{
+    //}
+    public Customer()
     {
     }
 }

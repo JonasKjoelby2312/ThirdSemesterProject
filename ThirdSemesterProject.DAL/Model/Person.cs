@@ -14,12 +14,21 @@ public abstract class Person
     public string PhoneNO { get; set; }
     public string PasswordHash { get; set; }
 
-    protected Person(int personId, string name, string email, string phoneNO, string passwordHash)
+    public string PersonType { get; set; }
+
+    public Person()
     {
-        PersonId = personId;
-        Name = name;
-        Email = email;
-        PhoneNO = phoneNO;
-        PasswordHash = passwordHash;
     }
+
+    //public Person(int personId, string name, string email, string phoneNO, string passwordHash, string personType)
+    //{
+    //    PersonId = personId;
+    //    Name = name;
+    //    Email = email;
+    //    PhoneNO = phoneNO;
+    //    PasswordHash = passwordHash;
+    //    PersonType = personType;
+    //}
+
+
 }

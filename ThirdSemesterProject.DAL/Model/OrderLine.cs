@@ -13,9 +13,15 @@ public class OrderLine
     public Product Product { get; set; }
     public decimal UnitPrice { get; set; }
 
-    public OrderLine(Product product, int quantity)
+    public OrderLine()
     {
-        Quantity = quantity;
-        Product = product;
     }
+
+
+
+    //public OrderLine(Product product, int quantity)
+    //{
+    //    Quantity = quantity;
+    //    Product = product;
+    //}
 }
