@@ -54,7 +54,7 @@ namespace ThirdSemesterProject.WinForm
                 Name = txtName.Text,
                 Description = txtDescription.Text,
                 Size = txtSize.Text,
-                Weight = Convert.ToDouble(txtWeight.Text),
+                Weight = Convert.ToDecimal(txtWeight.Text),
                 SalesPrice = Convert.ToDecimal(txtPrice.Text),
                 ProductType = txtProductType.Text,
                 CurrentStock = Convert.ToInt32(txtCurrStock.Text)
@@ -67,7 +67,7 @@ namespace ThirdSemesterProject.WinForm
             CurrProduct.Name = txtName.Text;
             CurrProduct.Description = txtDescription.Text;
             CurrProduct.Size = txtSize.Text;
-            CurrProduct.Weight = Convert.ToDouble(txtWeight.Text);
+            CurrProduct.Weight = Convert.ToDecimal(txtWeight.Text);
             CurrProduct.SalesPrice = Convert.ToDecimal(txtPrice.Text);
             CurrProduct.ProductType = txtProductType.Text;
             CurrProduct.CurrentStock = Convert.ToInt32(txtCurrStock.Text);

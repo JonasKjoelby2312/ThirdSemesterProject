@@ -70,8 +70,8 @@ public class ProductDAO : BaseDAO, IDAOAsync<Product>
     public async Task<Product> GetByIdAsync(int id)
     {
         using var connection = CreateConnection();
-        var product = await connection.QuerySingleAsync<Product>(SELECT_PRODUCT_BY_ID);
-        return product;
+        var product = await connection.QuerySingleAsync<Product>(SELECT_PRODUCT_BY_ID, new {productId = id});
+        return product; 
     }
 
     public async Task<bool> Update(Product entity)
