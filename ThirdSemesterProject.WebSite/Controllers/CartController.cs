@@ -4,6 +4,8 @@ using System.Text.Json;
 using ThirdSemesterProject.APIClient;
 using ThirdSemesterProject.APIClient.DTOs;
 using ThirdSemesterProject.DAL.DAOs;
+using ThirdSemesterProject.DAL.Model;
+
 //using ThirdSemesterProject.DAL.Model;
 using ThirdSemesterProject.WebSite.Models;
 
@@ -43,10 +45,24 @@ public class CartController : Controller
     {
         return View();
     }
+    /*[HttpPost]*/
+    /*public ActionResult CreateSaleOrder(SaleOrderDTO saleOrder)
+    {
+        try
+        {
+            _client.CreateSaleOrderAsync(saleOrder);
+            return RedirectToAction(nameof(Index));
+        }
+        catch
+        {
+            return View();
+        }
+    }*/
 
     // GET: CartController/Create
     public ActionResult Create()
     {
+
         return View();
     }
 

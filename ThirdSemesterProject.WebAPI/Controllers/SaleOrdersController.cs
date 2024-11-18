@@ -10,9 +10,9 @@ namespace ThirdSemesterProject.WebAPI.Controllers;
 [ApiController]
 public class SaleOrdersController : ControllerBase
 {
-    IDAO<SaleOrder> _saleOrderDAO;
+    IDAOAsync<SaleOrder> _saleOrderDAO;
 
-    public SaleOrdersController(IDAO<SaleOrder> saleOrderDAO)
+    public SaleOrdersController(IDAOAsync<SaleOrder> saleOrderDAO)
     {
         _saleOrderDAO = saleOrderDAO;
     }
@@ -36,7 +36,7 @@ public class SaleOrdersController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<int>> Post([FromBody] SaleOrder saleOrder)
     {
-        return Ok(_saleOrderDAO.Create(saleOrder));
+        return Ok(_saleOrderDAO.CreateAsync(saleOrder));
     }
 
     // PUT api/<SaleOrdersController>/5
