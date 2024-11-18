@@ -11,7 +11,5 @@ public class SaleOrderDTO
     public DateTime OrderDate { get; set; }
     public decimal Total { get; set; }
     public CustomerDTO Customer { get; set; }
-
-    //"set" in orderlines should be deleted...........
-    public List<OrderLineDTO> OrderLines { get; /*set;*/ }
+    public List<OrderLineDTO> OrderLines { get; }
 }

@@ -4,7 +4,7 @@ using System.Text.Json;
 using ThirdSemesterProject.APIClient;
 using ThirdSemesterProject.APIClient.DTOs;
 using ThirdSemesterProject.DAL.DAOs;
-using ThirdSemesterProject.DAL.Model;
+//using ThirdSemesterProject.DAL.Model;
 using ThirdSemesterProject.WebSite.Models;
 
 namespace ThirdSemesterProject.WebSite.Controllers;
@@ -52,11 +52,12 @@ public class CartController : Controller
 
     // POST: CartController/Create
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Create(IFormCollection collection)
+    [ValidateAntiForgeryToken]  
+    public ActionResult Create(SaleOrderDTO saleOrder)
     {
         try
         {
+            _client.CreateSaleOrderAsync(saleOrder);
             return RedirectToAction(nameof(Index));
         }
         catch
@@ -110,8 +111,8 @@ public class CartController : Controller
     public ActionResult EmptyCart()
     {
         var cart =  LoadChangeAndSaveCart(cart => cart.EmptyAll());
-        RedirectToAction("Index", cart);
-        return View();
+        return RedirectToAction("Index", cart);
+        
     }
 
     private Cart LoadChangeAndSaveCart(Action<Cart> action)

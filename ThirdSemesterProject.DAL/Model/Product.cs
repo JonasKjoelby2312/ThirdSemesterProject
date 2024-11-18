@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace ThirdSemesterProject.DAL.Model;
 
-public class Product : Component
+public class Product
 {
     public int ProductId { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public decimal Weight { get; set; }
     public string Size { get; set; }
     public int CurrentStock { get; set; }
     public decimal SalesPrice { get; set; }
     public string Color { get; set; }
     public string ProductType { get; set; }
-    public int Fk_componentId { get; set; }
 
     //public Product(int productId, string size, int currentStock, /*string color*/ /*decimal salesPrice,*/ string productType, int fk_componentId, string name, string description, decimal weight) : base(name, description, weight)
     //{
