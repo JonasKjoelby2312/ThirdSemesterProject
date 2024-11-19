@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ThirdSemesterProject.DAL.DAOs;
 using ThirdSemesterProject.DAL.Model;
+using ThirdSemesterProject.WebAPI.DTOs;
+using ThirdSemesterProject.WebAPI.DTOs.DTOConverter;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,10 +36,10 @@ public class SaleOrdersController : ControllerBase
 
     // POST api/<SaleOrdersController>
     [HttpPost]
-    public async Task<ActionResult<int>> Post([FromBody] SaleOrder saleOrder)
+    public async Task<ActionResult<int>> Post([FromBody] SaleOrderDTO saleOrderDTO)
     {
 
-        return Ok(await _saleOrderDAO.CreateAsync(saleOrder));
+        return Ok(await _saleOrderDAO.CreateAsync(saleOrderDTO.FromDTO()));
 
     }
 
