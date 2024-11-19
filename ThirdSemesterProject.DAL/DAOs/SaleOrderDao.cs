@@ -12,8 +12,8 @@ namespace ThirdSemesterProject.DAL.DAOs;
 
 public class SaleOrderDAO : BaseDAO, IDAOAsync<SaleOrder>
 {
-    private readonly string INSERT_SALEORDER = "INSERT INTO saleOrder VALUES(order_date = @OrderDate, total = @Total);"; //TODO customer fk?
-    private readonly string INSERT_ORDERLINES = "INSERT INTO orderLine VALUES(quantity = @Quantity, unit_price = @UnitPrice, fk_sale_order_id = @FKSaleOrderId, fk_product_id = @FKProductId);";
+    private readonly string INSERT_SALEORDER = "INSERT INTO saleOrder(order_date, total) VALUES (@OrderDate, @Total) SELECT CAST(SCOPE_IDENTITY() AS INT());"; //TODO customer fk?
+    private readonly string INSERT_ORDERLINES = "INSERT INTO orderLine VALUES (quantity, unit_price, fk_sale_order_id, fk_product_id) VALUES (@Quantity, @UnitPrice, @SaleOrderId, @FKProductId));";
     private readonly string GET_STOCK_BY_PRODUCT_ID = "SELECT current_Stock from product WHERE product_id = @productId;";
     private readonly string UPDATE_CURRENT_STOCK = "UPDATE product set current_stock = current_stock - @quantity where product_id = @productId;";
     public SaleOrderDAO(string connectionstring) : base(connectionstring)
