@@ -34,9 +34,9 @@ public class CartController : Controller
     // GET: CartController/Add/5?quantity=3
     public async Task<ActionResult> Add(int id, int quantity)
     {
-        ProductDTO product = await _client.GetProductByIdAsync(id);
-        var cart = LoadChangeAndSaveCart(cart => cart.ChangeQuantity(new ProductQuantity(product, quantity)));
-        //return RedirectToAction("Index", cart);
+        ProductDTO productDTO = await _client.GetProductByIdAsync(id);
+        var cart = LoadChangeAndSaveCart(cart => cart.ChangeQuantity(new ProductQuantity(productDTO, quantity)));
+        //return RedirectToAction("Index", product);
         return View("Index", cart);
     }
 
@@ -69,17 +69,31 @@ public class CartController : Controller
     // POST: CartController/Create
     [HttpPost]
     [ValidateAntiForgeryToken]  
-    public ActionResult Create(SaleOrderDTO saleOrder)
+    public ActionResult Create(SaleOrderDTO saleOrderDTO)
     {
         try
         {
-            _client.CreateSaleOrderAsync(saleOrder);
+            CartToSaleOrder(saleOrderDTO);
+            _client.CreateSaleOrderAsync(saleOrderDTO);
+            EmptyCart();
             return RedirectToAction(nameof(Index));
         }
         catch
         {
             return View();
         }
+    }
+
+    private async Task<SaleOrderDTO> CartToSaleOrder(SaleOrderDTO saleOrderDTO)
+    {
+        Cart cart = GetCartFromCookie();
+        foreach (ProductQuantity item in cart.ProductQuantities.Values)
+        {
+            
+            saleOrderDTO.OrderLines.Add(new OrderLineDTO() { Quantity = item.Quantity, UnitPrice = item.Price, ProductDTO = new ProductDTO { ProductId = item.Id, CurrentStock = 0, Description = "", Name = "", ProductType = "", SalesPrice = 100, Size = "", Weight = 2 }});
+
+        }
+        return saleOrderDTO;
     }
 
     // GET: CartController/Edit/5

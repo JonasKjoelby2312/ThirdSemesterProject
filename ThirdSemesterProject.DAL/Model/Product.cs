@@ -19,16 +19,10 @@ public class Product
     public string Color { get; set; }
     public string ProductType { get; set; }
 
-    //public Product(int productId, string size, int currentStock, /*string color*/ /*decimal salesPrice,*/ string productType, int fk_componentId, string name, string description, decimal weight) : base(name, description, weight)
-    //{
-    //    ProductId = productId;
-    //    Size = size;
-    //    CurrentStock = currentStock;
-    //    //SalesPrice = salesPrice;
-    //    //Color = color;
-    //    ProductType = productType;
-    //    Fk_componentId = fk_componentId;
-    //}
+    public Product()
+    {
+
+    }
     public override string ToString()
     {
         return $"Product Size: {Size}, product name: {Name}, description: {Description}, weight: {Weight}, stock: {CurrentStock}";

@@ -8,6 +8,27 @@ public static class DTOConverter
     {
         var saleOrder = new SaleOrder();
         saleOrderDTOToConvert.CopyPropertiesTo(saleOrder);
+        //saleOrder.OrderLines = new List<OrderLine>();
+        foreach (OrderLineDTO item in saleOrderDTOToConvert.OrderLines)
+        {
+            Product product = item.ProductDTO.FromDTO();
+            saleOrder.AddOrderLineToSaleOrder(item.FromDTO(product));
+        }
         return saleOrder;
+    }
+
+    public static OrderLine FromDTO(this OrderLineDTO orderLineDTOToConvert, Product product)
+    {
+        var orderLine = new OrderLine();
+        orderLineDTOToConvert.CopyPropertiesTo(orderLine); 
+        orderLine.Product = product;
+        return orderLine;
+    }
+
+    public static Product FromDTO(this ProductDTO productDTOToConvert)
+    {
+        var product = new Product();
+        productDTOToConvert.CopyPropertiesTo(product);
+        return product;
     }
 }
