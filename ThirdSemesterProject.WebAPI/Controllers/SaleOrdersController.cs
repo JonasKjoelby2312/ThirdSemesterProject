@@ -10,9 +10,9 @@ namespace ThirdSemesterProject.WebAPI.Controllers;
 [ApiController]
 public class SaleOrdersController : ControllerBase
 {
-    IDAO<SaleOrder> _saleOrderDAO;
+    IDAOAsync<SaleOrder> _saleOrderDAO;
 
-    public SaleOrdersController(IDAO<SaleOrder> saleOrderDAO)
+    public SaleOrdersController(IDAOAsync<SaleOrder> saleOrderDAO)
     {
         _saleOrderDAO = saleOrderDAO;
     }

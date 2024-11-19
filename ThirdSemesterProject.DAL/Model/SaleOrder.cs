@@ -10,10 +10,10 @@ public class SaleOrder
     public List<OrderLine> OrderLines { get; }
     /*  public string Address { get; set; }*/
 
-    public SaleOrder(Customer customer)
+    public SaleOrder()
     {
         OrderDate = DateTime.Now;
-        Customer = customer;
+        Customer = new Customer() { Name = "John", Email = "John", PasswordHash ="MAl", PersonId = 1, PersonType = "Customer", PhoneNO = "2353435"};
         OrderLines = new List<OrderLine>();
     }
 
