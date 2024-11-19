@@ -19,4 +19,9 @@ public class ProductDTO
     public int CurrentStock { get; set; }
     public string ProductType { get; set; }
     #endregion
+
+    public ProductDTO()
+    {
+        
+    }
 }

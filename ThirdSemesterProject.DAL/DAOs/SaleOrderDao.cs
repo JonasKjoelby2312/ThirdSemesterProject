@@ -13,7 +13,7 @@ namespace ThirdSemesterProject.DAL.DAOs;
 public class SaleOrderDAO : BaseDAO, IDAOAsync<SaleOrder>
 {
     private readonly string INSERT_SALEORDER = "INSERT INTO saleOrder(order_date, total) VALUES (@OrderDate, @Total) SELECT CAST(SCOPE_IDENTITY() AS INT());"; //TODO customer fk?
-    private readonly string INSERT_ORDERLINES = "INSERT INTO orderLine VALUES (quantity, unit_price, fk_sale_order_id, fk_product_id) VALUES (@Quantity, @UnitPrice, @SaleOrderId, @FKProductId));";
+    private readonly string INSERT_ORDERLINES = "INSERT INTO orderLine (quantity, unit_price, fk_sale_order_id, fk_product_id) VALUES (@Quantity, @UnitPrice, @SaleOrderId, @FKProductId);";
     private readonly string GET_STOCK_BY_PRODUCT_ID = "SELECT current_Stock from product WHERE product_id = @productId;";
     private readonly string UPDATE_CURRENT_STOCK = "UPDATE product set current_stock = current_stock - @quantity where product_id = @productId;";
     public SaleOrderDAO(string connectionstring) : base(connectionstring)
@@ -25,7 +25,7 @@ public class SaleOrderDAO : BaseDAO, IDAOAsync<SaleOrder>
         using var connection = CreateConnection();
         foreach (OrderLine orderLine in entity.OrderLines) 
         {
-            int currentStock = await connection.ExecuteAsync(GET_STOCK_BY_PRODUCT_ID);
+            int currentStock = await connection.ExecuteScalarAsync<int> (GET_STOCK_BY_PRODUCT_ID, new { productId = orderLine.Product.ProductId});
             if (currentStock < orderLine.Quantity)
             {
                 throw new Exception("CurrentStock is less than orderLine.Quantity");
@@ -41,7 +41,7 @@ public class SaleOrderDAO : BaseDAO, IDAOAsync<SaleOrder>
 
             foreach (OrderLine orderLine in entity.OrderLines)
             {
-                int orderLineId = await connection.ExecuteScalarAsync<int>(INSERT_ORDERLINES, new { quantity = orderLine.Quantity, unit_price = orderLine.UnitPrice, fk_sale_order_id = saleOrderId, fk_product_id = orderLine.Product.ProductId}, transaction);
+                int orderLineId = await connection.ExecuteScalarAsync<int>(INSERT_ORDERLINES, new { quantity = orderLine.Quantity, unit_price = orderLine.UnitPrice, SaleOrderId = saleOrderId, fk_product_id = orderLine.Product.ProductId}, transaction);
                 orderLine.OrderLineId = orderLineId;
                 await connection.ExecuteAsync(UPDATE_CURRENT_STOCK, new { quantity = orderLine.Quantity, productId = orderLine.Product.ProductId }, transaction);
             }

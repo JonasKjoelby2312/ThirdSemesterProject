@@ -12,9 +12,9 @@ public class SaleOrder
 
     public SaleOrder()
     {
-        OrderDate = DateTime.Now;
+        OrderDate = DateTime.Today;
         Customer = new Customer() { Name = "John", Email = "John", PasswordHash ="MAl", PersonId = 1, PersonType = "Customer", PhoneNO = "2353435"};
-        OrderLines = new List<OrderLine>();
+        OrderLines = new List<OrderLine>() { new OrderLine { OrderLineId = 1, Product = new Product { ProductId = 1, Color = "", CurrentStock = 10, Description = "", Name = " ", ProductType = "", SalesPrice = 100, Size = "", Weight = 3 }, Quantity = 2, UnitPrice = 100 }};
     }
 
     public bool AddOrderLineToSaleOrder(OrderLine orderLine)

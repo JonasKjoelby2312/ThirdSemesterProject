@@ -11,6 +11,14 @@ public class SaleOrderDTO
     public int SaleOrderId { get; set; }
     public DateTime OrderDate { get; set; }
     public decimal Total { get; set; }
-    public CustomerDTO Customer { get; set; }
+    public CustomerDTO CustomerDTO { get; set; }
     public List<OrderLineDTO> OrderLines { get; }
+
+    public SaleOrderDTO()
+    {
+        OrderDate = DateTime.Today;
+        CustomerDTO = new CustomerDTO() { PersonId = 1, Name = "John", Email = "", PasswordHash = "", PersonType = "", PhoneNO = "" };
+        OrderLines = new List<OrderLineDTO>() { new OrderLineDTO { OrderLineId = 1, ProductDTO =  new ProductDTO { ProductId = 1, CurrentStock = 2, Description = "", Name = "", ProductType = "", SalesPrice = 23, Size = "" }, Quantity = 1, UnitPrice = 23}
+        };
+    }
 }
