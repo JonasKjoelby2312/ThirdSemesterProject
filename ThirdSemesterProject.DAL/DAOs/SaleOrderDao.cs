@@ -37,6 +37,7 @@ public class SaleOrderDAO : BaseDAO, IDAOAsync<SaleOrder>
 
         try
         {
+            entity.Total = entity.CalculateTotal();
             int saleOrderId = await connection.ExecuteScalarAsync<int>(INSERT_SALEORDER, entity, transaction);
 
             foreach (OrderLine orderLine in entity.OrderLines)
