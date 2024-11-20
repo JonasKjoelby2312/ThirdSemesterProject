@@ -11,7 +11,7 @@ namespace ThirdSemesterProject.DAL.DAOs;
 
 public class ProductDAO : BaseDAO, IDAOAsync<Product>
 {
-    private readonly string GET_AÆÆ  = "WITH LatestSalesPrice AS(SELECT fk_product_id, value, creation_date FROM sales_price WHERE creation_date = (SELECT MAX(creation_date) FROM sales_price WHERE fk_product_id = sales_price.fk_product_id)) SELECT product_id AS productId, name, description, weight, size, color, current_stock AS currentStock, value AS salesPrice FROM product JOIN LatestSalesPrice ON product.product_id = LatestSalesPrice.fk_product_id;";
+    private readonly string GET_PRODUCT_WITH_NEWEST_SALES_PRICE = "WITH LatestSalesPrice AS(SELECT fk_product_id, value, creation_date FROM sales_price WHERE creation_date = (SELECT MAX(creation_date) FROM sales_price WHERE fk_product_id = sales_price.fk_product_id)) SELECT product_id AS productId, name, description, weight, size, color, current_stock AS currentStock, value AS salesPrice FROM product JOIN LatestSalesPrice ON product.product_id = LatestSalesPrice.fk_product_id;";
     private readonly string GET_ALL_PRODUCTS = "SELECT product_id, name, description, weight, size, color, current_stock from product;";
     private readonly string INSERT_PRODUCT = "INSERT INTO product values name = @name, description = @description, weight = @weight, size = @size, color = @color, current_stock = @current_stock, product_type = @product_type;";
     //private readonly string INSERT_COMPONENT = "INSERT INTO component name = @name, description = @description, weight = @weight;";
@@ -52,7 +52,7 @@ public class ProductDAO : BaseDAO, IDAOAsync<Product>
     public async Task<IEnumerable<Product>> GetAllAsync()
     {
         using var connection = CreateConnection();
-        var products = await connection.QueryAsync<Product>(GET_AÆÆ);
+        var products = await connection.QueryAsync<Product>(GET_PRODUCT_WITH_NEWEST_SALES_PRICE);
         return products;
     }
 

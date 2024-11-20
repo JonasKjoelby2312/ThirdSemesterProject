@@ -18,7 +18,12 @@ namespace ThirdSemesterProject.WebAPI
             builder.Services.AddSwaggerGen();
 
             /*builder.Services.AddSingleton<IDAO<Product>, ProductDAOStub>();*/
-            const string connectionString = "Data Source=.;Initial Catalog=webshop;Integrated Security=True";
+
+            //Docker ConnectionString: 
+            const string connectionString = "Server=tcp:localhost,1433;Database=webshop;User ID=sa;Password=Dockerstrongpwd123;";
+
+            //SSMS connectionString: 
+            //const string connectionString = "Data Source=.;Initial Catalog=webshop;Integrated Security=True";
             builder.Services.AddSingleton<IDAOAsync<Product>>((_) => (IDAOAsync<Product>) new ProductDAO(connectionString));
             builder.Services.AddSingleton<IDAOAsync<SaleOrder>>((_) => (IDAOAsync<SaleOrder>)new SaleOrderDAO(connectionString));
             var app = builder.Build();
