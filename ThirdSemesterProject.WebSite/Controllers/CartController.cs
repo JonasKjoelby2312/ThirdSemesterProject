@@ -81,7 +81,7 @@ public class CartController : Controller
         foreach (ProductQuantity item in cart.ProductQuantities.Values)
         {
             
-            saleOrderDTO.OrderLines.Add(new OrderLineDTO() { Quantity = item.Quantity, UnitPrice = item.Price, ProductDTO = new ProductDTO { ProductId = item.Id, CurrentStock = 0, Description = "", Name = "", ProductType = "", SalesPrice = 100, Size = "", Weight = 2 }});
+            saleOrderDTO.OrderLines.Add(new OrderLineDTO() { Quantity = item.Quantity, UnitPrice = item.Price, ProductDTO = new ProductDTO { ProductId = item.Id, CurrentStock = 0, Description = "", Name = "", ProductType = "", Color = "", SalesPrice = 100, Size = "", Weight = 2 }});
 
         }
         return saleOrderDTO;
