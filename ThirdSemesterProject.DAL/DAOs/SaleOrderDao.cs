@@ -44,13 +44,11 @@ public class SaleOrderDAO : BaseDAO, IDAOAsync<SaleOrder>
                 int orderLineId = await connection.ExecuteScalarAsync<int>(INSERT_ORDERLINES, new { quantity = orderLine.Quantity, unitPrice = orderLine.UnitPrice, saleOrderId = saleOrderId, FKProductId = orderLine.Product.ProductId}, transaction);
                 orderLine.OrderLineId = orderLineId;
                 await connection.ExecuteAsync(UPDATE_CURRENT_STOCK, new { quantity = orderLine.Quantity, productId = orderLine.Product.ProductId }, transaction);
-                int currentStock = await connection.ExecuteScalarAsync<int>(GET_STOCK_BY_PRODUCT_ID, new { productId = orderLine.Product.ProductId });
+                int currentStock = await connection.ExecuteScalarAsync<int>(GET_STOCK_BY_PRODUCT_ID, new { productId = orderLine.Product.ProductId }, transaction);
                 if (currentStock < 0)
                 {
                     throw new Exception($"CurrentStock: {currentStock}, requested stock: {orderLine.Quantity}");
                 }
-
-
             }
             transaction.Commit();
             return saleOrderId;
