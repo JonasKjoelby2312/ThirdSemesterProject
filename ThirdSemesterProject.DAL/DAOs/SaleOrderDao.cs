@@ -12,7 +12,7 @@ namespace ThirdSemesterProject.DAL.DAOs;
 
 public class SaleOrderDAO : BaseDAO, IDAOAsync<SaleOrder>
 {
-    private readonly string INSERT_SALEORDER = "INSERT INTO sale_order(order_date, total) VALUES (@OrderDate, @Total) SELECT CAST(SCOPE_IDENTITY() AS INT);"; //TODO customer fk?
+    private readonly string INSERT_SALEORDER = "INSERT INTO sale_order(order_date, total, fk_customer_id) VALUES (@OrderDate, @Total, @PersonId) SELECT CAST(SCOPE_IDENTITY() AS INT);"; //TODO customer fk?
     private readonly string INSERT_ORDERLINES = "INSERT INTO order_line (quantity, unit_price, fk_sale_order_id, fk_product_id) VALUES (@Quantity, @UnitPrice, @SaleOrderId, @FKProductId);";
     private readonly string GET_STOCK_BY_PRODUCT_ID = "SELECT current_Stock from product WHERE product_id = @productId;";
     private readonly string UPDATE_CURRENT_STOCK = "UPDATE product set current_stock = current_stock - @quantity where product_id = @productId;";
@@ -38,7 +38,7 @@ public class SaleOrderDAO : BaseDAO, IDAOAsync<SaleOrder>
         try
         {
             entity.Total = entity.CalculateTotal();
-            int saleOrderId = await connection.ExecuteScalarAsync<int>(INSERT_SALEORDER, entity, transaction);
+            int saleOrderId = await connection.ExecuteScalarAsync<int>(INSERT_SALEORDER, new {OrderDate = entity.OrderDate, Total = entity.Total, PersonId = entity.Customer.PersonId}, transaction);
 
             foreach (OrderLine orderLine in entity.OrderLines)
             {
