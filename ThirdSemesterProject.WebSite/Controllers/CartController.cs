@@ -60,18 +60,21 @@ public class CartController : Controller
     // POST: CartController/Create
     [HttpPost]
     [ValidateAntiForgeryToken]  
-    public ActionResult Create(SaleOrderDTO saleOrderDTO)
+    public async Task<ActionResult> Create(SaleOrderDTO saleOrderDTO)
     {
         try
         {
-            CartToSaleOrder(saleOrderDTO);
-            _client.CreateSaleOrderAsync(saleOrderDTO);
+            await CartToSaleOrder(saleOrderDTO);
+            await _client.CreateSaleOrderAsync(saleOrderDTO);
             EmptyCart();
-            return RedirectToAction(nameof(Index));
+
+            TempData["SuccessMessage"] = "Your order was successfully placed!";
+            return RedirectToAction(nameof(Create));
         }
         catch
         {
-            return View();
+            TempData["ErrorMessage"] = $"An error occurred while placing your order";
+            return RedirectToAction(nameof(Create));
         }
     }
 
