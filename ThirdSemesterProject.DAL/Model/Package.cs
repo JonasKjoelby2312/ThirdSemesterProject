@@ -13,11 +13,6 @@ public class Package : Component
     //Holds the componets within the package
     public List<Component> Components { get; set; } = new List<Component>();
 
-    //constructer with base to initialize 
-    //public Package(string name, string description, decimal weight) : base(name, description, weight)
-    //{
-    //}
-
     public void AddComponent(Component component) 
     {  
         Components.Add(component); 

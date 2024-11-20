@@ -19,16 +19,4 @@ public abstract class Person
     public Person()
     {
     }
-
-    //public Person(int personId, string name, string email, string phoneNO, string passwordHash, string personType)
-    //{
-    //    PersonId = personId;
-    //    Name = name;
-    //    Email = email;
-    //    PhoneNO = phoneNO;
-    //    PasswordHash = passwordHash;
-    //    PersonType = personType;
-    //}
-
-
 }

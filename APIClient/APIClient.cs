@@ -59,7 +59,7 @@ public class APIClient : IAPIClient
         return response.Data;
     }
 
-    
+
 
     public async Task<ProductDTO> GetProductByIdAsync(int id)
     {
@@ -70,11 +70,7 @@ public class APIClient : IAPIClient
 
         }
         return response.Data;
-
-       
     }
-
-    
 
     public async Task<bool> UpdateProductAsync(ProductDTO entity)
     {

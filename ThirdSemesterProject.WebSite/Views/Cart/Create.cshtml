@@ -12,23 +12,6 @@
 
     // Form fields here
     
-   @*  @foreach (var keyvalue in Model.ProductQuantities)
-    {
-        <div class="row" style="padding-top:2px;">
-            <div class="col-6">
-                @{
-                    ProductQuantity productQuantity = @keyvalue.Value;
-                }
-                @productQuantity.Quantity @(productQuantity.Name)(s)
-                at $@productQuantity.Price each
-            </div>
-            <div class="col-3">
-                total $@productQuantity.GetTotalPrice()
-            </div>
-        </div>
-    } *@
-
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Pay Order" class="btn btn-success" />

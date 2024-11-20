@@ -14,7 +14,6 @@ public interface IAPIClient
     Task<bool> UpdateProductAsync(ProductDTO entity);
     Task<bool> DeleteProductAsync(int id);
     Task<IEnumerable<ProductDTO>> GetAllProductsAsync();
-
     Task<int> CreateSaleOrderAsync(SaleOrderDTO entity);
 
 

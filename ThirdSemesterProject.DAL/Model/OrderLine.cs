@@ -16,12 +16,4 @@ public class OrderLine
     public OrderLine()
     {
     }
-
-
-
-    //public OrderLine(Product product, int quantity)
-    //{
-    //    Quantity = quantity;
-    //    Product = product;
-    //}
 }

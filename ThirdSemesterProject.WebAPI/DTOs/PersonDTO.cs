@@ -8,5 +8,6 @@ public class PersonDTO
     public string PhoneNO { get; set; }
     public string PasswordHash { get; set; }
     public string PersonType { get; set; }
+
 }
 
