@@ -32,12 +32,16 @@ public class CartController : Controller
     }
 
     // GET: CartController/Add/5?quantity=3
-    public async Task<ActionResult> Add(int id, int quantity)
+    public async Task<ActionResult> Add(int id, int quantity, bool returnToCart = false)
     {
         ProductDTO productDTO = await _client.GetProductByIdAsync(id);
         var cart = LoadChangeAndSaveCart(cart => cart.ChangeQuantity(new ProductQuantity(productDTO, quantity)));
+
+        if (returnToCart)
+        {
+            return View("Index", cart);
+        }
         return RedirectToAction("Index", "Products");
-        //return View("Index", cart);
     }
 
     // GET: CartController/Details/5
