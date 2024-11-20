@@ -36,8 +36,8 @@ public class CartController : Controller
     {
         ProductDTO productDTO = await _client.GetProductByIdAsync(id);
         var cart = LoadChangeAndSaveCart(cart => cart.ChangeQuantity(new ProductQuantity(productDTO, quantity)));
-        //return RedirectToAction("Index", product);
-        return View("Index", cart);
+        return RedirectToAction("Index", "Products");
+        //return View("Index", cart);
     }
 
     // GET: CartController/Details/5
@@ -45,20 +45,7 @@ public class CartController : Controller
     {
         return View();
     }
-    /*[HttpPost]*/
-    /*public ActionResult CreateSaleOrder(SaleOrderDTO saleOrder)
-    {
-        try
-        {
-            _client.CreateSaleOrderAsync(saleOrder);
-            return RedirectToAction(nameof(Index));
-        }
-        catch
-        {
-            return View();
-        }
-    }*/
-
+    
     // GET: CartController/Create
     public ActionResult Create()
     {

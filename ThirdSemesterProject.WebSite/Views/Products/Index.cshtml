@@ -51,7 +51,12 @@
                 @Html.DisplayFor(modelItem => item.CurrentStock)
             </td>
             <td>
-
+             @*        @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    } *@
 
                     <a class="btn-sm btn-primary" href="@Url.Action("Add", "Cart", new { id = item.ProductId, quantity = 1 })">Add to cart 
                         <span class="bi-cart-plus" style="margin-left:0px;"></span></a>

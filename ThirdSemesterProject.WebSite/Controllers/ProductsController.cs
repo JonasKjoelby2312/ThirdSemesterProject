@@ -15,7 +15,6 @@ public class ProductsController : Controller
 
     
     // GET: ProductsController
-    
     public async Task<ActionResult> Index()
     {
         var products = await _client.GetAllProductsAsync();
