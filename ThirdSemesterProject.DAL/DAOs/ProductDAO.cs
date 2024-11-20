@@ -22,8 +22,6 @@ public class ProductDAO : BaseDAO, IDAOAsync<Product>
     {
     }
 
-
-
     public async Task<int> CreateAsync(Product entity)
     {
         using var connection = CreateConnection();
