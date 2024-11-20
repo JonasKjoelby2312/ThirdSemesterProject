@@ -11,17 +11,17 @@ namespace ThirdSemesterProject.DAL.DAOs;
 public class ProductDAOStub : IDAO<Product>
 {
     private static List<Product> _products = new List<Product>() {
-        /*new Product(1, "M", 12, 399.95m, "Equipment", "Medium Sized Tent", "This tent is perfect for 2-3 persons, easy to set up, and very lightweight.", 4.2m),
-        new Product(2, "L", 7, 499.95m, "Equipment", "Large Family Tent", "A spacious tent for 4-6 persons with extra storage space and weather-resistant materials.", 7.5m),
-        new Product(3, "S", 10, 199.95m, "Equipment", "Small Backpacking Tent", "Compact and lightweight tent for solo travelers or couples.", 2.5m),
-        new Product(4, "M", 15, 149.95m, "Equipment", "Camping Sleeping Bag", "Warm sleeping bag suitable for temperatures as low as 0°C.", 1.2m),
-        new Product(5, "L", 8, 249.95m, "Equipment", "Double Sleeping Bag", "Comfortable sleeping bag for two, ideal for camping in cool temperatures.", 2.4m),
-        new Product(6, "M", 20, 99.95m, "Clothes", "Camping Stove", "Portable and compact camping stove with adjustable flame.", 1.8m),
-        new Product(7, "One Size", 25, 29.95m, "Clothes", "Camping Lantern", "Bright LED lantern with adjustable brightness and a long-lasting battery.", 0.9m),
-        new Product(8, "One Size", 30, 39.95m, "Clothes", "Portable Water Filter", "Filter and purify water while camping or hiking, essential for outdoor survival.", 0.6m),
-        new Product(9, "M", 18, 149.95m, "Clothes", "Hiking Backpack", "A 40L hiking backpack with multiple compartments and ergonomic design.", 1.3m),
-        new Product(10, "One Size", 50, 39.95m, "Clothes", "Camping Chair", "Foldable, lightweight camping chair with cup holder, perfect for relaxing by the campfire.", 1.5m)
-*/
+        new Product() { ProductId = 1, Name = "Large Family Tent", Description =  "A spacious tent for 4-6 persons with extra storage space and weather-resistant materials.", Weight = 7.5m, Size = "L", CurrentStock = 7, SalesPrice = 499.95m, Color = "Black", ProductType = "Equipment" },
+        new Product() { ProductId = 2, Name = "Small Backpacking Tent", Description = "Compact and lightweight tent for solo travelers or couples.", Weight = 2.5m, Size = "S", CurrentStock = 10, SalesPrice = 199.95m, Color = "Green", ProductType = "Equipment" },
+        new Product() { ProductId = 3, Name = "Camping Sleeping Bag", Description = "Warm sleeping bag suitable for temperatures as low as 0°C.", Weight = 1.2m, Size = "M", CurrentStock = 15, SalesPrice = 149.95m, Color = "Blue", ProductType = "Equipment" },
+        new Product() { ProductId = 4, Name = "Double Sleeping Bag", Description = "Comfortable sleeping bag for two, ideal for camping in cool temperatures.", Weight = 2.4m, Size = "L", CurrentStock = 8, SalesPrice = 249.95m, Color = "Red", ProductType = "Equipment" },
+        new Product() { ProductId = 5, Name = "Camping Stove", Description = "Portable and compact camping stove with adjustable flame.", Weight = 1.8m, Size = "M", CurrentStock = 20, SalesPrice = 99.95m, Color = "Silver", ProductType = "Equipment" },
+        new Product() { ProductId = 6, Name = "Camping Lantern", Description = "Bright LED lantern with adjustable brightness and a long-lasting battery.", Weight = 0.9m, Size = "One Size", CurrentStock = 25, SalesPrice = 29.95m, Color = "Yellow", ProductType = "Clothes" },
+        new Product() { ProductId = 7, Name = "Portable Water Filter", Description = "Filter and purify water while camping or hiking, essential for outdoor survival.", Weight = 0.6m, Size = "One Size", CurrentStock = 30, SalesPrice = 39.95m, Color = "White", ProductType = "Clothes" },
+        new Product() { ProductId = 8, Name = "Hiking Backpack", Description = "A 40L hiking backpack with multiple compartments and ergonomic design.", Weight = 1.3m, Size = "M", CurrentStock = 18, SalesPrice = 149.95m, Color = "Black", ProductType = "Clothes" },
+        new Product() { ProductId = 9, Name = "Camping Chair", Description = "Foldable, lightweight camping chair with cup holder, perfect for relaxing by the campfire.", Weight = 1.5m, Size = "One Size", CurrentStock = 50, SalesPrice = 39.95m, Color = "Brown", ProductType = "Clothes" },
+        new Product() { ProductId = 10, Name = "Insulated Cooler Box", Description = "Durable cooler box with excellent insulation to keep food and drinks cold for hours.", Weight = 4.0m, Size = "L", CurrentStock = 12, SalesPrice = 79.95m, Color = "White", ProductType = "Equipment" }
+
     };
     //The variable nextAvailableId, gets the id of the last item in the list, and adds one,
     //so we have the correct value
