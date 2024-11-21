@@ -6,8 +6,8 @@ public class PersonDTO
     public string Name { get; set; }
     public string Email { get; set; }
     public string PhoneNO { get; set; }
-    public string PasswordHash { get; set; }
     public string PersonType { get; set; }
+    public string Password { get; set; }
 
 }
 

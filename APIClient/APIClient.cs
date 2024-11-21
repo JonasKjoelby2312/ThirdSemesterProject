@@ -59,7 +59,15 @@ public class APIClient : IAPIClient
         return response.Data;
     }
 
-
+    public async Task<CustomerDTO> GetCustomerByIdAsync(int userId)
+    {
+        var response = await _restClient.RequestAsync<CustomerDTO>(Method.Get, $"Customers/{userId}");
+        if (!response.IsSuccessful)
+        {
+            throw new Exception($"Error retrieving customer with Id: {userId}. Message was {response.Content}");
+        }
+        return response.Data;
+    }
 
     public async Task<ProductDTO> GetProductByIdAsync(int id)
     {
@@ -67,6 +75,17 @@ public class APIClient : IAPIClient
         if (!response.IsSuccessful)
         {
             throw new Exception($"Error Getting Product by id = {id}. Message was {response.Content}");
+
+        }
+        return response.Data;
+    }
+
+    public async Task<int> LoginAsync(CustomerDTO loginInfo)
+    {
+        var response = await _restClient.RequestAsync<int>(Method.Get, $"logins", loginInfo);
+        if (!response.IsSuccessful)
+        {
+            throw new Exception($"Error loggin in for customer with Email = {loginInfo.Email}. Message was {response.Content}");
 
         }
         return response.Data;
