@@ -31,7 +31,7 @@ namespace ThirdSemesterProject.DAL.DAOs
                 var passwordHash = BCryptTool.HashPassword(password);
                 //int addressId = await connection.ExecuteScalarAsync<int>(INSERT_ADDRESS, entity, transaction);
                 int personId = await connection.ExecuteScalarAsync<int>(INSERT_PERSON, new { fk_address_id = 1, Name = entity.Name, Email = entity.Email, PhoneNo = entity.PhoneNO, PasswordHash = passwordHash, PersonType = "Customer"}, transaction );
-                await connection.QuerySingleAsync<int>(INSERT_CUSTOMER, new { PersonId = personId }, transaction);
+                await connection.ExecuteAsync(INSERT_CUSTOMER, new { PersonId = personId }, transaction);
                 transaction.Commit();
                 return personId;
             }
