@@ -31,4 +31,11 @@ public static class DTOConverter
         productDTOToConvert.CopyPropertiesTo(product);
         return product;
     }
+
+    public static Customer FromDTO(this CustomerDTO customerDTOToConvert)
+    {
+        var customer = new Customer();
+        customerDTOToConvert.CopyPropertiesTo(customer);
+        return customer;
+    }
 }

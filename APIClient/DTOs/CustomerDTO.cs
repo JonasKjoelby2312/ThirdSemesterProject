@@ -9,5 +9,5 @@ namespace ThirdSemesterProject.APIClient.DTOs;
 
 public class CustomerDTO : PersonDTO
 {
-    
+
 }

@@ -13,9 +13,10 @@ namespace ThirdSemesterProject.DAL.DAOs
 {
     public class CustomerDAO : BaseDAO, ICustomerDAO
     {
-        private readonly string INSERT_CUSTOMER = "";
-        private readonly string INSERT_PERSON = "";
+        private readonly string INSERT_CUSTOMER = "INSERT INTO customer (person_id) VALUES (@PersonId)";
+        private readonly string INSERT_PERSON = "INSERT INTO person (name, email, phone_no, password_hash, person_type, fk_address_id) VALUES (@Name, @Email, @PhoneNo, @PasswordHash, @PersonType, 1) SELECT CAST(SCOPE_IDENTITY() AS INT)";
         private readonly string INSERT_ADDRESS = "";
+        private readonly string INSERT_ZIP_CITY = "";
         public CustomerDAO(string connectionstring) : base(connectionstring)
         {
         }
@@ -23,14 +24,14 @@ namespace ThirdSemesterProject.DAL.DAOs
         public async Task<int> CreateAsync(Customer entity, string password)
         {
             using var connection = CreateConnection();
+            connection.Open();
             IDbTransaction transaction = connection.BeginTransaction();
             try
             {
                 var passwordHash = BCryptTool.HashPassword(password);
-                connection.Open();
-                int addressId = await connection.ExecuteScalarAsync<int>(INSERT_ADDRESS, entity, transaction);
-                int personId = await connection.ExecuteScalarAsync<int>(INSERT_PERSON, new { fk_address_id = addressId, name = entity.Name, email = entity.Email, phone_no = entity.PhoneNO, password = passwordHash, person_type = "Customer"}, transaction );
-                await connection.QuerySingleAsync<int>(INSERT_CUSTOMER, new { personId = entity.PersonId }, transaction);
+                //int addressId = await connection.ExecuteScalarAsync<int>(INSERT_ADDRESS, entity, transaction);
+                int personId = await connection.ExecuteScalarAsync<int>(INSERT_PERSON, new { fk_address_id = 1, Name = entity.Name, Email = entity.Email, PhoneNo = entity.PhoneNO, PasswordHash = passwordHash, PersonType = "Customer"}, transaction );
+                await connection.QuerySingleAsync<int>(INSERT_CUSTOMER, new { PersonId = personId }, transaction);
                 transaction.Commit();
                 return personId;
             }

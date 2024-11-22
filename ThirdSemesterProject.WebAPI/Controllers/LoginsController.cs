@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ThirdSemesterProject.DAL.DAOs;
 using ThirdSemesterProject.WebAPI.DTOs;
 
@@ -10,10 +11,12 @@ namespace ThirdSemesterProject.WebAPI.Controllers
     [ApiController]
     public class LoginsController : ControllerBase
     {
+        IMapper _mapper;
 
         ICustomerDAO _customerDAO;
-        public LoginsController(ICustomerDAO customerDAO) 
-        { 
+        public LoginsController(ICustomerDAO customerDAO, IMapper mapper)
+        {
+            _mapper = mapper;
             _customerDAO = customerDAO;
         }
 

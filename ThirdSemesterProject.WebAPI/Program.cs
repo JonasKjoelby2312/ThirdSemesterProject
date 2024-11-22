@@ -16,7 +16,7 @@ namespace ThirdSemesterProject.WebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddAutoMapper(typeof(Program));
             /*builder.Services.AddSingleton<IDAO<Product>, ProductDAOStub>();*/
 
             //Docker ConnectionString: 
@@ -26,6 +26,7 @@ namespace ThirdSemesterProject.WebAPI
             /*const string connectionString = "Data Source=.;Initial Catalog=webshop;Integrated Security=True";*/
             builder.Services.AddSingleton<IDAOAsync<Product>>((_) => (IDAOAsync<Product>) new ProductDAO(connectionString));
             builder.Services.AddSingleton<IDAOAsync<SaleOrder>>((_) => (IDAOAsync<SaleOrder>)new SaleOrderDAO(connectionString));
+            builder.Services.AddSingleton<ICustomerDAO> ((_) => (ICustomerDAO)new CustomerDAO(connectionString));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

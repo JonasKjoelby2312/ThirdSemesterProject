@@ -17,6 +17,7 @@ public interface IAPIClient
     Task<int> CreateSaleOrderAsync(SaleOrderDTO entity);
     Task<int> LoginAsync(CustomerDTO loginInfo);
     Task<CustomerDTO> GetCustomerByIdAsync(int userId);
+    Task<int> CreateCustomerAsync(CustomerDTO customerDTO);
 
 
 

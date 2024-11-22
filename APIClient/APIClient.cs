@@ -14,6 +14,15 @@ public class APIClient : IAPIClient
     private RestClient _restClient;
     public APIClient(string baseUrl) => _restClient = new RestClient(baseUrl);
 
+    public async Task<int> CreateCustomerAsync(CustomerDTO customerDTO)
+    {
+        var response = await _restClient.RequestAsync<int>(Method.Post, "Customers", customerDTO);
+        if (!response.IsSuccessful)
+        {
+            throw new Exception($"Error creating user with email: {customerDTO.Email}. Message was: {response.Content}");
+        }
+        return response.Data;
+    }
 
     public async Task<int> CreateProductAsync(ProductDTO entity)
     {

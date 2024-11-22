@@ -15,4 +15,9 @@ public class PersonDTO
     public string PersonType { get; set; }
     public string Password { get; set; }
 
+    public PersonDTO()
+    {
+        PersonType = "Person";
+    }
+
 }

@@ -2,19 +2,20 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Security.Claims;
 using ThirdSemesterProject.APIClient;
 using ThirdSemesterProject.APIClient.DTOs;
 
 namespace ThirdSemesterProject.WebSite.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomersController : Controller
     {
 
         IAPIClient _client;
 
 
-        public CustomerController(IAPIClient client)
+        public CustomersController(IAPIClient client)
         {
             _client = client;
         }
@@ -94,6 +95,35 @@ namespace ThirdSemesterProject.WebSite.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             TempData["Message"] = "You are now Logged Out";
             return RedirectToAction("Index", "");
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CustomerDTO customerDTO)
+        {
+            try
+            {
+                if (await _client.CreateCustomerAsync(customerDTO) > 0)
+                {
+                    TempData["Message"] = $"User {customerDTO.Email} Created!";
+                    return RedirectToAction(nameof(Index), "Home");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "User not created!";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.ErrorMessage = ex.Message;
+            }
+            return View();
         }
     }
 }
