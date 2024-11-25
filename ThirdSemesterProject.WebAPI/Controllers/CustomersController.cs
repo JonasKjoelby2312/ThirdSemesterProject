@@ -30,9 +30,9 @@ namespace ThirdSemesterProject.WebAPI.Controllers
 
         // GET api/<CustomersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<int>> Get(int id)
         {
-            return "value";
+            return Ok(await _customerDAO.GetByIdAsync(id));
         }
 
         // POST api/<CustomersController>

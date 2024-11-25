@@ -19,6 +19,7 @@ namespace ThirdSemesterProject.DAL.DAOs
         private readonly string INSERT_ADDRESS = "";
         private readonly string INSERT_ZIP_CITY = "";
         private readonly string GET_MAIL = "SELECT person_id as PersonId, password_hash as PasswordHash FROM person Where email = @email";
+        private readonly string GET_CUSTROMER_BY_ID = "select person_id as PersonId, name as Name, email as Email, phone_no as PhoneNO, person_type as PersonType from person Where person_id = @id";
         public CustomerDAO(string connectionstring) : base(connectionstring)
         {
         }
@@ -59,9 +60,20 @@ namespace ThirdSemesterProject.DAL.DAOs
             throw new NotImplementedException();
         }
 
-        public Task<Customer> GetByIdAsync(int id)
+        public async Task<Customer> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            using var connection = CreateConnection();
+            connection.Open();
+            try
+            {
+                var customer = await connection.QuerySingleOrDefaultAsync<Customer>(GET_CUSTROMER_BY_ID, new { id });
+                return customer;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Error retrieving Customer with id: {id}. Meassage was {ex.Message}", ex);
+            }
         }
 
         public async Task<int> LoginAsync(string email, string password)
