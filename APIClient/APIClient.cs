@@ -91,7 +91,7 @@ public class APIClient : IAPIClient
 
     public async Task<int> LoginAsync(CustomerDTO loginInfo)
     {
-        var response = await _restClient.RequestAsync<int>(Method.Get, $"logins", loginInfo);
+        var response = await _restClient.RequestAsync<int>(Method.Post, $"logins", loginInfo);
         if (!response.IsSuccessful)
         {
             throw new Exception($"Error loggin in for customer with Email = {loginInfo.Email}. Message was {response.Content}");

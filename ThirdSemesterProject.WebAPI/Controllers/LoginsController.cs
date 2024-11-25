@@ -11,12 +11,10 @@ namespace ThirdSemesterProject.WebAPI.Controllers
     [ApiController]
     public class LoginsController : ControllerBase
     {
-        IMapper _mapper;
 
         ICustomerDAO _customerDAO;
-        public LoginsController(ICustomerDAO customerDAO, IMapper mapper)
+        public LoginsController(ICustomerDAO customerDAO)
         {
-            _mapper = mapper;
             _customerDAO = customerDAO;
         }
 

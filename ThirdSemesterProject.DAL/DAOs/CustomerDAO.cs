@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using static Dapper.SqlMapper;
 using ThirdSemesterProject.DAL.Authentication;
 using ThirdSemesterProject.DAL.Model;
 
@@ -17,6 +18,7 @@ namespace ThirdSemesterProject.DAL.DAOs
         private readonly string INSERT_PERSON = "INSERT INTO person (name, email, phone_no, password_hash, person_type, fk_address_id) VALUES (@Name, @Email, @PhoneNo, @PasswordHash, @PersonType, 1) SELECT CAST(SCOPE_IDENTITY() AS INT)";
         private readonly string INSERT_ADDRESS = "";
         private readonly string INSERT_ZIP_CITY = "";
+        private readonly string GET_MAIL = "SELECT person_id, password_hash FROM person Where email = @email";
         public CustomerDAO(string connectionstring) : base(connectionstring)
         {
         }
@@ -62,9 +64,24 @@ namespace ThirdSemesterProject.DAL.DAOs
             throw new NotImplementedException();
         }
 
-        public Task<int> LoginAsync(string email, string password)
+        public async Task<int> LoginAsync(string email, string password)
         {
-            throw new NotImplementedException();
+            using var connection = CreateConnection();
+            connection.Open();
+            try
+            {
+                var customerTuple = await connection.QueryFirstOrDefaultAsync<PersonTuple>(GET_MAIL, new {email = email});
+                if (customerTuple != null && BCryptTool.ValidatePassword(password, customerTuple.PasswordHash))
+                {
+                    return customerTuple.PersonId;
+                }   
+                return -1;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Error Login in for Customer with email: {email}. Meassage was {ex.Message}", ex);
+            }
         }
 
         public Task<bool> UpdateAsync(Customer entity)
