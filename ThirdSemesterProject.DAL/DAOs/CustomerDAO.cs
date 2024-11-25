@@ -18,7 +18,7 @@ namespace ThirdSemesterProject.DAL.DAOs
         private readonly string INSERT_PERSON = "INSERT INTO person (name, email, phone_no, password_hash, person_type, fk_address_id) VALUES (@Name, @Email, @PhoneNo, @PasswordHash, @PersonType, 1) SELECT CAST(SCOPE_IDENTITY() AS INT)";
         private readonly string INSERT_ADDRESS = "";
         private readonly string INSERT_ZIP_CITY = "";
-        private readonly string GET_MAIL = "SELECT person_id, password_hash FROM person Where email = @email";
+        private readonly string GET_MAIL = "SELECT person_id as PersonId, password_hash as PasswordHash FROM person Where email = @email";
         public CustomerDAO(string connectionstring) : base(connectionstring)
         {
         }
