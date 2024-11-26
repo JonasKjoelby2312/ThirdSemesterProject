@@ -15,10 +15,10 @@ namespace ThirdSemesterProject.WebAPI.Controllers
     {
         
         ICustomerDAO _customerDAO;
-        IMapper _mapper;
-        public CustomersController(IMapper mapper, ICustomerDAO customerDAO)
+       
+        public CustomersController(ICustomerDAO customerDAO)
         {
-            _mapper = mapper;
+            
             _customerDAO = customerDAO;
         }
         // GET: api/<CustomersController>
