@@ -39,8 +39,7 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> Post([FromBody] CustomerDTO newCustomerDTO)
         {
-            //Customer customer = _mapper.Map<Customer>(newCustomerDTO);
-            //return Ok(await _customerDAO.CreateAsync(customer, customer.Password));
+            
             return Ok(await _customerDAO.CreateAsync(newCustomerDTO.FromDTO(), newCustomerDTO.Password));
         }
 
