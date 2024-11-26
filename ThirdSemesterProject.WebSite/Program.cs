@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authentication.Cookies;
 using ThirdSemesterProject.APIClient;
 
 namespace ThirdSemesterProject.WebSite
@@ -12,6 +13,8 @@ namespace ThirdSemesterProject.WebSite
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddSingleton((Func<IServiceProvider, IAPIClient>)((_) => new APIClient.APIClient("https://localhost:7027/api/")));
+
+            AddCookieAuthentication(builder.Services);
 
             var app = builder.Build();
 
@@ -28,6 +31,7 @@ namespace ThirdSemesterProject.WebSite
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
@@ -35,6 +39,11 @@ namespace ThirdSemesterProject.WebSite
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+        }
+
+        static void AddCookieAuthentication(IServiceCollection services)
+        {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
         }
     }
 }
