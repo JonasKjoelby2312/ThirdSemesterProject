@@ -20,3 +20,52 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+
+.navbar {
+    padding: 20px 15px; /* Adds padding to the entire navbar */
+}
+
+.navbar-brand {
+    font-size: 1.8rem; /* Makes the webshop name more prominent */
+    font-weight: bold; /* Bold for better visibility */
+    margin-right: 30px; /* Space between the webshop name and the navigation buttons */
+    color: #2a473e; /* Forest green */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow for style */
+}
+
+    .navbar-brand:hover {
+        color: #5c7a5b; /* Slightly lighter green on hover */
+        text-decoration: none; /* Prevent underline */
+
+    }
+
+.nav-link {
+    font-size: 1.1rem; /* Slightly larger navigation links */
+    margin-left: 15px; /* Adds space between individual nav links */
+    color: #2a473e; /* Forest green for text */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth color and scaling transitions */
+}
+
+    .nav-link:hover {
+        color: #8da57b; /* Olive green on hover */
+        transform: scale(1.1); /* Slightly enlarge on hover */
+    }
+
+.navbar-collapse {
+    justify-content: flex-end; /* Ensures navigation links are pushed to the right */
+}
+
+.nav-link-account {
+    font-size: 1.1rem; 
+    margin-left: 60px; 
+    color: #2a473e; 
+    transition: color 0.3s ease, transform 0.3s ease; 
+
+    position: absolute; 
+    top: 13px;
+    right: 0;
+    margin: 20px; 
+}
+

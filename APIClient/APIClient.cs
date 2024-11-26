@@ -112,4 +112,9 @@ public class APIClient : IAPIClient
             throw new Exception($"Error Updating Product with id = {entity}. Message was {response.Content}");
         }
     }
+
+    Task<IEnumerable<SaleOrderDTO>> IAPIClient.GetAllSaleOrdersByPersonIdAsync(int id)
+    {
+       throw new NotImplementedException();
+    }
 }

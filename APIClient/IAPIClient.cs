@@ -18,13 +18,7 @@ public interface IAPIClient
     Task<int> LoginAsync(CustomerDTO loginInfo);
     Task<CustomerDTO> GetCustomerByIdAsync(int userId);
     Task<int> CreateCustomerAsync(CustomerDTO customerDTO);
-
-
-
-
-
-
-
+    Task<IEnumerable<SaleOrderDTO>> GetAllSaleOrdersByPersonIdAsync(int id);
 
 
 }

@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using ThirdSemesterProject.APIClient;
+using ThirdSemesterProject.APIClient.DTOs;
+using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.WebSite.Controllers
 {
     public class SaleOrdersController : Controller
     {
+
+        IAPIClient _client;
         // GET: SaleOrdersController
         public ActionResult Index()
         {
@@ -17,6 +23,10 @@ namespace ThirdSemesterProject.WebSite.Controllers
             return View();
         }
 
+        public async Task<ActionResult<IEnumerable<SaleOrderDTO>>> GetAllSaleOrdersByPersonId(int id)
+        {
+            return View (_client.GetAllSaleOrdersByPersonIdAsync(id));
+        }
         // GET: SaleOrdersController/Create
         public ActionResult Create()
         {
