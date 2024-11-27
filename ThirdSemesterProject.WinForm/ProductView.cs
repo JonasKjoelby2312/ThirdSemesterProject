@@ -57,6 +57,7 @@ namespace ThirdSemesterProject.WinForm
                 Weight = Convert.ToDecimal(txtWeight.Text),
                 SalesPrice = Convert.ToDecimal(txtPrice.Text),
                 ProductType = txtProductType.Text,
+                Color = txtColor.Text,
                 CurrentStock = Convert.ToInt32(txtCurrStock.Text)
             };
             CurrProduct = res;
@@ -71,6 +72,7 @@ namespace ThirdSemesterProject.WinForm
             CurrProduct.SalesPrice = Convert.ToDecimal(txtPrice.Text);
             CurrProduct.ProductType = txtProductType.Text;
             CurrProduct.CurrentStock = Convert.ToInt32(txtCurrStock.Text);
+            CurrProduct.Color = txtColor.Text;
         }
     }
 }
