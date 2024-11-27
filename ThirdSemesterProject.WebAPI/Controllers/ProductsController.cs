@@ -40,7 +40,7 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> Post([FromBody] Product product)
         {
-            return Ok( _productsDAO.CreateAsync(product));
+            return Ok(await _productsDAO.CreateAsync(product));
         }
 
         // PUT api/<ProductsController>/5
