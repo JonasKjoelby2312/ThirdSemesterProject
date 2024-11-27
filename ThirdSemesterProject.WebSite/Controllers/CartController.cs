@@ -64,6 +64,7 @@ public class CartController : Controller
     {
         try
         {
+            saleOrderDTO.CustomerDTO.PersonId = Int32.Parse(User.Claims.Where(c => c.Type == "user_id").Select(c => c.Value).SingleOrDefault());
             await CartToSaleOrder(saleOrderDTO);
             await _client.CreateSaleOrderAsync(saleOrderDTO);
             EmptyCart();

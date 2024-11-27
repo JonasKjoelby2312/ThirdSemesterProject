@@ -7,6 +7,7 @@ public static class DTOConverter
     public static SaleOrder FromDTO(this SaleOrderDTO saleOrderDTOToConvert )
     {
         var saleOrder = new SaleOrder();
+        saleOrderDTOToConvert.CustomerDTO.CopyPropertiesTo(saleOrder.Customer);
         saleOrderDTOToConvert.CopyPropertiesTo(saleOrder);
         //saleOrder.OrderLines = new List<OrderLine>();
         foreach (OrderLineDTO item in saleOrderDTOToConvert.OrderLines)
