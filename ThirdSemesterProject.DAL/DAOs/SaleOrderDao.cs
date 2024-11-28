@@ -10,7 +10,7 @@ using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.DAL.DAOs;
 
-public class SaleOrderDAO : BaseDAO, IDAOAsync<SaleOrder>
+public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
 {
     private readonly string INSERT_SALEORDER = "INSERT INTO sale_order(order_date, total, fk_customer_id) VALUES (@OrderDate, @Total, @PersonId) SELECT CAST(SCOPE_IDENTITY() AS INT);"; //TODO customer fk?
     private readonly string INSERT_ORDERLINES = "INSERT INTO order_line (quantity, unit_price, fk_sale_order_id, fk_product_id) VALUES (@Quantity, @UnitPrice, @SaleOrderId, @FKProductId);";

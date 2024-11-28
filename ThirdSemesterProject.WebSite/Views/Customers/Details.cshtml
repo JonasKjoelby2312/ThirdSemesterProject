@@ -4,10 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Account Details</h1>
 
 <div>
-    <h4>CustomerDTO</h4>
     <hr />
     <dl class="row">
        
@@ -33,7 +32,7 @@
 </div>
 <div>
     <div class="action-links">
-        <a href="@Url.Action("Details", "SaleOrders", new { id = Model.PersonId })" title="View Purchase History">
+        <a href="@Url.Action("SaleOrders", "Customers", new { customerId = Model.PersonId })" title="View Purchase History">
             View Purchase History
         </a>
 </div>

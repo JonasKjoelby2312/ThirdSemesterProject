@@ -1,4 +1,5 @@
-﻿using ThirdSemesterProject.DAL.Model;
+﻿using System.Net.WebSockets;
+using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.WebAPI.DTOs.DTOConverter;
 
@@ -38,5 +39,21 @@ public static class DTOConverter
         var customer = new Customer();
         customerDTOToConvert.CopyPropertiesTo(customer);
         return customer;
+    }
+
+    public static SaleOrderDTO ToDTO(this SaleOrder saleOrderToConvert)
+    {
+        var saleOrderDTO = new SaleOrderDTO();
+        saleOrderToConvert.CopyPropertiesTo(saleOrderDTO);
+        return saleOrderDTO;
+
+    }
+    public static IEnumerable<SaleOrderDTO> ToDTOs(this IEnumerable<SaleOrder> saleOrderToConvert)
+    {
+        foreach (var saleOrder in saleOrderToConvert)
+        {
+            yield return saleOrder.ToDTO();
+        }
+
     }
 }

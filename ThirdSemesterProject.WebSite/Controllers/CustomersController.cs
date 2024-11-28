@@ -125,8 +125,19 @@ public class CustomersController : Controller
         }
         return View();
     }
-    public ActionResult Details()
+    
+    public async Task<ActionResult> Details()
     {
-        return View();
+        int id = Int32.Parse(User.Claims.Where(c => c.Type == "user_id").Select(c => c.Value).SingleOrDefault());
+        var customer = await _client.GetCustomerByIdAsync(id);
+        return View(customer);
+    }
+
+    [HttpGet("Customers/{customerId}/SaleOrders")]
+    public async Task<ActionResult<IEnumerable<SaleOrderDTO>>> SaleOrders(int customerId)
+    {
+        var customer = await _client.GetCustomerByIdAsync(customerId);
+        var saleOrders = await _client.GetAllSaleOrdersByPersonIdAsync(customerId);
+        return View(saleOrders);
     }
 }

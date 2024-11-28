@@ -113,8 +113,15 @@ public class APIClient : IAPIClient
         }
     }
 
-    Task<IEnumerable<SaleOrderDTO>> IAPIClient.GetAllSaleOrdersByPersonIdAsync(int id)
+    async Task<IEnumerable<SaleOrderDTO>> IAPIClient.GetAllSaleOrdersByPersonIdAsync(int id)
     {
-       throw new NotImplementedException();
+        var request = new RestRequest($"SaleOrders", Method.Get);
+        request.AddParameter("id", id);
+        var response = await _restClient.ExecuteAsync<IEnumerable<SaleOrderDTO>>(request);
+        if (!response.IsSuccessful)
+        {
+            throw new Exception("FEJL!!!!!");
+        }
+        return response.Data;
     }
 }

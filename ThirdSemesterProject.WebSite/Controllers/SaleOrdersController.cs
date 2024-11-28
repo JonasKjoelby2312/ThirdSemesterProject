@@ -23,10 +23,6 @@ namespace ThirdSemesterProject.WebSite.Controllers
             return View();
         }
 
-        public async Task<ActionResult<IEnumerable<SaleOrderDTO>>> GetAllSaleOrdersByPersonId(int id)
-        {
-            return View (_client.GetAllSaleOrdersByPersonIdAsync(id));
-        }
         // GET: SaleOrdersController/Create
         public ActionResult Create()
         {

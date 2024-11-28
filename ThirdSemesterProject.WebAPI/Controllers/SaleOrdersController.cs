@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using ThirdSemesterProject.DAL.DAOs;
 using ThirdSemesterProject.DAL.Model;
 using ThirdSemesterProject.WebAPI.DTOs;
@@ -12,9 +13,9 @@ namespace ThirdSemesterProject.WebAPI.Controllers;
 [ApiController]
 public class SaleOrdersController : ControllerBase
 {
-    IDAOAsync<SaleOrder> _saleOrderDAO;
+    ISaleOrderDAO _saleOrderDAO;
 
-    public SaleOrdersController(IDAOAsync<SaleOrder> saleOrderDAO)
+    public SaleOrdersController(ISaleOrderDAO saleOrderDAO)
     {
         _saleOrderDAO = saleOrderDAO;
     }
@@ -22,9 +23,18 @@ public class SaleOrdersController : ControllerBase
 
     // GET: api/<SaleOrdersController>
     [HttpGet]
-    public IEnumerable<string> Get()
+    public async Task<ActionResult<IEnumerable<SaleOrderDTO>>> Get([FromQuery] int? id)
     {
-        return new string[] { "value1", "value2" };
+        IEnumerable<SaleOrder> saleOrders;
+        if (id.HasValue)
+        {
+            saleOrders = await _saleOrderDAO.GetAllSaleOrdersByPersonId(id.Value);
+            return Ok(saleOrders.ToDTOs());
+        }
+        else
+        {
+            return NotFound();
+        }
     }
 
     // GET api/<SaleOrdersController>/5
