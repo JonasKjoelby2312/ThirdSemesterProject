@@ -7,14 +7,13 @@ namespace ThirdSemesterProject.WebSite.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
         private IAPIClient _client;
 
 
-        public HomeController(ILogger<HomeController> logger, IAPIClient client)
+        public HomeController(IAPIClient client)
         {
-            _logger = logger;
+            
             _client = client;
         }
 
