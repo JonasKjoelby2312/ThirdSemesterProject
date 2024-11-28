@@ -17,7 +17,7 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
     private readonly string GET_STOCK_BY_PRODUCT_ID = "SELECT current_Stock from product WHERE product_id = @productId;";
     private readonly string UPDATE_CURRENT_STOCK = "UPDATE product set current_stock = current_stock - @quantity where product_id = @productId;";
     private readonly string GET_ALL_SALEORDERS_BY_PERSONID = "SELECT sale_order_id as SaleOrderId, order_date as OrderDate, total as Total, fk_customer_id as CustomerId from sale_order where fk_customer_id = @person_id";
-    private readonly string GET_ORDERLINES_BY_SALEORDERID = "SELECT order_line_id as OrderLineId, quantity as Quantity, unit_price as UnitPrice, fk_sale_order_id as SaleOrderId, fk_product_id as ProductId from order_line where fk_sale_order_id = @sale_order_id";
+    private readonly string GET_ORDERLINES_BY_SALEORDERID = "SELECT ol.order_line_id AS orderLineId, ol.quantity, ol.unit_price, p.product_id AS productId, p.name AS productName, p.description, p.weight, p.size, p.color, p.current_stock AS currentStock, p.product_type AS productType FROM order_line ol JOIN product p ON ol.fk_product_id = p.product_id WHERE ol.fk_sale_order_id = @SaleOrderId;";
     public SaleOrderDAO(string connectionstring) : base(connectionstring)
     {
     }
@@ -31,8 +31,13 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
             var saleOrders = await connection.QueryAsync<SaleOrder>(GET_ALL_SALEORDERS_BY_PERSONID, new { person_id = personId });
             foreach (var so in saleOrders)
             {
-                var orderLines = await connection.QueryAsync<OrderLine>(GET_ORDERLINES_BY_SALEORDERID, new { sale_order_id = so.SaleOrderId });
-                so.OrderLines = orderLines.ToList();
+                using var orderLinesAndProducts = await connection.QueryMultipleAsync(GET_ORDERLINES_BY_SALEORDERID, new { SaleOrderId = so.SaleOrderId });
+                
+                var orderLines = orderLinesAndProducts.Read<OrderLine>().ToList();
+                //var product = orderLinesAndProducts.Read<Product>();
+                
+                so.OrderLines = orderLines;
+                //orderLine.Product = product;
             }
             connection.Close();
             return saleOrders.ToList();
@@ -43,6 +48,7 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
             throw new Exception($"Could not get SaleOrders and Orderlines. Message was: {ex.Message}", ex);
         }
     }
+
 
     public async Task<int> CreateAsync(SaleOrder entity)
     {
