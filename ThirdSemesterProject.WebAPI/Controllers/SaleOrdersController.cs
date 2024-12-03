@@ -23,25 +23,18 @@ public class SaleOrdersController : ControllerBase
 
     // GET: api/<SaleOrdersController>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<SaleOrderDTO>>> Get([FromQuery] int? id)
+    public async Task<ActionResult<IEnumerable<SaleOrderDTO>>> Get([FromQuery] int id)
     {
         IEnumerable<SaleOrder> saleOrders;
-        if (id.HasValue)
+        if (id != 0)
         {
-            saleOrders = await _saleOrderDAO.GetAllSaleOrdersByPersonId(id.Value);
+            saleOrders = await _saleOrderDAO.GetAllSaleOrders(id);
             return Ok(saleOrders.ToDTOs());
         }
         else
         {
             return NotFound();
         }
-    }
-
-    // GET api/<SaleOrdersController>/5
-    [HttpGet("{id}")]
-    public string Get(int id)
-    {
-        return "value";
     }
 
     // POST api/<SaleOrdersController>

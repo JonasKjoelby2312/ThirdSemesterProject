@@ -15,4 +15,6 @@ public interface ISaleOrderDAO
     Task<int> CreateAsync(SaleOrder entity);
     Task<bool> Update(SaleOrder entity);
     Task<bool> Delete(SaleOrder entity);
+    Task<IEnumerable<SaleOrder>> GetAllSaleOrders(int id);
+    Task<IEnumerable<OrderLineWithProducts>> GetAllOrderLinesWithProductsBySaleOrderId(int id);
 }

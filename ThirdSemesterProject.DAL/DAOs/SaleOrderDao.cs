@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using ThirdSemesterProject.DAL.Model;
@@ -32,11 +33,19 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
             foreach (var so in saleOrders)
             {
                 using var orderLinesAndProducts = await connection.QueryMultipleAsync(GET_ORDERLINES_BY_SALEORDERID, new { SaleOrderId = so.SaleOrderId });
-                
-                var orderLines = orderLinesAndProducts.Read<OrderLine>().ToList();
+
+                var orderLinesWithProducts = orderLinesAndProducts.Read<OrderLineWithProducts>().ToList();
+                foreach (var line in orderLinesWithProducts)
+                {
+                    Product p = new Product() { Name = line.Name };
+                    OrderLine ol = new OrderLine() { Quantity = line.Quantity, UnitPrice = line.UnitPrice, Product = p };
+                    so.AddOrderLineToSaleOrder(ol);
+                }
+
+                //var orderLines = orderLinesAndProducts.Read<OrderLine>().ToList();
                 //var product = orderLinesAndProducts.Read<Product>();
                 
-                so.OrderLines = orderLines;
+                //so.OrderLines = orderLines;
                 //orderLine.Product = product;
             }
             connection.Close();
@@ -46,6 +55,23 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
         {
             connection.Close();
             throw new Exception($"Could not get SaleOrders and Orderlines. Message was: {ex.Message}", ex);
+        }
+    }
+
+    public async Task<IEnumerable<SaleOrder>> GetAllSaleOrders(int personId)
+    {
+        using var connection = CreateConnection();
+        connection.Open();
+        try
+        {
+            var saleOrders = await connection.QueryAsync<SaleOrder>(GET_ALL_SALEORDERS_BY_PERSONID, new { person_id = personId });
+            connection.Close();
+            return saleOrders;
+        }
+        catch (Exception ex) 
+        {
+
+            throw new Exception("No SaleOrders exsist");
         }
     }
 
@@ -91,6 +117,35 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
             throw new Exception($"Error: Could not persist SaleOrder: {entity} in database. Message was: {ex.Message}", ex);
         }
     }
+
+
+    //Arbejder videre i morgen
+    public async Task<IEnumerable<OrderLineWithProducts>> GetAllOrderLinesWithProductsBySaleOrderId(int id)
+    {
+        using var connection = CreateConnection();
+        connection.Open();
+        List<OrderLineWithProducts> listOfOrderLinesWithProducts = new List<OrderLineWithProducts>();
+        try
+        {
+            var orderLinesWithProducts = await connection.QueryAsync<OrderLineWithProducts>(GET_ORDERLINES_BY_SALEORDERID, new { SaleOrderId = id } );
+            foreach (var line in orderLinesWithProducts)
+            {
+                OrderLineWithProducts currOrderLineWithProduct = new OrderLineWithProducts();
+                currOrderLineWithProduct.Name = line.Name;
+                currOrderLineWithProduct.UnitPrice = line.UnitPrice;
+                currOrderLineWithProduct.Quantity = line.Quantity;
+                listOfOrderLinesWithProducts.Add(currOrderLineWithProduct);
+            }
+            return (IEnumerable<OrderLineWithProducts>)listOfOrderLinesWithProducts;
+        }
+        catch (Exception ex)
+        {
+
+            throw new Exception("No order information in SaleOrder") ;
+        }
+        
+    }
+
 
     public Task<bool> Delete(SaleOrder entity)
     {

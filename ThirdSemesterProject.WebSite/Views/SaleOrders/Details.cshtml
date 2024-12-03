@@ -1,0 +1,40 @@
+﻿@model ThirdSemesterProject.APIClient.DTOs.SaleOrderDTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details About </h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+        @foreach (var item in Model.OrderLines)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(modelItem => item.ProductDTO.Name)
+            </dt>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(modelItem => item.UnitPrice)
+            </dt>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(modelItem => item.Quantity)
+            </dt>
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
