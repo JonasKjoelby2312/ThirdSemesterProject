@@ -10,7 +10,15 @@ namespace ThirdSemesterProject.WebSite.Controllers
     public class SaleOrdersController : Controller
     {
 
+
+
         IAPIClient _client;
+
+        public SaleOrdersController(IAPIClient client)
+        {
+            _client = client;
+        }
+
         // GET: SaleOrdersController
         public ActionResult Index()
         {
@@ -18,9 +26,12 @@ namespace ThirdSemesterProject.WebSite.Controllers
         }
 
         // GET: SaleOrdersController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var orderLinesWithProducts = await _client.GetAllOrderLinesWithProductsBySaleOrderIdAsync(id);
+
+            return View(orderLinesWithProducts);
         }
 
         // GET: SaleOrdersController/Create

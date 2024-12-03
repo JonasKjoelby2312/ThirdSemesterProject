@@ -113,7 +113,7 @@ public class APIClient : IAPIClient
         }
     }
 
-    async Task<IEnumerable<SaleOrderDTO>> IAPIClient.GetAllSaleOrdersByPersonIdAsync(int id)
+    public async Task<IEnumerable<SaleOrderDTO>> GetAllSaleOrdersByPersonIdAsync(int id)
     {
         var request = new RestRequest($"SaleOrders", Method.Get);
         request.AddParameter("id", id);
@@ -121,6 +121,17 @@ public class APIClient : IAPIClient
         if (!response.IsSuccessful)
         {
             throw new Exception("FEJL!!!!!");
+        }
+        return response.Data;
+    }
+
+    public async Task<IEnumerable<OrderLineWithProductsDTO>> GetAllOrderLinesWithProductsBySaleOrderIdAsync(int id)
+    {
+        var response = await _restClient.RequestAsync<IEnumerable<OrderLineWithProductsDTO>> (Method.Get, $"SaleOrders/{id}");
+        if (!response.IsSuccessful)
+        {
+            throw new Exception($"Error getting order line with products id was:{id}. Message was {response.Content}");
+
         }
         return response.Data;
     }

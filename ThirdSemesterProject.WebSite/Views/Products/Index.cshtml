@@ -1,68 +1,106 @@
 ﻿@model IEnumerable<ThirdSemesterProject.APIClient.DTOs.ProductDTO>
 
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Products";
 }
+
+<style>
+    body {
+        background: linear-gradient(to bottom, #eae2b7, #d8ccb4); /* Light beige and tan gradient */
+        color: #2a473e; /* Deep forest green */
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .product-grid {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping to new rows */
+        justify-content: center; /* Center items horizontally */
+        gap: 15px; /* Space between boxes */
+        padding: 15px;
+    }
+
+    .product-box {
+        background: #f4f1de; /* Light beige */
+        border: 2px solid #8da57b; /* Olive green border */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(44, 72, 62, 0.2); /* Soft forest green shadow */
+        width: 200px; /* Smaller box width */
+        padding: 10px; /* Smaller padding */
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-box:hover {
+        transform: scale(1.05); /* Slight zoom on hover */
+        box-shadow: 0 6px 12px rgba(44, 72, 62, 0.4); /* More intense shadow */
+    }
+
+    .product-box h3 {
+        font-size: 1rem; /* Smaller font size */
+        color: #2a473e; /* Forest green */
+        margin-bottom: 5px; /* Smaller margin */
+    }
+
+    .product-box p {
+        font-size: 0.8rem; /* Smaller font size */
+        margin: 3px 0; /* Smaller margin */
+        color: #5c7a5b; /* Muted olive green for secondary text */
+    }
+
+    .product-box .action-links {
+        margin-top: 10px; /* Smaller margin */
+    }
+
+    .product-box .action-links a {
+        display: inline-block;
+        padding: 6px 10px; /* Even smaller padding */
+        font-size: 0.7rem; /* Even smaller font size */
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        background: #8da57b; /* Olive green */
+        color: #f4f1de; /* Light beige */
+        border: 2px solid #5c7a5b; /* Muted forest green border */
+        border-radius: 5px;
+        transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease;
+        margin-right: 5px; /* Add margin between buttons */
+    }
+
+    .product-box .action-links a:hover {
+        background: #5c7a5b; /* Muted forest green */
+        color: #f4f1de; /* Light beige */
+        transform: scale(1.1); /* Slightly enlarge on hover */
+        box-shadow: 0 4px 8px rgba(44, 72, 62, 0.3); /* Add hover shadow */
+    }
+
+    .product-box .action-links a:active {
+        background: #2a473e; /* Darker forest green */
+        color: #eae2b7; /* Tan */
+    }
+</style>
 
 <h1>Products</h1>
 
-<p>
-    @* <a asp-action="Create">Create New</a> *@
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Size)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SalesPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CurrentStock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-                <th>
-                    @Html.DisplayFor(modelItem => item.ProductId)
-                </th>
-             
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SalesPrice) DKK.
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentStock)
-            </td>
-            <td>
-                    <a class="btn-sm btn-primary" href="@Url.Action("Add", "Cart", new { id = item.ProductId, quantity = 1 })">Add to cart 
-                        <span class="bi-cart-plus" style="margin-left:0px;"></span></a>
-               @*  @Html.ActionLink("Add To Cart", "Cart", new { id = item.ProductId, quantity = 1 }) *@
-                | @Html.ActionLink("See More", "Details", new { id=item.ProductId }) 
-                @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
-                  
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="product-grid">
+    @foreach (var item in Model)
+    {
+        <div class="product-box">
+            <h3>@item.Name</h3>
+            <p><strong>Size:</strong> @item.Size</p>
+            <p><strong>Price:</strong> @item.SalesPrice DKK.</p>
+            <p><strong>Stock:</strong> @item.CurrentStock</p>
+            <p><strong>Color:</strong> @item.Color</p>
+            <div class="action-links">
+                <a class="btn-sm btn-primary" href="@Url.Action("Add", "Cart", new { id = item.ProductId, quantity = 1 })">
+                    Add to cart 
+                    <span class="bi-cart-plus" style="margin-left:3px;"></span>
+                </a>
+                <a href="@Url.Action("Details", "Products", new { id = item.ProductId })">
+                    See More
+                </a>
+            </div>
+        </div>
+    }
+</div>

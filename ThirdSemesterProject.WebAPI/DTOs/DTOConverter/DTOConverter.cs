@@ -56,4 +56,23 @@ public static class DTOConverter
         }
 
     }
+
+    private static OrderLineWithProductsDTO ToDTO(this OrderLineWithProducts orderLineWithProducts)
+    {
+        var orderLineWithProductDTO = new OrderLineWithProductsDTO();
+        orderLineWithProducts.CopyPropertiesTo(orderLineWithProductDTO);
+        return orderLineWithProductDTO;
+
+    }
+
+    public static IEnumerable<OrderLineWithProductsDTO> ToDTOs(this IEnumerable<OrderLineWithProducts> orderLineWithProducts)
+    {   
+
+        foreach (var olwp in orderLineWithProducts)
+        {
+            yield return olwp.ToDTO();
+        }
+        
+
+    }
 }
