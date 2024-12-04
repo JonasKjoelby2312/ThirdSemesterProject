@@ -57,4 +57,19 @@ public class SaleOrdersController : ControllerBase
     public void Delete(int id)
     {
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<IEnumerable<OrderLineWithProductsDTO>>> GetOrderLinesWithProducts(int id)
+    {
+        IEnumerable<OrderLineWithProducts> orderLinesWithProducts;
+
+        if (id > 0)
+        {
+            orderLinesWithProducts = await _saleOrderDAO.GetAllOrderLinesWithProductsBySaleOrderId(id);
+            return Ok(orderLinesWithProducts.ToDTOs()); 
+        } else 
+        { 
+            return NotFound();
+        }
+    }
 }

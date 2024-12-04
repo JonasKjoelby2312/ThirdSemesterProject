@@ -18,7 +18,8 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
     private readonly string GET_STOCK_BY_PRODUCT_ID = "SELECT current_Stock from product WHERE product_id = @productId;";
     private readonly string UPDATE_CURRENT_STOCK = "UPDATE product set current_stock = current_stock - @quantity where product_id = @productId;";
     private readonly string GET_ALL_SALEORDERS_BY_PERSONID = "SELECT sale_order_id as SaleOrderId, order_date as OrderDate, total as Total, fk_customer_id as CustomerId from sale_order where fk_customer_id = @person_id";
-    private readonly string GET_ORDERLINES_BY_SALEORDERID = "SELECT ol.order_line_id AS orderLineId, ol.quantity, ol.unit_price, p.product_id AS productId, p.name AS productName, p.description, p.weight, p.size, p.color, p.current_stock AS currentStock, p.product_type AS productType FROM order_line ol JOIN product p ON ol.fk_product_id = p.product_id WHERE ol.fk_sale_order_id = @SaleOrderId;";
+    private readonly string GET_ORDERLINES_BY_SALEORDERID = "SELECT p.name AS Name, ol.quantity AS Quantity, ol.unit_price AS UnitPrice FROM order_line ol JOIN product p ON ol.fk_product_id = p.product_id WHERE ol.fk_sale_order_id = @saleOrderId;";
+
     public SaleOrderDAO(string connectionstring) : base(connectionstring)
     {
     }
@@ -136,12 +137,12 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
                 currOrderLineWithProduct.Quantity = line.Quantity;
                 listOfOrderLinesWithProducts.Add(currOrderLineWithProduct);
             }
-            return (IEnumerable<OrderLineWithProducts>)listOfOrderLinesWithProducts;
+            return listOfOrderLinesWithProducts;
         }
         catch (Exception ex)
         {
 
-            throw new Exception("No order information in SaleOrder") ;
+            throw new Exception("Could not get orderlines and products exception was: ", ex) ;
         }
         
     }
