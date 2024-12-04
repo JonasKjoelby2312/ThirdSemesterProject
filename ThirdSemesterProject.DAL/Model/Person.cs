@@ -14,6 +14,7 @@ public abstract class Person
     public string PhoneNO { get; set; }
     public string? Password { get; set; }
     public string PersonType { get; set; }
+    public Address Address { get; set; }
 
     public Person()
     {

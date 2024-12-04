@@ -18,6 +18,6 @@ public class SaleOrderDTO
     {
         OrderLines = new List<OrderLineDTO>();
         OrderDate = DateTime.Now;
-        CustomerDTO = new CustomerDTO() { PersonId = 1, Name = "John", Email = "", Password = "", PersonType = "", PhoneNO = "" };
+        CustomerDTO = new CustomerDTO() { PersonId = 1, Name = "", Email = "", Password = "", PersonType = "", PhoneNO = "", AddressDTO = new AddressDTO() { City = "", HouseNo = "", RoadName = "", Zip = 0 } };
     }
 }
