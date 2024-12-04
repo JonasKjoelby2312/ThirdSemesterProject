@@ -54,7 +54,7 @@ public class CustomersController : Controller
         }
         else
         {
-            ViewBag.ErrorMessage = "Incorrect Login or non exesting user";
+            ViewBag.ErrorMessage = "Invalid Login!";
         }
         return View();
     }

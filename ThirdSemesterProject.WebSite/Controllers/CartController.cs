@@ -70,7 +70,7 @@ public class CartController : Controller
             EmptyCart();
 
             TempData["SuccessMessage"] = "Your order was successfully placed!";
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction("Index", "Home");
         }
         catch
         {
