@@ -21,6 +21,7 @@ public class PersonDTO
     public PersonDTO()
     {
         PersonType = "Person";
+        AddressDTO = new AddressDTO() { RoadName = "Rømøgade", City = "Aalborg", HouseNo = "32, 5 TV", Zip = 9000};
     }
 
 }

@@ -14,5 +14,9 @@ public class PersonDTO
     public string Password { get; set; }
     public AddressDTO AddressDTO { get; set; }
 
+    public PersonDTO()
+    {
+        AddressDTO = new AddressDTO() { RoadName = "", Zip = 0, HouseNo = "", City = ""};  
+    }
 }
 
