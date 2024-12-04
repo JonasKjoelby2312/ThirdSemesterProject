@@ -9,6 +9,7 @@ using System.Transactions;
 using static Dapper.SqlMapper;
 using ThirdSemesterProject.DAL.Authentication;
 using ThirdSemesterProject.DAL.Model;
+using System.Data.SqlClient;
 
 namespace ThirdSemesterProject.DAL.DAOs
 {
@@ -40,7 +41,7 @@ namespace ThirdSemesterProject.DAL.DAOs
                 transaction.Commit();
                 return personId;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 transaction.Rollback();
                 throw new Exception($"Error could not persist customer {entity} in DataBase. Message was {ex.Message}", ex);

@@ -71,3 +71,67 @@
                 background: #2a473e; /* Darker forest green */
                 color: #eae2b7; /* Tan */
             }
+
+/* BaseLayout.css */
+
+body {
+    background-color: #362204; /* Set the background color to #362204 */
+    color: #ffffff; /* Set the text color to white for better readability */
+    font-family: Arial, sans-serif;
+}
+
+a {
+    color: #ffffff; /* Set the link color to white */
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #cccccc; /* Set the hover color to light gray */
+    }
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+    color: #ffffff; /* Set the navbar text color to white */
+}
+
+    .navbar-light .navbar-nav .nav-link:hover {
+        color: #cccccc; /* Set the navbar link hover color to light gray */
+    }
+
+.container {
+    padding: 20px;
+}
+
+footer {
+    background-color: #2a1a03; /* Darker shade for the footer */
+    color: #ffffff; /* Set the footer text color to white */
+}
+
+    footer a {
+        color: #ffffff; /* Set the footer link color to white */
+    }
+
+        footer a:hover {
+            color: #cccccc; /* Set the footer link hover color to light gray */
+        }
+
+.form-control {
+    background-color: #4a3305; /* Slightly darker background for form controls */
+    color: #ffffff; /* Set the form control text color to white */
+    border-color: #5a4306; /* Set the form control border color */
+}
+
+    .form-control:focus {
+        border-color: #7a6326; /* Set the form control focus border color */
+        box-shadow: 0 0 8px rgba(122, 99, 38, 0.6); /* Set the form control focus box shadow */
+    }
+
+.btn-primary {
+    background-color: #5a4306; /* Set the primary button background color */
+    border-color: #5a4306; /* Set the primary button border color */
+}
+
+    .btn-primary:hover {
+        background-color: #7a6326; /* Set the primary button hover background color */
+        border-color: #7a6326; /* Set the primary button hover border color */
+    }

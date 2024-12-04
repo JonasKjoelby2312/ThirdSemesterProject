@@ -128,7 +128,7 @@ public class CustomersController : Controller
     
     public async Task<ActionResult> Details()
     {
-        int id = Int32.Parse(User.Claims.Where(c => c.Type == "user_id").Select(c => c.Value).SingleOrDefault());
+        int id = Int32.Parse(User.Claims.Where(claim => claim.Type == "user_id").Select(claim => claim.Value).SingleOrDefault());
         var customer = await _client.GetCustomerByIdAsync(id);
         return View(customer);
     }

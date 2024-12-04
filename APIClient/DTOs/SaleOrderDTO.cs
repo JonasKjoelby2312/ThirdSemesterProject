@@ -18,6 +18,6 @@ public class SaleOrderDTO
     {
         OrderLines = new List<OrderLineDTO>();
         OrderDate = DateTime.Now;
-        CustomerDTO = new CustomerDTO() { PersonId = 1, Name = "", Email = "", Password = "", PersonType = "", PhoneNO = "", AddressDTO = new AddressDTO() { City = "Aalborg", HouseNo = "23, 4 TV", RoadName = "Rømøgade", Zip = 9000 } };
+        CustomerDTO = new CustomerDTO() { PersonId = 0, Name = "", Email = "", Password = "", PersonType = "", PhoneNO = "", AddressDTO = new AddressDTO() { City = "", HouseNo = "", RoadName = "", Zip = 0} };
     }
 }

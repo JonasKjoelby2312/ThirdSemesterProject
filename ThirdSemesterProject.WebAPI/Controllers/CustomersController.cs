@@ -43,8 +43,8 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         {
             
             var customerToMap = _mapper.Map<CustomerDTO, Customer>(newCustomerDTO);
-            var customer = await _customerDAO.CreateAsync(customerToMap, newCustomerDTO.Password);
-            return Ok(customer);
+            var customerId = await _customerDAO.CreateAsync(customerToMap, newCustomerDTO.Password);
+            return Ok(customerId);
         }
 
         // PUT api/<CustomersController>/5
