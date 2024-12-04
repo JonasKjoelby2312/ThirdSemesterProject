@@ -4,6 +4,10 @@
     ViewData["Title"] = "Cart";
 }
 
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/BaseLayout.css" />
+</head>
+
 <h1>Cart</h1>
    @if (Model == null || Model.ProductQuantities.Count == 0)
     {
@@ -28,7 +32,7 @@
                 <div class="col-3">
                     <a class="btn btn-primary" href="@Url.Action("Add", "Cart", new { id = @productQuantity.Id, quantity=-1, returnToCart = true})" title="remove one">-1</a>
                 <a class="btn btn-primary" href="@Url.Action("Add", "Cart", new { id = @productQuantity.Id, quantity=1, returnToCart = true})" title="add one">+1</a>
-                    <a class="btn btn-danger" href="@Url.Action("Delete", "Cart", new { id = @productQuantity.Id})" title="delete product"><span class="bi-trash"></span></a>
+                <a class="btn btn-danger" href="@Url.Action("EmptyCart", "Cart", new { id = @productQuantity.Id})" title="delete product"><span class="bi-trash"></span>🗑</a>
 
                 </div>
             </div>
