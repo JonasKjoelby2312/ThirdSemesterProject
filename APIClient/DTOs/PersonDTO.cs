@@ -16,6 +16,7 @@ public class PersonDTO
     public string? PhoneNO { get; set; }
     public string PersonType { get; set; }
     public string Password { get; set; }
+    public AddressDTO AddressDTO { get; set; }
 
     public PersonDTO()
     {
