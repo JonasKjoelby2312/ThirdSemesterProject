@@ -19,7 +19,7 @@ public class APIClient : IAPIClient
         var response = await _restClient.RequestAsync<int>(Method.Post, "Customers", customerDTO);
         if (!response.IsSuccessful)
         {
-            throw new Exception($"Error creating user with email: {customerDTO.Email}. Message was: {response.Content}");
+            throw new HttpRequestException($"Error creating user with email: {customerDTO.Email}. Message was: {response.Content}");
         }
         return response.Data;
     }
@@ -29,7 +29,7 @@ public class APIClient : IAPIClient
         var response = await _restClient.RequestAsync<int>(Method.Post, "products", entity);
         if (!response.IsSuccessful)
         {
-            throw new Exception($"Error Creating Product. Message was {response.Content}");
+            throw new HttpRequestException($"Error Creating Product. Message was {response.Content}");
         }
         return response.Data;
     }
@@ -39,7 +39,7 @@ public class APIClient : IAPIClient
         var response = await _restClient.RequestAsync<int>(Method.Post, "saleOrders", entity);
         if (!response.IsSuccessful)
         {
-            throw new Exception($"Error Creating Product. Message was {response.Content}");
+            throw new HttpRequestException($"Error Creating Product. Message was {response.Content}");
         }
         return response.Data;
     }
@@ -53,7 +53,7 @@ public class APIClient : IAPIClient
         }
         else
         {
-            throw new Exception($"Error Deleting Product with id = {id}. Message was {response.Content}");
+            throw new HttpRequestException($"Error Deleting Product with id = {id}. Message was {response.Content}");
         }
     }
 
@@ -63,7 +63,7 @@ public class APIClient : IAPIClient
         var response = await _restClient.RequestAsync<IEnumerable<ProductDTO>>(Method.Get, $"Products");
         if (!response.IsSuccessful)
         {
-            throw new Exception($"Error Retriving Product. Message was {response.Content}");
+            throw new HttpRequestException($"Error Retriving Product. Message was {response.Content}");
         }
         return response.Data;
     }
@@ -73,7 +73,7 @@ public class APIClient : IAPIClient
         var response = await _restClient.RequestAsync<CustomerDTO>(Method.Get, $"Customers/{userId}");
         if (!response.IsSuccessful)
         {
-            throw new Exception($"Error retrieving customer with Id: {userId}. Message was {response.Content}");
+            throw new HttpRequestException($"Error retrieving customer with Id: {userId}. Message was {response.Content}");
         }
         return response.Data;
     }
@@ -83,7 +83,7 @@ public class APIClient : IAPIClient
         var response = await _restClient.RequestAsync<ProductDTO>(Method.Get, $"products/{id}");
         if (!response.IsSuccessful)
         {
-            throw new Exception($"Error Getting Product by id = {id}. Message was {response.Content}");
+            throw new HttpRequestException($"Error Getting Product by id = {id}. Message was {response.Content}");
 
         }
         return response.Data;
@@ -94,7 +94,7 @@ public class APIClient : IAPIClient
         var response = await _restClient.RequestAsync<int>(Method.Post, $"logins", loginInfo);
         if (!response.IsSuccessful)
         {
-            throw new Exception($"Error loggin in for customer with Email = {loginInfo.Email}. Message was {response.Content}");
+            throw new HttpRequestException($"Error loggin in for customer with Email = {loginInfo.Email}. Message was {response.Content}");
 
         }
         return response.Data;
@@ -109,7 +109,7 @@ public class APIClient : IAPIClient
         }
         else
         {
-            throw new Exception($"Error Updating Product with id = {entity}. Message was {response.Content}");
+            throw new HttpRequestException($"Error Updating Product with id = {entity}. Message was {response.Content}");
         }
     }
 
@@ -120,7 +120,7 @@ public class APIClient : IAPIClient
         var response = await _restClient.ExecuteAsync<IEnumerable<SaleOrderDTO>>(request);
         if (!response.IsSuccessful)
         {
-            throw new Exception("FEJL!!!!!");
+            throw new HttpRequestException($"Error getting all sales for customer with id:{id}");
         }
         return response.Data;
     }
@@ -130,7 +130,7 @@ public class APIClient : IAPIClient
         var response = await _restClient.RequestAsync<IEnumerable<OrderLineWithProductsDTO>> (Method.Get, $"SaleOrders/{id}");
         if (!response.IsSuccessful)
         {
-            throw new Exception($"Error getting order line with products id was:{id}. Message was {response.Content}");
+            throw new HttpRequestException($"Error getting order line with products id was:{id}. Message was {response.Content}");
 
         }
         return response.Data;
