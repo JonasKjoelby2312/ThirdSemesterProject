@@ -10,9 +10,9 @@ namespace ThirdSemesterProject.WebAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        IDAOAsync<Product> _productsDAO;
+        IProductDAO _productsDAO;
 
-        public ProductsController(IDAOAsync<Product> dao)
+        public ProductsController(IProductDAO dao)
         {
             _productsDAO = dao;
         }
