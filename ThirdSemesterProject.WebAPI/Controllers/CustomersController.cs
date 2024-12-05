@@ -15,11 +15,13 @@ namespace ThirdSemesterProject.WebAPI.Controllers
     {
         
         ICustomerDAO _customerDAO;
+        private IMapper _mapper;
        
-        public CustomersController(ICustomerDAO customerDAO)
+        public CustomersController(ICustomerDAO customerDAO, IMapper mapper)
         {
             
             _customerDAO = customerDAO;
+            _mapper = mapper;
         }
         // GET: api/<CustomersController>
         [HttpGet]
@@ -40,7 +42,9 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         public async Task<ActionResult<int>> Post([FromBody] CustomerDTO newCustomerDTO)
         {
             
-            return Ok(await _customerDAO.CreateAsync(newCustomerDTO.FromDTO(), newCustomerDTO.Password));
+            var customerToMap = _mapper.Map<CustomerDTO, Customer>(newCustomerDTO);
+            var customerId = await _customerDAO.CreateAsync(customerToMap, newCustomerDTO.Password);
+            return Ok(customerId);
         }
 
         // PUT api/<CustomersController>/5

@@ -2,6 +2,7 @@
 using ThirdSemesterProject.DAL.DAOs;
 using ThirdSemesterProject.DAL.Model;
 using ThirdSemesterProject.WebAPI.DTOs;
+using ThirdSemesterProject.WebAPI.Profiles;
 
 namespace ThirdSemesterProject.WebAPI
 {
@@ -17,6 +18,7 @@ namespace ThirdSemesterProject.WebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(typeof(MappingProfiles));
             
             /*builder.Services.AddSingleton<IDAO<Product>, ProductDAOStub>();*/
 
