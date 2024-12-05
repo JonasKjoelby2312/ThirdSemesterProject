@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,16 @@ using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.DAL.DAOs;
 
-public class ProductDAO : BaseDAO, IDAOAsync<Product>
+public class ProductDAO : BaseDAO, IProductDAO
 {
     private readonly string GET_PRODUCT_WITH_NEWEST_SALES_PRICE = "WITH LatestSalesPrice AS (SELECT fk_product_id, value, creation_date FROM sales_price sp WHERE sales_price_id = (SELECT TOP 1 sales_price_id FROM sales_price WHERE fk_product_id = sp.fk_product_id ORDER BY creation_date DESC, sales_price_id DESC)) SELECT product.product_id AS productId, product.name, product.description, product.weight, product.size, product.color, product.current_stock AS currentStock, LatestSalesPrice.value AS salesPrice, product.product_type AS productType FROM product LEFT JOIN LatestSalesPrice ON product.product_id = LatestSalesPrice.fk_product_id;";
     private readonly string GET_ALL_PRODUCTS = "SELECT product_id, name, description, weight, size, color, current_stock, product_type from product;";
     private readonly string INSERT_PRODUCT = "INSERT INTO product(name, description, weight, size, color, current_stock, product_type) values (@name, @description, @weight, @size, @color, @currentStock, @productType) SELECT CAST(SCOPE_IDENTITY() AS INT)";
     private readonly string SELECT_PRODUCT_BY_ID = "WITH LatestSalesPrice AS (SELECT fk_product_id, value, creation_date FROM sales_price sp WHERE sales_price_id = (SELECT TOP 1 sales_price_id FROM sales_price WHERE fk_product_id = sp.fk_product_id ORDER BY creation_date DESC, sales_price_id DESC)) SELECT product.product_id AS productId, product.name, product.description, product.weight, product.size, product.color, product.current_stock AS currentStock, LatestSalesPrice.value AS salesPrice, product.product_type AS productType FROM product full outer JOIN LatestSalesPrice ON product.product_id = LatestSalesPrice.fk_product_id where product_id = @productId;";
     private readonly string INSERT_SALES_PRICE = "insert into sales_price (creation_date, [value], fk_product_id) VALUES (@creationDate, @value, @fkProductId)";
+    private readonly string FIND_PRODUCTS_BY_PART_OF_NAME = "SELECT product_id as ProductId, name, description, weight, size, color, current_stock, product_type FROM product WHERE name LIKE @partOfName;";
+    private readonly string DELETE_SALES_PRICES_BY_ID = "DELETE FROM sales_price WHERE fk_product_id = @fkProductId";
+    private readonly string DELETE_PRODUCT_BY_ID = "DELETE FROM product WHERE product_id = @productId";
 
     public ProductDAO(string connectionString) : base(connectionString)
     {
@@ -42,9 +46,31 @@ public class ProductDAO : BaseDAO, IDAOAsync<Product>
         }
     }
 
-    public async Task<bool> Delete(Product entity)
+    public async Task<bool> DeleteAsync(Product entity)
     {
-        throw new NotImplementedException();
+        using var connection = CreateConnection();
+        connection.Open();
+        IDbTransaction transaction = connection.BeginTransaction();
+
+        try
+        {
+            bool res = await connection.ExecuteAsync(DELETE_SALES_PRICES_BY_ID, new {fkProductId = entity.ProductId}, transaction) > 0;
+            res = await connection.ExecuteAsync(DELETE_PRODUCT_BY_ID, new {productId = entity.ProductId}, transaction) > 0;
+            if (!res)
+            {
+                transaction.Rollback();
+            }
+            else
+            {
+                transaction.Commit();
+            }
+            return res;
+        }
+        catch (Exception ex)
+        {
+            transaction.Rollback();
+            throw new Exception($"Could not delete product with id: {entity.ProductId}. Message was: {ex.Message}", ex);
+        }
     }
 
     public async Task<IEnumerable<Product>> GetAllAsync()
@@ -54,16 +80,6 @@ public class ProductDAO : BaseDAO, IDAOAsync<Product>
         return products;
     }
 
-    public async Task<IEnumerable<Product>> GetAllClothes()
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IEnumerable<Product>> GetAllEquipment()
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<Product> GetByIdAsync(int id)
     {
         using var connection = CreateConnection();
@@ -71,8 +87,18 @@ public class ProductDAO : BaseDAO, IDAOAsync<Product>
         return product; 
     }
 
-    public async Task<bool> Update(Product entity)
+    public async Task<bool> UpdateAsync(Product entity)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<IEnumerable<Product>> FindProductsByPartOfNameAsync(string givenPartOfName)
+    {
+        using var connection = CreateConnection();
+
+        string searchSQLString = "%" + givenPartOfName + "%";
+
+        IEnumerable<Product> products = await connection.QueryAsync<Product>(FIND_PRODUCTS_BY_PART_OF_NAME, new { partOfName =  searchSQLString});
+        return products;
     }
 }
