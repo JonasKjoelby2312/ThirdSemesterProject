@@ -27,7 +27,7 @@ namespace ThirdSemesterProject.WebAPI
 
             //SSMS connectionString: 
             /*const string connectionString = "Data Source=.;Initial Catalog=webshop;Integrated Security=True";*/
-            builder.Services.AddSingleton<IDAOAsync<Product>>((_) => (IDAOAsync<Product>) new ProductDAO(connectionString));
+            builder.Services.AddSingleton<IProductDAO>((_) => (IProductDAO) new ProductDAO(connectionString));
             builder.Services.AddSingleton<ISaleOrderDAO>((_) => (ISaleOrderDAO)new SaleOrderDAO(connectionString));
             builder.Services.AddSingleton<ICustomerDAO> ((_) => (ICustomerDAO)new CustomerDAO(connectionString));
             var app = builder.Build();
