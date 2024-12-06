@@ -18,6 +18,6 @@ public abstract class Person
 
     public Person()
     {
-        Address = new Address();
+        Address = new Address() {RoadName = "", City = "", HouseNo = "", Zip = 0 };
     }
 }

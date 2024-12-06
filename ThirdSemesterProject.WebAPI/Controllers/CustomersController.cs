@@ -30,12 +30,25 @@ namespace ThirdSemesterProject.WebAPI.Controllers
             return new string[] { "value1", "value2" };
         }
 
+
+        //This method is used for getting a customer by id, it takes an id in the paramater. 
+        //The method returns a customer. 
         // GET api/<CustomersController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<int>> Get(int id)
+        public async Task<ActionResult<CustomerDTO>> Get(int id)
         {
-            return Ok(await _customerDAO.GetByIdAsync(id));
+            var foundCustomer = await _customerDAO.GetByIdAsync(id);
+            if (foundCustomer != null)
+            {
+                return Ok(foundCustomer); 
+            }
+            return NotFound();
         }
+
+
+        //The post method, are used for creating customers on the website. 
+        //The method takes a CustomerDTO object, and uses the NuGet package AutoMapper, to map from DTO to model class. 
+        //The method returns the newly created ID from the database. 
 
         // POST api/<CustomersController>
         [HttpPost]

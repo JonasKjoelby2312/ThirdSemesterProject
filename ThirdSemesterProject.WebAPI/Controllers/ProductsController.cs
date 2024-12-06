@@ -23,6 +23,9 @@ namespace ThirdSemesterProject.WebAPI.Controllers
             return Ok(await _productsDAO.GetAllAsync());
         }
 
+
+        //This method is used for finding a product by ID, it takes an id in the paramater. 
+        //The method returns a product. 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> Get([FromRoute] int id)
