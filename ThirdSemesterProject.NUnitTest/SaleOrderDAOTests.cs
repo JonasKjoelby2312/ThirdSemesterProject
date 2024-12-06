@@ -57,10 +57,10 @@ public class SaleOrderDAOTests
     {
         _saleOrderDAO = new SaleOrderDAO("Server=tcp:hildur.ucn.dk,1433;Database=DMA-CSD-S232_10503126;User ID=DMA-CSD-S232_10503126;Password=Password1!;");
 
-        Customer customer = new Customer() {Name = "Dude", Email = "Dude@gmail.com", Address = new Address() {RoadName = "dudestreet", City = "DudeCity", HouseNo = "69", Zip = 9999 } };
+        Customer customer = new Customer() {Name = "Dude", Email = "Dude@gmail.com", Address = new Address() {RoadName = "dudestreet", City = "DudeCity", HouseNo = "69", Zip = 9000 } };
         _saleOrder = new SaleOrder();
-        Product product = new Product() { Name = "fack", Color = "redfack", CurrentStock = 2, Description = "fack is fack", ProductType = "Equipment", SalesPrice = new SalesPrice() { CreationDate = DateTime.Now, Value = 2.2m }, Size = "L", Weight = 2 };
-        _saleOrder.AddOrderLineToSaleOrder(new OrderLine { Product = product, Quantity = 12, UnitPrice = 2 });
+        Product product = new Product() { Name = "fack", Color = "redfack", CurrentStock = 10, Description = "fack is fack", ProductType = "Equipment", SalesPrice = 2, Size = "L", Weight = 2 };
+        _saleOrder.AddOrderLineToSaleOrder(new OrderLine { Product = product, Quantity = 1, UnitPrice = 2 });
 
     }
 
@@ -69,11 +69,13 @@ public class SaleOrderDAOTests
     {
         //Arrange
         var expectedOrderId = await _saleOrderDAO.CreateAsync(_saleOrder);
+
         //Act
+        
 
         //Assert
 
-        Assert.That(_saleOrder.SaleOrderId > 0);
+        Assert.That(_saleOrder.SaleOrderId, Is.GreaterThan(0));
     }
 
 
