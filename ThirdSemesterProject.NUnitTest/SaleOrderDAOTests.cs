@@ -48,7 +48,7 @@ using ThirdSemesterProject.DAL.Model;
 //Testing of the SaleOrderDAO class.
 public class SaleOrderDAOTests
 {
-    private SaleOrderDAO _saleOrderDAO;
+    private SaleOrderDAO _saleOrderDAO; 
     private SaleOrder _saleOrder;
 
 
@@ -57,22 +57,22 @@ public class SaleOrderDAOTests
     {
         _saleOrderDAO = new SaleOrderDAO("Server=tcp:hildur.ucn.dk,1433;Database=DMA-CSD-S232_10503126;User ID=DMA-CSD-S232_10503126;Password=Password1!;");
 
-        Customer customer = new Customer() {Name = "Dude", Email = "Dude@gmail.com", Address = new Address() {RoadName = "dudestreet", City = "DudeCity", HouseNo = "69", Zip = 9000 } };
+        
+    }
+
+    [Test]
+    public async Task TestSaleOrderCreateSuccesAsync()
+    {
+        //Arrange
+        Customer customer = new Customer() { Name = "Dude", Email = "Dude@gmail.com", Address = new Address() { RoadName = "dudestreet", City = "DudeCity", HouseNo = "69", Zip = 9000 } };
         _saleOrder = new SaleOrder();
         Product product = new Product() { Name = "fack", Color = "redfack", CurrentStock = 10, Description = "fack is fack", ProductType = "Equipment", SalesPrice = 2, Size = "L", Weight = 2 };
         _saleOrder.AddOrderLineToSaleOrder(new OrderLine { Product = product, Quantity = 1, UnitPrice = 2 });
 
-    }
-
-    [Test]
-    public async Task TestSaleOrderCreateAsync()
-    {
-        //Arrange
-        var expectedOrderId = await _saleOrderDAO.CreateAsync(_saleOrder);
 
         //Act
-        
-
+        var expectedOrderId = await _saleOrderDAO.CreateAsync(_saleOrder);
+        SaleOrder salesOrder = await _saleOrderDAO.GetByIdAsync(expectedOrderId);
         //Assert
 
         Assert.That(_saleOrder.SaleOrderId, Is.GreaterThan(0));
