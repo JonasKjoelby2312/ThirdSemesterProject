@@ -11,6 +11,9 @@ using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.DAL.DAOs;
 
+/// <summary>
+/// Implementation of the ISaleOrderDAO interface
+/// </summary>
 public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
 {
     private readonly string INSERT_SALEORDER = "INSERT INTO sale_order(order_date, total, fk_customer_id) VALUES (@OrderDate, @Total, @PersonId) SELECT CAST(SCOPE_IDENTITY() AS INT);"; //TODO customer fk?
@@ -24,6 +27,9 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
     {
     }
 
+    //This method is used for getting all saleOrder with the orderLines and products
+    //The method takes an personId in the params. 
+    //The method returns a List with saleOrders with orderLines and products. 
     public async Task<List<SaleOrder>> GetAllSaleOrdersByPersonId(int personId) // returnerer en liste med saleorders, med en liste af orderlines, der IKKE har produkt objekter på sig!!
     {
         using var connection = CreateConnection();
@@ -43,11 +49,6 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
                     so.AddOrderLineToSaleOrder(ol);
                 }
 
-                //var orderLines = orderLinesAndProducts.Read<OrderLine>().ToList();
-                //var product = orderLinesAndProducts.Read<Product>();
-                
-                //so.OrderLines = orderLines;
-                //orderLine.Product = product;
             }
             connection.Close();
             return saleOrders.ToList();
@@ -59,6 +60,9 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
         }
     }
 
+    //This method is used for getting all saleOrders by personID
+    //The method takes a personId in the params. 
+    //The method returns a IEnumerable<SaleOrder>
     public async Task<IEnumerable<SaleOrder>> GetAllSaleOrders(int personId)
     {
         using var connection = CreateConnection();
@@ -76,7 +80,9 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
         }
     }
 
-
+    //This method is used for creating saleOrders
+    //The method takes a saleOrder object in the params. 
+    //The method returns the newly created saleOrderID. 
     public async Task<int> CreateAsync(SaleOrder entity)
     {
         using var connection = CreateConnection();

@@ -36,15 +36,7 @@ public class SaleOrderDAOStub : IDAO<SaleOrder>
         throw new NotImplementedException();
     }
 
-    public IEnumerable<SaleOrder> GetAllClothes()
-    {
-        throw new NotImplementedException();
-    }
-
-    public IEnumerable<SaleOrder> GetAllEquipment()
-    {
-        throw new NotImplementedException();
-    }
+  
 
     public SaleOrder GetById(int id)
     {
