@@ -89,7 +89,7 @@ namespace ThirdSemesterProject.DAL.DAOs
 
         //This method is used for logging in to the webpage. 
         //The method takes an email and password in the params. 
-        //The BCryptTool is used for salting and hasing the password from the user
+        //The BCryptTool is used for salting and hashing the password from the user
         //And is checked against the salted and hashed password from the database. 
         //If the passwords and email matches the one in the database, 
         //The method returns the customerId, else it will return -1. 

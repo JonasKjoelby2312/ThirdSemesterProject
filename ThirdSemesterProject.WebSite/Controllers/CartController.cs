@@ -31,6 +31,7 @@ public class CartController : Controller
         return _client;
     }
 
+    //This method is used for adding products to the cart. 
     // GET: CartController/Add/5?quantity=3
     public async Task<ActionResult> Add(int id, int quantity, bool returnToCart = false)
     {
@@ -159,6 +160,7 @@ public class CartController : Controller
         return JsonSerializer.Deserialize<Cart>(cookie) ?? new Cart();
     }
 
+    //This method is used for saving the current 
     private void SaveCartToCookie(Cart cart)
     {
         var cookieOptions = new CookieOptions();
