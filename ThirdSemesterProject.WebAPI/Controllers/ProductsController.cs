@@ -31,7 +31,7 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         /// This HttpGet is used to retrive all products.
         /// </summary>
         /// <returns>
-        /// A List of all the products in the database.
+        /// A IEnumeranble of all the products in the database.
         /// </returns>
         // GET: api/<ProductsController>
         [HttpGet]
@@ -47,8 +47,6 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         /// <returns> 
         /// Returns a product from the database, if it does not exsist it will throw a 404 error not found.
         /// </returns>
-        ///This method is used for finding a product by ID, it takes an id in the paramater. 
-        ///The method returns a product. 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> Get([FromRoute] int id)
