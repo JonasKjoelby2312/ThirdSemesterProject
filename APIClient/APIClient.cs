@@ -46,7 +46,7 @@ public class APIClient : IAPIClient
 
     public async Task<bool> DeleteProductAsync(int id)
     {
-        var response = await _restClient.RequestAsync<int>(Method.Delete, $"products/{id}", null);
+        var response = await _restClient.RequestAsync<int>(Method.Delete, $"products/{id}");
         if (response.StatusCode == HttpStatusCode.OK)
         {
             return true;

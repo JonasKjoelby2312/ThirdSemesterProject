@@ -11,6 +11,9 @@ using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.DAL.DAOs;
 
+/// <summary>
+/// Implementation of the IProductDAO interface
+/// </summary>
 public class ProductDAO : BaseDAO, IProductDAO
 {
     private readonly string GET_PRODUCT_WITH_NEWEST_SALES_PRICE = "WITH LatestSalesPrice AS (SELECT fk_product_id, value, creation_date FROM sales_price sp WHERE sales_price_id = (SELECT TOP 1 sales_price_id FROM sales_price WHERE fk_product_id = sp.fk_product_id ORDER BY creation_date DESC, sales_price_id DESC)) SELECT product.product_id AS productId, product.name, product.description, product.weight, product.size, product.color, product.current_stock AS currentStock, LatestSalesPrice.value AS salesPrice, product.product_type AS productType FROM product LEFT JOIN LatestSalesPrice ON product.product_id = LatestSalesPrice.fk_product_id;";
@@ -26,6 +29,9 @@ public class ProductDAO : BaseDAO, IProductDAO
     {
     }
 
+    //This method is used for creating products to the webpage from our winforms application. 
+    //The method takes a Product object in the params
+    //The method returns the newly created productId.  
     public async Task<int> CreateAsync(Product entity)
     {
         using var connection = CreateConnection();
@@ -46,6 +52,9 @@ public class ProductDAO : BaseDAO, IProductDAO
         }
     }
 
+    //This method is used for deleting products on the webpage. 
+    //The method takes a Product object in the params. 
+    //´The method returns a boolean, true or false depending on the outcome. 
     public async Task<bool> DeleteAsync(Product entity)
     {
         using var connection = CreateConnection();
@@ -73,6 +82,8 @@ public class ProductDAO : BaseDAO, IProductDAO
         }
     }
 
+    //This method i used for getting all the products on the webpage. 
+    //The method returns a IEnumerable<Product>
     public async Task<IEnumerable<Product>> GetAllAsync()
     {
         using var connection = CreateConnection();
@@ -80,6 +91,9 @@ public class ProductDAO : BaseDAO, IProductDAO
         return products;
     }
 
+    //This method is used for getting a product by its ID. 
+    //The method takes a id in the params. 
+    //And returns a product
     public async Task<Product> GetByIdAsync(int id)
     {
         using var connection = CreateConnection();
@@ -92,6 +106,8 @@ public class ProductDAO : BaseDAO, IProductDAO
         throw new NotImplementedException();
     }
 
+
+    //Skal denne være en del af det endelige project? 
     public async Task<IEnumerable<Product>> FindProductsByPartOfNameAsync(string givenPartOfName)
     {
         using var connection = CreateConnection();

@@ -13,12 +13,13 @@ using System.Data.SqlClient;
 
 namespace ThirdSemesterProject.DAL.DAOs
 {
+    /// <summary>
+    /// Implementation of the ICustomerDAO interface
+    /// </summary>
     public class CustomerDAO : BaseDAO, ICustomerDAO
     {
         private readonly string INSERT_CUSTOMER = "INSERT INTO customer (person_id) VALUES (@PersonId)";
         private readonly string INSERT_PERSON = "INSERT INTO person (name, email, phone_no, password_hash, person_type, fk_address_id) VALUES (@Name, @Email, @PhoneNo, @PasswordHash, @PersonType, @FKAddressId) SELECT CAST(SCOPE_IDENTITY() AS INT)";
-        private readonly string INSERT_ADDRESS = "";
-        private readonly string INSERT_ZIP_CITY = "";
         private readonly string GET_MAIL = "SELECT person_id as PersonId, password_hash as PasswordHash FROM person Where email = @email";
         private readonly string GET_CUSTROMER_BY_ID = "select person_id as PersonId, name as Name, email as Email, phone_no as PhoneNO, person_type as PersonType from person Where person_id = @id";
         private readonly string INSERT_INTO_ADDRESS = "insert into address (house_no, road_name, fk_zip) VALUES (@HouseNo, @RoadName, @FkZip) SELECT CAST(SCOPE_IDENTITY() as INT);";
@@ -26,6 +27,10 @@ namespace ThirdSemesterProject.DAL.DAOs
         {
         }
 
+        //This method is used for creating customers on the webpage. 
+        //The method takes a Customer object, and a password. 
+        //The typed password is salted and hashed by the BCryptTool. 
+        //The method returns the newly created customerId. 
         public async Task<int> CreateAsync(Customer entity, string password)
         {
             using var connection = CreateConnection();
@@ -63,6 +68,9 @@ namespace ThirdSemesterProject.DAL.DAOs
             throw new NotImplementedException();
         }
 
+        //This method is used for getting a customer by ID. 
+        //The method takes an id in the params
+        //The method returns a Task<Customer>
         public async Task<Customer> GetByIdAsync(int id)
         {
             using var connection = CreateConnection();
@@ -79,6 +87,12 @@ namespace ThirdSemesterProject.DAL.DAOs
             }
         }
 
+        //This method is used for logging in to the webpage. 
+        //The method takes an email and password in the params. 
+        //The BCryptTool is used for salting and hasing the password from the user
+        //And is checked against the salted and hashed password from the database. 
+        //If the passwords and email matches the one in the database, 
+        //The method returns the customerId, else it will return -1. 
         public async Task<int> LoginAsync(string email, string password)
         {
             using var connection = CreateConnection();
