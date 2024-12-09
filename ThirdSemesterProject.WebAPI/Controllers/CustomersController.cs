@@ -9,30 +9,36 @@ using ThirdSemesterProject.WebAPI.DTOs.DTOConverter;
 
 namespace ThirdSemesterProject.WebAPI.Controllers
 {
+    /// <summary>
+    /// Handles customer-related API operations.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        
+
         ICustomerDAO _customerDAO;
         private IMapper _mapper;
-       
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomersController"/> class.
+        /// </summary>
+        /// <param name="customerDAO">Data Access Object for customer operations.</param>
+        /// <param name="mapper">AutoMapper instance for mapping between DTOs and models.</param>
         public CustomersController(ICustomerDAO customerDAO, IMapper mapper)
         {
-            
+
             _customerDAO = customerDAO;
             _mapper = mapper;
         }
-        // GET: api/<CustomersController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
-
-        //This method is used for getting a customer by id, it takes an id in the paramater. 
-        //The method returns a customer. 
+        /// <summary>
+        /// Retrieves a customer by their unique identifier.
+        /// </summary>
+        /// <param name="id">The unique identifier of the customer.</param>
+        /// <returns>An <see cref="ActionResult"/> containing the customer's details.</returns>
+        ///This method is used for getting a customer by id, it takes an id in the paramater. 
+        ///The method returns a customer. 
         // GET api/<CustomersController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomerDTO>> Get(int id)
@@ -40,36 +46,27 @@ namespace ThirdSemesterProject.WebAPI.Controllers
             var foundCustomer = await _customerDAO.GetByIdAsync(id);
             if (foundCustomer != null)
             {
-                return Ok(foundCustomer); 
+                return Ok(foundCustomer);
             }
             return NotFound();
         }
 
 
-        //The post method, are used for creating customers on the website. 
-        //The method takes a CustomerDTO object, and uses the NuGet package AutoMapper, to map from DTO to model class. 
-        //The method returns the newly created ID from the database. 
-
+        /// <summary>
+        /// Creates a new customer.
+        /// </summary>
+        /// <param name="newCustomerDTO">The data transfer object containing new customer details.</param>
+        /// <returns>The unique identifier of the created customer.</returns>
+        ///The post method, are used for creating customers on the website. 
+        ///The method takes a CustomerDTO object, and uses the NuGet package AutoMapper, to map from DTO to model class. 
+        ///The method returns the newly created ID from the database. 
         // POST api/<CustomersController>
         [HttpPost]
         public async Task<ActionResult<int>> Post([FromBody] CustomerDTO newCustomerDTO)
         {
-            
             var customerToMap = _mapper.Map<CustomerDTO, Customer>(newCustomerDTO);
             var customerId = await _customerDAO.CreateAsync(customerToMap, newCustomerDTO.Password);
             return Ok(customerId);
-        }
-
-        // PUT api/<CustomersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<CustomersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
