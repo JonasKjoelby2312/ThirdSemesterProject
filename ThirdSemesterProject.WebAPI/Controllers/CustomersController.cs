@@ -9,6 +9,9 @@ using ThirdSemesterProject.WebAPI.DTOs.DTOConverter;
 
 namespace ThirdSemesterProject.WebAPI.Controllers
 {
+    /// <summary>
+    /// Handles customer-related API operations.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
@@ -16,20 +19,25 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         
         ICustomerDAO _customerDAO;
         private IMapper _mapper;
-       
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomersController"/> class.
+        /// </summary>
+        /// <param name="customerDAO">Data Access Object for customer operations.</param>
+        /// <param name="mapper">AutoMapper instance for mapping between DTOs and models.</param>
         public CustomersController(ICustomerDAO customerDAO, IMapper mapper)
         {
             
             _customerDAO = customerDAO;
             _mapper = mapper;
         }
-        // GET: api/<CustomersController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
+        /// <summary>
+        /// Retrieves a customer by their unique identifier.
+        /// </summary>
+        /// <param name="id">The unique identifier of the customer.</param>
+        /// <returns>An <see cref="ActionResult"/> containing the customer's details.</returns>
         // GET api/<CustomersController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<int>> Get(int id)
@@ -37,6 +45,12 @@ namespace ThirdSemesterProject.WebAPI.Controllers
             return Ok(await _customerDAO.GetByIdAsync(id));
         }
 
+
+        /// <summary>
+        /// Creates a new customer.
+        /// </summary>
+        /// <param name="newCustomerDTO">The data transfer object containing new customer details.</param>
+        /// <returns>The unique identifier of the created customer.</returns>
         // POST api/<CustomersController>
         [HttpPost]
         public async Task<ActionResult<int>> Post([FromBody] CustomerDTO newCustomerDTO)
@@ -45,18 +59,6 @@ namespace ThirdSemesterProject.WebAPI.Controllers
             var customerToMap = _mapper.Map<CustomerDTO, Customer>(newCustomerDTO);
             var customerId = await _customerDAO.CreateAsync(customerToMap, newCustomerDTO.Password);
             return Ok(customerId);
-        }
-
-        // PUT api/<CustomersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<CustomersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

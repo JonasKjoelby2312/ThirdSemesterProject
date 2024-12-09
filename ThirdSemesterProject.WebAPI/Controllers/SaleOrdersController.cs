@@ -9,18 +9,33 @@ using ThirdSemesterProject.WebAPI.DTOs.DTOConverter;
 
 namespace ThirdSemesterProject.WebAPI.Controllers;
 
+
+/// <summary>
+/// APIController for managing saleOrder realted operations. 
+/// </summary>
 [Route("api/[controller]")]
 [ApiController]
 public class SaleOrdersController : ControllerBase
 {
     ISaleOrderDAO _saleOrderDAO;
 
+
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SaleOrdersController"/> class
+    /// And sets up dependency on a saleOrder data access object.
+    /// </summary>
+    /// <param name="dao"></param> The data access object saleOrder, and is used for database operations.</param>
     public SaleOrdersController(ISaleOrderDAO saleOrderDAO)
     {
         _saleOrderDAO = saleOrderDAO;
     }
 
-
+    /// <summary>
+    /// This HttpGet is used to retrive all saleOrders.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns> All saleOrders from the database</returns>
     // GET: api/<SaleOrdersController>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<SaleOrderDTO>>> Get([FromQuery] int id)
@@ -37,7 +52,13 @@ public class SaleOrdersController : ControllerBase
         }
     }
 
-    // POST api/<SaleOrdersController>
+    /// <summary>
+    /// This HttpPost adds a new saleOrder to the database.
+    /// </summary>
+    /// <param name="saleOrderDTO">The saleOrder to add</param>
+    /// <returns>
+    /// The newly created saleOrder. 
+    /// </returns>
     [HttpPost]
     public async Task<ActionResult<int>> Post([FromBody] SaleOrderDTO saleOrderDTO)
     {
@@ -46,18 +67,13 @@ public class SaleOrdersController : ControllerBase
 
     }
 
-    // PUT api/<SaleOrdersController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
-    // DELETE api/<SaleOrdersController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
-    }
-
+    /// <summary>
+    /// This HttpGet is used to get a single saleOrder from the database with given id.
+    /// </summary>
+    /// <param name="id">The identifyer for the saleOrder </param>
+    /// <returns> 
+    /// Returns a saleOrder from the database, if it does not exsist it will throw a 404 error not found.
+    /// </returns>
     [HttpGet("{id}")]
     public async Task<ActionResult<IEnumerable<OrderLineWithProductsDTO>>> GetOrderLinesWithProducts(int id)
     {

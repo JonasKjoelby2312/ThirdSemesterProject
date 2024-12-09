@@ -7,11 +7,35 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ThirdSemesterProject.WebSite.styles.css" asp-append-version="true" />
+    <style>
+        /* Custom header styles */
+        header .navbar {
+            background-color: #8b4513; /* Wood brown */
+        }
+
+        header .navbar-brand {
+            color: #000000; /* Black text */
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        header .navbar-brand:hover {
+            color: #000000; /* Keep black on hover */
+        }
+
+        header .nav-link {
+            color: #ffffff; /* White text for navigation links */
+        }
+
+        header .nav-link:hover {
+            color: #f0e6d2; /* Light beige hover for links */
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Outdoor Adventure Shop</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -21,23 +45,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                            <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
+                            <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Create">Create User</a>
+                            <a class="nav-link" asp-area="" asp-controller="Customers" asp-action="Create">Create User</a>
                         </li>
                         <li class="nav-item">
                             @if (Context.User.Identity.IsAuthenticated)
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="LogOut">Log out</a>
-                                <a class="nav-link-account text-dark" asp-area="" asp-controller="Customers" asp-action="Details">Account</a>
+                                <a class="nav-link" asp-area="" asp-controller="Customers" asp-action="LogOut">Log out</a>
+                                <a class="nav-link-account" asp-area="" asp-controller="Customers" asp-action="Details">Account</a>
                             }
                             else
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="LogIn">Log in</a>
+                                <a class="nav-link" asp-area="" asp-controller="Customers" asp-action="LogIn">Log in</a>
                             }
                         </li>
                     </ul>

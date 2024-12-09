@@ -59,7 +59,8 @@ public class SaleOrderDAOTests
 
         Customer customer = new Customer() {Name = "Dude", Email = "Dude@gmail.com", Address = new Address() {RoadName = "dudestreet", City = "DudeCity", HouseNo = "69", Zip = 9999 } };
         _saleOrder = new SaleOrder();
-        Product product = new Product() { Name = "fack", Color = "redfack", CurrentStock = 2, Description = "fack is fack", ProductType = "Equipment", SalesPrice = new SalesPrice() { CreationDate = DateTime.Now, Value = 2.2m }, Size = "L", Weight = 2 };
+        Product product = new Product() { Name = "fack", Color = "redfack", CurrentStock = 2, Description = "fack is fack", ProductType = "Equipment", SalesPrice = 2.22M, Size = "L", Weight = 2 };
+        OrderLine orderLine = new OrderLine();
         _saleOrder.AddOrderLineToSaleOrder(new OrderLine { Product = product, Quantity = 12, UnitPrice = 2 });
 
     }
