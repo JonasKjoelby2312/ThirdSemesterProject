@@ -26,7 +26,7 @@ public class CartController : Controller
         return View(GetCartFromCookie());
     }
 
-    public IAPIClient Get_client()
+    public IAPIClient GetClient()
     {
         return _client;
     }
