@@ -7,6 +7,9 @@ using ThirdSemesterProject.APIClient.DTOs;
 
 namespace ThirdSemesterProject.APIClient;
 
+/// <summary>
+/// A interface with methods for the APIClient which defines the operations it can use.
+/// </summary>
 public interface IAPIClient
 {
     Task<int> CreateProductAsync(ProductDTO entity);

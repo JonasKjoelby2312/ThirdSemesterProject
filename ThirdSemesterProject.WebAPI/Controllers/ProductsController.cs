@@ -40,6 +40,7 @@ namespace ThirdSemesterProject.WebAPI.Controllers
             return Ok(await _productsDAO.GetAllAsync());
         }
 
+        //rettes?
         /// <summary>
         /// This HttpGet is used to get a single product from the database with given id.
         /// </summary>
