@@ -5,8 +5,6 @@ using ThirdSemesterProject.APIClient;
 using ThirdSemesterProject.APIClient.DTOs;
 using ThirdSemesterProject.DAL.DAOs;
 using ThirdSemesterProject.DAL.Model;
-
-//using ThirdSemesterProject.DAL.Model; slettes??
 using ThirdSemesterProject.WebSite.Models;
 
 namespace ThirdSemesterProject.WebSite.Controllers;
@@ -16,9 +14,9 @@ public class CartController : Controller
     private IAPIClient _client;
 
     /// <summary>
-    /// Instantiates the IAPIClient. ???
+    /// Creates a variable of IAPIClient using dependency injection.
     /// </summary>
-    /// <param name="client">Takes the IAPIClient and names it client. ??</param>
+    /// <param name="client">Takes the IAPIClient and names it client.</param>
     public CartController(IAPIClient client)
     {
         _client = client;
@@ -69,10 +67,10 @@ public class CartController : Controller
     }
 
     /// <summary>
-    /// 
+    /// This method uses a customer with id needed to create a saleOrder.
     /// </summary>
     /// <param name="saleOrderDTO"></param>
-    /// <returns></returns>
+    /// <returns>a success message if the order is created, else it catch an error message if it failed.</returns>
     // POST: CartController/Create
     [HttpPost]
     [ValidateAntiForgeryToken]  
@@ -95,6 +93,11 @@ public class CartController : Controller
         }
     }
 
+    /// <summary>
+    /// This method creates a saleOrder when a product is added and a orderLines is created.
+    /// </summary>
+    /// <param name="saleOrderDTO"></param>
+    /// <returns>SaleOrder.</returns>
     private async Task<SaleOrderDTO> CartToSaleOrder(SaleOrderDTO saleOrderDTO)
     {
         Cart cart = GetCartFromCookie();
@@ -134,6 +137,12 @@ public class CartController : Controller
         return View();
     }
 
+    /// <summary>
+    /// This method is used for deleting a orderline from the cart.
+    /// </summary>
+    /// <param name="id">uses the product id to delete</param>
+    /// <param name="collection"></param>
+    /// <returns>The cart view with one less product or deletes the whole orderLine if it is zero </returns>
     // POST: CartController/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -149,6 +158,10 @@ public class CartController : Controller
         }
     }
 
+    /// <summary>
+    /// This method is used for empting the whole cart.
+    /// </summary>
+    /// <returns>returns the cart view with an empty cart</returns>
     public ActionResult EmptyCart()
     {
         var cart =  LoadChangeAndSaveCart(cart => cart.EmptyAll());
@@ -156,6 +169,11 @@ public class CartController : Controller
         
     }
 
+    /// <summary>
+    /// This method is used to load and save the cart when something is delted or added to the cart.
+    /// </summary>
+    /// <param name="action"></param>
+    /// <returns>the updated cart</returns>
     private Cart LoadChangeAndSaveCart(Action<Cart> action)
     {
         Cart cart = GetCartFromCookie();
@@ -165,6 +183,9 @@ public class CartController : Controller
         return cart;
     }
 
+    /// <summary>
+    /// This method is responsible for retrieving and deserializing a shopping cart object (Cart) from a browser cookie.
+    /// </summary>
     private Cart GetCartFromCookie()
     {
         Request.Cookies.TryGetValue("Cart", out string? cookie);
@@ -175,7 +196,7 @@ public class CartController : Controller
         return JsonSerializer.Deserialize<Cart>(cookie) ?? new Cart();
     }
 
-    //This method is used for saving the current 
+    //This method is used for saving the current cart.
     private void SaveCartToCookie(Cart cart)
     {
         var cookieOptions = new CookieOptions();

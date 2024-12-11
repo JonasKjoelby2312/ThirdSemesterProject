@@ -28,6 +28,12 @@ public class CustomersController : Controller
         return View();
     }
 
+    /// <summary>
+    /// This method is used to Login a customer if they exist in the system.
+    /// </summary>
+    /// <param name="loginInfo"></param>
+    /// <param name="returnUrl"></param>
+    /// <returns>A succes message for login if true, else it returns error message for loggin in.</returns>
     [HttpPost]
     public async Task<ActionResult> Login([FromForm] CustomerDTO loginInfo, [FromQuery] string returnUrl)
     {
@@ -59,6 +65,10 @@ public class CustomersController : Controller
         return View();
     }
 
+    /// <summary>
+    /// This method uses ASP.Net Core authentication using the identity to verify the customer.
+    /// </summary>
+    /// <param name="claims"></param>
     private async Task SignInUsingClaims(List<Claim> claims)
     {
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -90,6 +100,10 @@ public class CustomersController : Controller
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authPropterties);
     }
 
+    /// <summary>
+    /// This method is used for loggin a customer out of the website.
+    /// </summary>
+    /// <returns>a message that the customer is logged out.</returns>
     public async Task<IActionResult> LogOut()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -102,6 +116,11 @@ public class CustomersController : Controller
         return View();
     }
 
+    /// <summary>
+    /// This method creates a customer if the values in CreateCustomerAsync are vaild.
+    /// </summary>
+    /// <param name="customerDTO"></param>
+    /// <returns>If successful the customer will be returned to the Home view and get a succes message, else a error message.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CustomerDTO customerDTO)
@@ -126,6 +145,10 @@ public class CustomersController : Controller
         return View();
     }
     
+    /// <summary>
+    /// This method is used for seeing the details about the logged in customer.
+    /// </summary>
+    /// <returns>A view of the customer details</returns>
     public async Task<ActionResult> Details()
     {
         int id = Int32.Parse(User.Claims.Where(claim => claim.Type == "user_id").Select(claim => claim.Value).SingleOrDefault());
@@ -133,6 +156,11 @@ public class CustomersController : Controller
         return View(customer);
     }
 
+    /// <summary>
+    /// This method is used for getting all saleOrders associated with a customer.
+    /// </summary>
+    /// <param name="customerId">Using the customerId to find the saleOrders for the customer.</param>
+    /// <returns>A view with the customers saleOrders.</returns>
     [HttpGet("Customers/{customerId}/SaleOrders")]
     public async Task<ActionResult<IEnumerable<SaleOrderDTO>>> SaleOrders(int customerId)
     {
