@@ -74,6 +74,7 @@ namespace ThirdSemesterProject.DAL.DAOs
         /// <param name="id">takes an id in the params.</param>
         /// <returns>A customer by givin id</returns>
         /// <exception cref="Exception">thros an exception if it fails with the id</exception>
+        /// //SAMME SOM I TIDL. KLASSE
         public async Task<Customer> GetByIdAsync(int id)
         {
             using var connection = CreateConnection();
@@ -81,6 +82,7 @@ namespace ThirdSemesterProject.DAL.DAOs
             try
             {
                 var customer = await connection.QuerySingleOrDefaultAsync<Customer>(GET_CUSTROMER_BY_ID, new { id });
+                connection.Close();
                 return customer;
             }
             catch (Exception ex)
@@ -107,6 +109,7 @@ namespace ThirdSemesterProject.DAL.DAOs
                 {
                     return customerTuple.PersonId;
                 }   
+                connection.Close(); 
                 return -1;
             }
             catch (Exception ex)
