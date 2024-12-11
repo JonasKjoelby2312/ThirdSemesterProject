@@ -1,0 +1,227 @@
+﻿DROP TABLE IF EXISTS order_line;
+DROP TABLE IF EXISTS sale_order;
+DROP TABLE IF EXISTS customer;
+DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS sales_price;
+DROP TABLE IF EXISTS package;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS component;
+DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS address;
+DROP TABLE IF EXISTS zip_city;
+
+CREATE TABLE zip_city(
+    zip_code int PRIMARY KEY NOT NULL,
+    city NVARCHAR(50) not NULL
+
+);
+
+create table address(
+    address_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    house_no NVARCHAR(50) not NULL,
+    road_name NVARCHAR(100) not NULL,
+    fk_zip int FOREIGN KEY REFERENCES zip_city(zip_code)
+);
+
+
+create table person (
+    person_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    name nvarchar(100) NOT NULL,
+    email nvarchar(100) UNIQUE not NULL,
+    phone_no nvarchar(25) UNIQUE NOT NULL,
+    password_hash NVARCHAR(200) not NULL,
+    person_type NVARCHAR(50) not NULL,
+    fk_address_id int FOREIGN KEY REFERENCES address(address_id) on DELETE CASCADE
+    
+);
+create table customer (
+    person_id int PRIMARY KEY NOT NULL,
+FOREIGN KEY (person_id) REFERENCES person(person_id)
+    );
+
+--Fremmed nøgle skal slettes på cascade, spørg Karsten/Jakob
+create table employee (
+    person_id int PRIMARY KEY NOT NULL,
+    salary int not NULL,
+    company_position NVARCHAR(50) not NULL,
+FOREIGN KEY (person_id) REFERENCES person(person_id)
+
+)
+
+
+create table sale_order (
+    sale_order_id int primary key IDENTITY(1,1) not NULL,
+    order_date DATETIME2 not NULL,
+    total DECIMAL not null,
+	fk_customer_id int FOREIGN KEY REFERENCES customer(person_id) not NULL
+    --Mangler forbindelse til customer 
+)
+
+
+
+create table component (
+    component_id int UNIQUE IDENTITY(1,1) not NULL,
+    name NVARCHAR(100) not NULL,
+    description NVARCHAR(200) not NULL,
+    weight DECIMAL not NULL
+ )
+
+create table product (
+    product_id int UNIQUE IDENTITY(1,1) not NULL,
+    name NVARCHAR(100) not NULL,
+    description NVARCHAR(200) not NULL,
+    weight DECIMAL not NULL,
+    size NVARCHAR(50) not NULL,
+    color NVARCHAR(50) not NULL,
+    current_stock int not NULL,
+    product_type NVARCHAR(50) not NULL,
+    --fk_component_id int FOREIGN key REFERENCES component(component_id) on DELETE CASCADE
+)
+
+create table order_line (
+    order_line_id int UNIQUE IDENTITY(1,1) not NULL,
+    quantity int not NULL,
+    unit_price DECIMAL not NULL,
+    fk_sale_order_id int FOREIGN key REFERENCES sale_order(sale_order_id) on DELETE CASCADE,
+    fk_product_id int FOREIGN key REFERENCES product(product_id)
+)
+
+create table package (
+    package_id int UNIQUE IDENTITY(1,1) not NULL,
+    fk_component_id int FOREIGN key REFERENCES component(component_id) on DELETE CASCADE
+) 
+
+create table sales_price (
+    sales_price_id int UNIQUE IDENTITY(1,1) not null,
+    creation_date DATETIME2 not NULL,
+    value decimal not NULL,
+    fk_product_id int FOREIGN key REFERENCES product(product_id) on DELETE CASCADE
+)
+
+insert INTO zip_city (zip_code, city) VALUES 
+(9000, 'Aalborg'),
+(8600, 'Silkeborg'),
+(4200, 'Slagelse')
+
+-- Insert values into address, referencing zip_city
+INSERT INTO address (house_no, road_name, fk_zip) VALUES 
+    ('1A', 'Main St', 9000),  -- Aalborg (9000)
+    ('2B', 'Main St', 9000), 
+    ('3C', 'Main St', 9000), 
+    ('10', 'Market St', 8600),  -- Silkeborg (8600)
+    ('20', 'Market St', 8600), 
+    ('30', 'Market St', 8600), 
+    ('101', 'Lake Rd', 4200),   -- Slagelse (4200)
+    ('102', 'Lake Rd', 4200),
+    ('103', 'Lake Rd', 4200),
+    ('104', 'Lake Rd', 4200);
+
+
+
+INSERT INTO person VALUES 
+    ('John Doe', 'john.doe@example.com', '555-0100', 'hashed_pw_1', 'Employee', 1),
+    ('Jane Smith', 'jane.smith@example.com', '555-0101', 'hashed_pw_2', 'Employee', 2),
+    ('Alice Johnson', 'alice.j@example.com', '555-0102', 'hashed_pw_3', 'Employee', 3),
+    ('Bob Brown', 'bob.brown@example.com', '555-0103', 'hashed_pw_4', 'Employee', 4),
+    ('Charlie Green', 'charlie.green@example.com', '555-0104', 'hashed_pw_5', 'Employee', 5),
+    ('Diana White', 'diana.white@example.com', '555-0105', 'hashed_pw_6', 'Employee', 6),
+    ('Emily Black', 'emily.black@example.com', '555-0106', 'hashed_pw_7', 'Customer', 7),
+    ('Frank Blue', 'frank.blue@example.com', '555-0107', 'hashed_pw_8', 'Customer', 8),
+    ( 'Grace Red', 'grace.red@example.com', '555-0108', 'hashed_pw_9', 'Customer', 9),
+    ('Henry Yellow', 'henry.yellow@example.com', '555-0109', 'hashed_pw_10', 'Customer', 10);
+
+	INSERT INTO customer VALUES
+	(7),
+	(8),
+	(9),
+	(10);
+
+    -- Insert data into component table
+/*INSERT INTO component (name, description, weight) VALUES
+    ('Medium Sized Tent', 'This tent is perfect for 2-3 persons, easy to set up, and very lightweight.', 4.2),
+    ('Large Family Tent', 'A spacious tent for 4-6 persons with extra storage space and weather-resistant materials.', 7.5),
+    ('Small Backpacking Tent', 'Compact and lightweight tent for solo travelers or couples.', 2.5),
+    ('Camping Sleeping Bag', 'Warm sleeping bag suitable for temperatures as low as 0°C.', 1.2),
+    ('Double Sleeping Bag', 'Comfortable sleeping bag for two, ideal for camping in cool temperatures.', 2.4),
+    ('Camping Stove', 'Portable and compact camping stove with adjustable flame.', 1.8),
+    ('Camping Lantern', 'Bright LED lantern with adjustable brightness and a long-lasting battery.', 0.9),
+    ('Portable Water Filter', 'Filter and purify water while camping or hiking, essential for outdoor survival.', 0.6),
+    ('Hiking Backpack', 'A 40L hiking backpack with multiple compartments and ergonomic design.', 1.3),
+    ('Camping Chair', 'Foldable, lightweight camping chair with cup holder, perfect for relaxing by the campfire.', 1.5);*/
+
+
+-- Insert data into product table
+/*INSERT INTO product (size, color, current_stock, product_type, fk_component_id) VALUES
+    ('M', 'Black', 12, 'Equipment', 1),   -- Medium Sized Tent
+    ('L', 'Red', 7, 'Equipment', 2),    -- Large Family Tent
+    ('S', 'Orange', 10, 'Equipment', 3),   -- Small Backpacking Tent
+    ('M', 'White', 15, 'Equipment', 4),   -- Camping Sleeping Bag
+    ('L', 'Equipment', 8,'Equipment', 5),    -- Double Sleeping Bag
+    ('M', 'Clothes', 20, 'Equipment', 6),     -- Camping Stove
+    ('One Size', 'Clothes', 25, 'Equipment' , 7), -- Camping Lantern
+    ('One Size', 'Clothes', 30, 'Equipment', 8), -- Portable Water Filter
+    ('M', 'Clothes', 18, 'Equipment', 9),     -- Hiking Backpack
+    ('One Size', 'Clothes', 50, 'Equipment', 10); -- Camping Chair*/
+
+  INSERT INTO product (name, description, weight, size, color, current_stock, product_type) VALUES
+('Medium Sized Tent', 'This tent is perfect for 2-3 persons, easy to set up, and very lightweight.', 2.5, 'M', 'Black', 12, 'Equipment'),
+('Large Family Tent', 'A spacious tent for 4-6 persons with extra storage space and weather-resistant materials.', 5.0, 'L', 'Red', 7, 'Equipment'),
+('Small Backpacking Tent', 'Compact and lightweight tent for solo travelers or couples.', 1.2, 'S', 'Orange', 10, 'Equipment'),
+('Camping Sleeping Bag', 'Warm sleeping bag suitable for temperatures as low as 0°C.', 1.5, 'M', 'White', 15, 'Equipment'),
+('Double Sleeping Bag', 'Comfortable sleeping bag for two, ideal for camping in cool temperatures.', 2.0, 'L', 'Black', 8, 'Equipment'),
+('Camping Stove', 'Portable and compact camping stove with adjustable flame.', 1.0, 'M', 'Black', 20, 'Equipment'),
+('Camping Lantern', 'Bright LED lantern with adjustable brightness and a long-lasting battery.', 0.5, 'One Size', 'White', 25, 'Equipment'),
+('Portable Water Filter', 'Filter and purify water while camping or hiking, essential for outdoor survival.', 0.3, 'One Size', 'Black', 30, 'Equipment'),
+('Hiking Backpack', 'A 40L hiking backpack with multiple compartments and ergonomic design.', 2.0, 'M', 'Black', 18, 'Equipment'),
+('Camping Chair', 'Foldable, lightweight camping chair with cup holder, perfect for relaxing by the campfire.', 1.0, 'One Size', 'Black', 50, 'Equipment'),
+('Trekking Poles', 'Adjustable trekking poles for stability and support during long hikes.', 0.8, 'One Size', 'Green', 22, 'Equipment'),
+('Hiking Boots', 'Durable hiking boots with excellent traction and ankle support.', 1.5, 'M', 'Brown', 16, 'Footwear'),
+('Hiking Socks', 'Moisture-wicking hiking socks to keep your feet dry and comfortable.', 0.1, 'One Size', 'Gray', 40, 'Footwear'),
+('Sunscreen SPF 50', 'High-SPF sunscreen to protect your skin from harmful UV rays.', 0.05, 'One Size', 'White', 60, 'Toiletries'),
+('Insect Repellent', 'Effective insect repellent to keep mosquitoes and other bugs away.', 0.1, 'One Size', 'Yellow', 35, 'Toiletries'),
+('Portable Solar Charger', 'Compact solar charger to keep your electronics powered while on the go.', 0.2, 'One Size', 'Black', 28, 'Electronics'),
+('Water Bottle', 'Reusable water bottle with a wide mouth and easy-to-clean design.', 0.5, 'One Size', 'Blue', 70, 'Toiletries'),
+('Portable Shelter', 'Quick-deploy portable shelter for emergency situations or extended stays.', 1.0, 'One Size', 'Gray', 15, 'Equipment'),
+('Bear Canister', 'Bear-resistant canister to safely store food and attractants while camping.', 1.2, 'One Size', 'Black', 20, 'Equipment'),
+('Multi-tool', 'Compact multi-tool with various blades and tools for outdoor activities.', 0.3, 'One Size', 'Silver', 25, 'Equipment');
+
+
+      
+
+INSERT INTO sales_price (creation_date, value, fk_product_id) VALUES
+('2023-01-01', 379.95, 1),  -- Medium Sized Tent (historical price)
+('2023-11-01', 399.95, 1),  -- Medium Sized Tent (current price)
+('2022-06-15', 89.95, 6),   -- Camping Stove (historical price)
+('2023-10-01', 99.95, 6),   -- Camping Stove (current price)
+('2022-12-01', 35.95, 10),  -- Camping Chair (historical price)
+('2023-09-01', 39.95, 10),  -- Camping Chair (current price)
+('2023-11-01', 499.95, 2),  -- Large Family Tent (most recent price)
+('2023-11-01', 199.95, 3),  -- Small Backpacking Tent (most recent price)
+('2023-11-01', 149.95, 4),  -- Camping Sleeping Bag (most recent price)
+('2023-11-01', 249.95, 5),  -- Double Sleeping Bag (most recent price)
+('2023-11-01', 29.95, 7),   -- Camping Lantern (most recent price)
+('2023-11-01', 39.95, 8),   -- Portable Water Filter (most recent price)
+('2023-11-01', 149.95, 9),  -- Hiking Backpack (most recent price)
+('2023-11-01', 59.95, 11),  -- Trekking Poles (most recent price)
+('2023-11-01', 129.95, 12), -- Hiking Boots (most recent price)
+('2023-11-01', 9.95, 13),   -- Hiking Socks (most recent price)
+('2023-11-01', 24.95, 14),  -- Sunscreen SPF 50 (most recent price)
+('2023-11-01', 19.95, 15),  -- Insect Repellent (most recent price)
+('2023-11-01', 69.95, 16),  -- Portable Solar Charger (most recent price)
+('2023-11-01', 19.95, 17),  -- Water Bottle (most recent price)
+('2023-11-01', 129.95, 18), -- Portable Shelter (most recent price)
+('2023-11-01', 59.95, 19),  -- Bear Canister (most recent price)
+('2023-11-01', 29.95, 20)   -- Multitool (Most recent price)
+
+
+
+/*SELECT product_id AS productId, 
+       name, 
+       description, 
+       weight, 
+       size, 
+       color, 
+       current_stock AS currentStock, 
+       value AS salesPrice
+FROM product
+JOIN LatestSalesPrice ON product.product_id = LatestSalesPrice.fk_product_id;*/

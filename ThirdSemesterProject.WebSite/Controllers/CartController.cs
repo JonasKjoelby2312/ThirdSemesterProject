@@ -37,8 +37,8 @@ public class CartController : Controller
     /// This method Adds a product to the cart.
     /// </summary>
     /// <param name="id">Uses product id.</param>
-    /// <param name="quantity">adds the quantity to the product added to the cart.</param> ????
-    /// <param name="returnToCart">??</param>
+    /// <param name="quantity">adds the quantity for the product added to the cart.</param> ????
+    /// <param name="returnToCart">???</param>
     /// <returns>the cart index view</returns>
     // GET: CartController/Add/5?quantity=3
     public async Task<ActionResult> Add(int id, int quantity, bool returnToCart = false)
@@ -142,7 +142,7 @@ public class CartController : Controller
     /// </summary>
     /// <param name="id">uses the product id to delete</param>
     /// <param name="collection"></param>
-    /// <returns>The cart view with one less product or deletes the whole orderLine if it is zero </returns>
+    /// <returns>The cart view with one less product or deletes the whole orderLine if it is 0. </returns>
     // POST: CartController/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -166,7 +166,6 @@ public class CartController : Controller
     {
         var cart =  LoadChangeAndSaveCart(cart => cart.EmptyAll());
         return RedirectToAction("Index", cart);
-        
     }
 
     /// <summary>
