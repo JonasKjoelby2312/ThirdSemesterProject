@@ -84,11 +84,24 @@ public class ProductDAO : BaseDAO, IProductDAO
 
     //This method i used for getting all the products on the webpage. 
     //The method returns a IEnumerable<Product>
+    //HAR TILFØJET CLOSE/OPEN CONNECTION, SAMT TRY CATCH. GÆLDER OGSÅ FOR DEN NEDENUNDER. 
     public async Task<IEnumerable<Product>> GetAllAsync()
     {
         using var connection = CreateConnection();
-        var products = await connection.QueryAsync<Product>(GET_PRODUCT_WITH_NEWEST_SALES_PRICE);
-        return products;
+        connection.Open();
+
+
+        try
+        {
+            var products = await connection.QueryAsync<Product>(GET_PRODUCT_WITH_NEWEST_SALES_PRICE);
+            connection.Close();
+            return products;
+        }
+        catch (SqlException ex)
+        {
+
+            throw new Exception($"There was a problem getting all products. Error message was {ex.Message}");
+        }
     }
 
     //This method is used for getting a product by its ID. 
@@ -97,8 +110,20 @@ public class ProductDAO : BaseDAO, IProductDAO
     public async Task<Product> GetByIdAsync(int id)
     {
         using var connection = CreateConnection();
-        var product = await connection.QuerySingleAsync<Product>(SELECT_PRODUCT_BY_ID, new {productId = id});
-        return product; 
+        connection.Open();
+        try
+        {
+            var product = await connection.QuerySingleAsync<Product>(SELECT_PRODUCT_BY_ID, new { productId = id });
+            connection.Close();
+            return product;
+        }
+        catch (SqlException ex)
+        {
+
+            throw new Exception($"Error getting product by id with id:{id}. The exception was:, {ex.Message}");
+        }
+        
+     
     }
 
     public async Task<bool> UpdateAsync(Product entity)

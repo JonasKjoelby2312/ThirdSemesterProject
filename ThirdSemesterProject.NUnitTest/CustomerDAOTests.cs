@@ -52,7 +52,9 @@ public class CustomerDAOTests
     public async Task CreateCustomerTestSucces()
     {
         //Arrange 
-        Customer customer = new Customer() { Name = "Jane Doe", Email = "Jane.Doe@example.com", Address = new Address() {RoadName = "Road", City = "By", HouseNo = "1", Zip = 9000 }, Password = "123", PersonType = "Person", PhoneNO = "56473829" };
+        Customer customer = new Customer() { Name = "Jane Doe", Email = "Jane.Doe@example.com", 
+            Address = new Address() {RoadName = "Road", City = "By", HouseNo = "1", Zip = 9000 }, 
+            Password = "123", PersonType = "Person", PhoneNO = "56473829" };
         //Act
         var customerId =  await _customerDAO.CreateAsync(customer, customer.Password);
         
