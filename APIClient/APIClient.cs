@@ -90,11 +90,10 @@ public class APIClient : IAPIClient
         }
     }
 
-    //Skal ikke bruges pt. vi vil gerne kunne få 10 producter via Id
     /// <summary>
-    /// Retrives all products from the database.(not good if it is a big database with products, time consuming) ???
+    /// Retrives all products from the database.
     /// </summary>
-    /// <returns>true if all the products is retrived</returns>
+    /// <returns>a collection of all products</returns>
     /// <exception cref="HttpRequestException">If it fails it throws an HttpRequestException with the response.</exception>
     public async Task<IEnumerable<ProductDTO>> GetAllProductsAsync()
     {
@@ -176,10 +175,10 @@ public class APIClient : IAPIClient
     }
 
     /// <summary>
-    /// This method returns all the sale orders which is associated to a specific customer. //er det ok??
+    /// This method returns all the sale orders which is associated to a specific customer.
     /// </summary>
     /// <param name="id">Uses customer id.</param>
-    /// <returns>true if all the sale orders associated with the customer is returned.</returns>
+    /// <returns>a collection of saleOrders associated with customer</returns>
     /// <exception cref="HttpRequestException">throws an HttpRequestException if there is an error returning sale orders using the customer id.</exception>
     public async Task<IEnumerable<SaleOrderDTO>> GetAllSaleOrdersByPersonIdAsync(int id)
     {
@@ -194,10 +193,10 @@ public class APIClient : IAPIClient
     }
 
     /// <summary>
-    /// The sale order is associated with orderlines and this method is used to retrive all the orderlines on the sale order. ???
+    /// The method uses the saleOrderID to get OrderLineWithProducts.
     /// </summary>
-    /// <param name="id">Uses the sale order id to retrive the orderline.s</param>
-    /// <returns>true if the orderlines are retrived.</returns>
+    /// <param name="id">Uses the sale order id to retrive the orderline.</param>
+    /// <returns>a collection of orderlines</returns>
     /// <exception cref="HttpRequestException">throws an HttpRequestException if there is an error returning the orderlines.</exception>
     public async Task<IEnumerable<OrderLineWithProductsDTO>> GetAllOrderLinesWithProductsBySaleOrderIdAsync(int id)
     {

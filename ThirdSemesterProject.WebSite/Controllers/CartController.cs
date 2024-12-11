@@ -54,13 +54,13 @@ public class CartController : Controller
         }
         return RedirectToAction("Index", "Products");
     }
-
+    //slettes?
     // GET: CartController/Details/5
     public ActionResult Details(int id)
     {
         return View();
     }
-    
+    //slettes?
     // GET: CartController/Create
     public ActionResult Create()
     {
@@ -68,6 +68,11 @@ public class CartController : Controller
         return View();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="saleOrderDTO"></param>
+    /// <returns></returns>
     // POST: CartController/Create
     [HttpPost]
     [ValidateAntiForgeryToken]  
