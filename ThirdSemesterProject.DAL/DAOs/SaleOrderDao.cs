@@ -11,6 +11,8 @@ using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.DAL.DAOs;
 
+//SaleOrderDao = SaleOrderDAO?
+
 /// <summary>
 /// Implementation of the ISaleOrderDAO interface
 /// </summary>
@@ -79,10 +81,15 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
             throw new Exception("No SaleOrders exsist");
         }
     }
+ 
 
-    //This method is used for creating saleOrders
-    //The method takes a saleOrder object in the params. 
-    //The method returns the newly created saleOrderID. 
+    //lav sammen evt. i forhold samtigheds problem
+    /// <summary>
+    /// Used for creating a saleOrder.
+    /// </summary>
+    /// <param name="entity">SaleOrder object??</param>
+    /// <returns>the newly created saleOrderID.</returns>
+    /// <exception cref="Exception">?</exception>
     public async Task<int> CreateAsync(SaleOrder entity)
     {
         using var connection = CreateConnection();
@@ -154,6 +161,7 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
     }
 
 
+    //slettes?
     public Task<bool> Delete(SaleOrder entity)
     {
         throw new NotImplementedException();

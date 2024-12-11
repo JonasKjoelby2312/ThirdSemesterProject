@@ -6,7 +6,7 @@ using ThirdSemesterProject.APIClient.DTOs;
 using ThirdSemesterProject.DAL.DAOs;
 using ThirdSemesterProject.DAL.Model;
 
-//using ThirdSemesterProject.DAL.Model;
+//using ThirdSemesterProject.DAL.Model; slettes??
 using ThirdSemesterProject.WebSite.Models;
 
 namespace ThirdSemesterProject.WebSite.Controllers;
@@ -15,6 +15,10 @@ public class CartController : Controller
 {
     private IAPIClient _client;
 
+    /// <summary>
+    /// Instantiates the IAPIClient. ???
+    /// </summary>
+    /// <param name="client">Takes the IAPIClient and names it client. ??</param>
     public CartController(IAPIClient client)
     {
         _client = client;
@@ -31,6 +35,13 @@ public class CartController : Controller
         return _client;
     }
 
+    /// <summary>
+    /// This method Adds a product to the cart.
+    /// </summary>
+    /// <param name="id">Uses product id.</param>
+    /// <param name="quantity">adds the quantity to the product added to the cart.</param> ????
+    /// <param name="returnToCart">??</param>
+    /// <returns>the cart index view</returns>
     // GET: CartController/Add/5?quantity=3
     public async Task<ActionResult> Add(int id, int quantity, bool returnToCart = false)
     {
@@ -159,6 +170,7 @@ public class CartController : Controller
         return JsonSerializer.Deserialize<Cart>(cookie) ?? new Cart();
     }
 
+    //This method is used for saving the current 
     private void SaveCartToCookie(Cart cart)
     {
         var cookieOptions = new CookieOptions();

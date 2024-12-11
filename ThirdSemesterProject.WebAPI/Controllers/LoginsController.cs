@@ -26,7 +26,6 @@ namespace ThirdSemesterProject.WebAPI.Controllers
             _customerDAO = customerDAO;
         }
 
-
         /// <summary>
         /// This method authenticates a customer based on email and password.
         /// </summary>

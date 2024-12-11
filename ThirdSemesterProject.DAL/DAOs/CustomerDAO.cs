@@ -68,9 +68,12 @@ namespace ThirdSemesterProject.DAL.DAOs
             throw new NotImplementedException();
         }
 
-        //This method is used for getting a customer by ID. 
-        //The method takes an id in the params
-        //The method returns a Task<Customer>
+        /// <summary>
+        /// This method is used for getting a customer by ID.
+        /// </summary>
+        /// <param name="id">takes an id in the params.</param>
+        /// <returns>A customer by givin id</returns>
+        /// <exception cref="Exception">thros an exception if it fails with the id</exception>
         public async Task<Customer> GetByIdAsync(int id)
         {
             using var connection = CreateConnection();
@@ -89,7 +92,7 @@ namespace ThirdSemesterProject.DAL.DAOs
 
         //This method is used for logging in to the webpage. 
         //The method takes an email and password in the params. 
-        //The BCryptTool is used for salting and hasing the password from the user
+        //The BCryptTool is used for salting and hashing the password from the user
         //And is checked against the salted and hashed password from the database. 
         //If the passwords and email matches the one in the database, 
         //The method returns the customerId, else it will return -1. 
@@ -113,7 +116,7 @@ namespace ThirdSemesterProject.DAL.DAOs
             }
         }
 
-        public Task<bool> UpdateAsync(Customer entity)
+        public Task<bool> UpdateAsync(Customer entity) //slettes?
         {
             throw new NotImplementedException();
         }

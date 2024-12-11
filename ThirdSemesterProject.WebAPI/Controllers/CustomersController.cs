@@ -51,7 +51,7 @@ namespace ThirdSemesterProject.WebAPI.Controllers
             return NotFound();
         }
 
-
+        //rettes?
         /// <summary>
         /// Creates a new customer.
         /// </summary>
