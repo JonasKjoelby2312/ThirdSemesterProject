@@ -97,8 +97,20 @@ public class ProductDAO : BaseDAO, IProductDAO
     public async Task<Product> GetByIdAsync(int id)
     {
         using var connection = CreateConnection();
-        var product = await connection.QuerySingleAsync<Product>(SELECT_PRODUCT_BY_ID, new {productId = id});
-        return product; 
+        connection.Open();
+        try
+        {
+            var product = await connection.QuerySingleAsync<Product>(SELECT_PRODUCT_BY_ID, new { productId = id });
+            connection.Close();
+            return product;
+        }
+        catch (SqlException ex)
+        {
+
+            throw new Exception($"Error getting product by id with id:{id}. The exception was:, {ex.Message}");
+        }
+        
+     
     }
 
     public async Task<bool> UpdateAsync(Product entity)

@@ -93,6 +93,7 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
     public async Task<int> CreateAsync(SaleOrder entity)
     {
         using var connection = CreateConnection();
+        connection.Open();
         foreach (OrderLine orderLine in entity.OrderLines)
         {
             int currentStock = await connection.ExecuteScalarAsync<int>(GET_STOCK_BY_PRODUCT_ID, new { productId = orderLine.Product.ProductId });
@@ -101,7 +102,7 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
                 throw new Exception("CurrentStock is less than orderLine.Quantity");
             }
         }
-        connection.Open();
+        
 
         IDbTransaction transaction = connection.BeginTransaction();
 
