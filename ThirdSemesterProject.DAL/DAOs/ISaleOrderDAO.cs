@@ -9,7 +9,7 @@ namespace ThirdSemesterProject.DAL.DAOs;
 
 public interface ISaleOrderDAO
 {
-    public Task<List<SaleOrder>> GetAllSaleOrdersByPersonId(int personId);
+    Task<List<SaleOrder>> GetAllSaleOrdersByPersonId(int personId);
     Task<IEnumerable<SaleOrder>> GetAllAsync();
     Task<SaleOrder> GetByIdAsync(int id);
     Task<int> CreateAsync(SaleOrder entity);
