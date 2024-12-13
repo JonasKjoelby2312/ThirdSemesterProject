@@ -136,7 +136,6 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
     }
 
 
-    //Arbejder videre i morgen
     public async Task<IEnumerable<OrderLineWithProducts>> GetAllOrderLinesWithProductsBySaleOrderId(int id)
     {
         using var connection = CreateConnection();
@@ -164,7 +163,6 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
     }
 
 
-    //slettes?
     public Task<bool> Delete(SaleOrder entity)
     {
         throw new NotImplementedException();
