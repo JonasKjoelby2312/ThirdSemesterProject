@@ -62,7 +62,7 @@ public class SaleOrdersController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<int>> Post([FromBody] SaleOrderDTO saleOrderDTO)
     {
-        return Ok(await _saleOrderDAO.CreateAsync(saleOrderDTO.FromDTO()));
+        return Ok(await _saleOrderDAO.CreateSaleOrderAsync(saleOrderDTO.FromDTO()));
     }
 
     /// <summary>

@@ -12,7 +12,7 @@ public interface ISaleOrderDAO
     Task<List<SaleOrder>> GetAllSaleOrdersByPersonId(int personId);
     Task<IEnumerable<SaleOrder>> GetAllAsync();
     Task<SaleOrder> GetByIdAsync(int id);
-    Task<int> CreateAsync(SaleOrder entity);
+    Task<int> CreateSaleOrderAsync(SaleOrder entity);
     Task<bool> Update(SaleOrder entity);
     Task<bool> Delete(SaleOrder entity);
     Task<IEnumerable<SaleOrder>> GetAllSaleOrders(int id);

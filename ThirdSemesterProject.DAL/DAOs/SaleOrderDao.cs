@@ -90,7 +90,7 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
     /// <param name="entity">SaleOrder object??</param>
     /// <returns>the newly created saleOrderID.</returns>
     /// <exception cref="Exception">?</exception>
-    public async Task<int> CreateAsync(SaleOrder entity) //skift navn til CreateSaleOrderAsync
+    public async Task<int> CreateSaleOrderAsync(SaleOrder entity) //skift navn til CreateSaleOrderAsync
     {
         using var connection = CreateConnection();
         foreach (OrderLine orderLine in entity.OrderLines)

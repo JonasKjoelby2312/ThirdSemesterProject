@@ -75,7 +75,7 @@ public class SaleOrderDAOTests
 
 
         //Act
-        var expectedOrderId = await _saleOrderDAO.CreateAsync(_saleOrder);
+        var expectedOrderId = await _saleOrderDAO.CreateSaleOrderAsync(_saleOrder);
         SaleOrder salesOrder = await _saleOrderDAO.GetByIdAsync(expectedOrderId);
         //Assert
 
