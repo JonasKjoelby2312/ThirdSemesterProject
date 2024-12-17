@@ -4,7 +4,6 @@ public class Cart
 {
     public Dictionary<int, ProductQuantity> ProductQuantities { get; set; }
 
-
     public Cart(Dictionary<int, ProductQuantity>? productQuantities = null)
     {
         ProductQuantities = productQuantities ?? new Dictionary<int, ProductQuantity>(); 
@@ -39,7 +38,6 @@ public class Cart
     #region Helper Methods
     //GetTotal and GetNumberOfProducts are methods indstead of readonly properties
     //so they don't give any problems during deserilaization.
-
     public decimal GetTotal()
     {
         decimal total = 0;

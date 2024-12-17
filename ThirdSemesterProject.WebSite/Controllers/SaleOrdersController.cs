@@ -9,9 +9,6 @@ namespace ThirdSemesterProject.WebSite.Controllers
 {
     public class SaleOrdersController : Controller
     {
-
-
-
         IAPIClient _client;
 
         public SaleOrdersController(IAPIClient client)
@@ -30,7 +27,6 @@ namespace ThirdSemesterProject.WebSite.Controllers
         public async Task<ActionResult> Details(int id)
         {
             var orderLinesWithProducts = await _client.GetAllOrderLinesWithProductsBySaleOrderIdAsync(id);
-
             return View(orderLinesWithProducts);
         }
 

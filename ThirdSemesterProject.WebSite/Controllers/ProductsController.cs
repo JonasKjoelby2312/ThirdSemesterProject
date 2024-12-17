@@ -13,7 +13,6 @@ public class ProductsController : Controller
         _client = client;
     }
 
-    
     // GET: ProductsController
     public async Task<ActionResult> Index()
     {

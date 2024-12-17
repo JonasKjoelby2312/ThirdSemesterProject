@@ -15,7 +15,6 @@ public class SaleOrderDAOStub : IDAO<SaleOrder>
     {
         _saleOrders = new List<SaleOrder>();
     }
-
     public int Create(SaleOrder entity)
     {
 
@@ -23,7 +22,6 @@ public class SaleOrderDAOStub : IDAO<SaleOrder>
         entity.SaleOrderId = nextAvailableId;
         _saleOrders.Add(entity);
         return entity.SaleOrderId;
-
     }
 
     public bool Delete(SaleOrder entity)
@@ -35,8 +33,6 @@ public class SaleOrderDAOStub : IDAO<SaleOrder>
     {
         throw new NotImplementedException();
     }
-
-  
 
     public SaleOrder GetById(int id)
     {

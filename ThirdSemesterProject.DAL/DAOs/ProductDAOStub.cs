@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using ThirdSemesterProject.DAL.Model;
 
 namespace ThirdSemesterProject.DAL.DAOs;
-//A static list gets created to hold the products. 
-//10 products gets created, and added to the list. 
+//A static list is to hold the products. 
+//10 products is, and added to the list. 
 public class ProductDAOStub : IDAO<Product>
 {
     private static List<Product> _products = new List<Product>() {
@@ -41,7 +41,8 @@ public class ProductDAOStub : IDAO<Product>
     {
         throw new NotImplementedException();
     }
-    //Returns the whole list of products
+
+    //Returns the all products
     public IEnumerable<Product> GetAll()
     {
         return _products;
@@ -56,15 +57,14 @@ public class ProductDAOStub : IDAO<Product>
     {
         return _products.Where(product => product.ProductType == "Clothes");
     }
-//The method gets an id in the paramaters, and uses that to look through the list of products,
-//to find the one that matches the one sent in the parameters
+
+    //The method gets an id in the paramaters, and uses that to look through the list of products,
+    //To find the one that matches the one sent in the parameters
     public Product GetById(int id)
     {
         Product productToReturn = _products.FirstOrDefault(product => product.ProductId == id);
         return productToReturn;
     }
-
-    
 
     public bool Update(Product entity)
     {

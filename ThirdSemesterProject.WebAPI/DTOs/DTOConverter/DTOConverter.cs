@@ -110,7 +110,6 @@ public static class DTOConverter
     /// <returns>An enumerable of <see cref="OrderLineWithProductsDTO"/>s.</returns>
     public static IEnumerable<OrderLineWithProductsDTO> ToDTOs(this IEnumerable<OrderLineWithProducts> orderLineWithProducts)
     {   
-
         foreach (var olwp in orderLineWithProducts)
         {
             yield return olwp.ToDTO();

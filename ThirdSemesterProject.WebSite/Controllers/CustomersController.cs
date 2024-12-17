@@ -11,9 +11,7 @@ namespace ThirdSemesterProject.WebSite.Controllers;
 
 public class CustomersController : Controller
 {
-
     IAPIClient _client;
-
 
     public CustomersController(IAPIClient client)
     {

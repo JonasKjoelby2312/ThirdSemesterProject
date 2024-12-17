@@ -119,7 +119,7 @@ namespace ThirdSemesterProject.DAL.DAOs
             }
         }
 
-        public Task<bool> UpdateAsync(Customer entity) //slettes?
+        public Task<bool> UpdateAsync(Customer entity)
         {
             throw new NotImplementedException();
         }

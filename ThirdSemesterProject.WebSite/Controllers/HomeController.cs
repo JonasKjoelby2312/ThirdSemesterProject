@@ -7,17 +7,13 @@ namespace ThirdSemesterProject.WebSite.Controllers
 {
     public class HomeController : Controller
     {
-
         private IAPIClient _client;
-
 
         public HomeController(IAPIClient client)
         {
             
             _client = client;
         }
-
-        
 
         public async Task<IActionResult> Index()
         {

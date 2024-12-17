@@ -27,7 +27,6 @@ namespace ThirdSemesterProject.WebAPI.Controllers
         /// <param name="mapper">AutoMapper instance for mapping between DTOs and models.</param>
         public CustomersController(ICustomerDAO customerDAO, IMapper mapper)
         {
-
             _customerDAO = customerDAO;
             _mapper = mapper;
         }

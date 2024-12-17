@@ -16,6 +16,5 @@ public class ProductDTO
 
     public ProductDTO()
     {
-
     }
 }

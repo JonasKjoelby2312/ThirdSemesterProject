@@ -62,7 +62,6 @@ public class SaleOrderDAOTests
         Product product = new Product() { Name = "fack", Color = "redfack", CurrentStock = 2, Description = "fack is fack", ProductType = "Equipment", SalesPrice = 2.22M, Size = "L", Weight = 2 };
         OrderLine orderLine = new OrderLine();
         _saleOrder.AddOrderLineToSaleOrder(new OrderLine { Product = product, Quantity = 12, UnitPrice = 2 });
-
     }
 
     [Test]
@@ -82,6 +81,4 @@ public class SaleOrderDAOTests
 
         Assert.That(_saleOrder.SaleOrderId, Is.GreaterThan(0));
     }
-
-
 }

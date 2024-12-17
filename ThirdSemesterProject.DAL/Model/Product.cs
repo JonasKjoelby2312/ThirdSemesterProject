@@ -27,6 +27,4 @@ public class Product
     {
         return $"Product Size: {Size}, product name: {Name}, description: {Description}, weight: {Weight}, stock: {CurrentStock}";
     }
-    // , price: {SalesPrice
-
 }

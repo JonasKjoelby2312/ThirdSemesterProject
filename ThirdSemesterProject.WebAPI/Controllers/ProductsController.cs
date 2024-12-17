@@ -57,7 +57,6 @@ namespace ThirdSemesterProject.WebAPI.Controllers
             {
                 return NotFound();
             }
-
             return Ok(foundProductById);
         }
 

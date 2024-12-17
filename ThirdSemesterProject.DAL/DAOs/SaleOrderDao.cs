@@ -90,7 +90,7 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
     /// <param name="entity">SaleOrder object??</param>
     /// <returns>the newly created saleOrderID.</returns>
     /// <exception cref="Exception">?</exception>
-    public async Task<int> CreateAsync(SaleOrder entity)
+    public async Task<int> CreateAsync(SaleOrder entity) //skift navn til CreateSaleOrderAsync
     {
         using var connection = CreateConnection();
         foreach (OrderLine orderLine in entity.OrderLines)
@@ -103,7 +103,6 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
         }
 
         connection.Open();
-
         IDbTransaction transaction = connection.BeginTransaction();
 
         try
@@ -135,7 +134,6 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
         }
     }
 
-
     public async Task<IEnumerable<OrderLineWithProducts>> GetAllOrderLinesWithProductsBySaleOrderId(int id)
     {
         using var connection = CreateConnection();
@@ -159,9 +157,7 @@ public class SaleOrderDAO : BaseDAO, ISaleOrderDAO
 
             throw new Exception("Could not get orderlines and products exception was: ", ex) ;
         }
-        
     }
-
 
     public Task<bool> Delete(SaleOrder entity)
     {

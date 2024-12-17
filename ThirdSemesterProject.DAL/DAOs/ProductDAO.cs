@@ -84,12 +84,10 @@ public class ProductDAO : BaseDAO, IProductDAO
 
     //This method i used for getting all the products on the webpage. 
     //The method returns a IEnumerable<Product>
-    //HAR TILFØJET CLOSE/OPEN CONNECTION, SAMT TRY CATCH. GÆLDER OGSÅ FOR DEN NEDENUNDER. 
     public async Task<IEnumerable<Product>> GetAllAsync()
     {
         using var connection = CreateConnection();
         connection.Open();
-
 
         try
         {
@@ -122,8 +120,6 @@ public class ProductDAO : BaseDAO, IProductDAO
 
             throw new Exception($"Error getting product by id with id:{id}. The exception was:, {ex.Message}");
         }
-        
-     
     }
 
     public async Task<bool> UpdateAsync(Product entity)
@@ -131,8 +127,6 @@ public class ProductDAO : BaseDAO, IProductDAO
         throw new NotImplementedException();
     }
 
-
-    //Skal denne være en del af det endelige project? 
     public async Task<IEnumerable<Product>> FindProductsByPartOfNameAsync(string givenPartOfName)
     {
         using var connection = CreateConnection();

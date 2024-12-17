@@ -15,7 +15,6 @@ public class ProductQuantity
         Price = product.SalesPrice;
         Name = product.Name;
         Quantity = quantity;
-      
     }
 
     public ProductQuantity()

@@ -16,5 +16,4 @@
             CreationDate = creationDate;
             Value = value;
         }
-    
 }

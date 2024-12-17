@@ -62,7 +62,6 @@ public class CartController : Controller
     // GET: CartController/Create
     public ActionResult Create()
     {
-
         return View();
     }
 
@@ -103,9 +102,7 @@ public class CartController : Controller
         Cart cart = GetCartFromCookie();
         foreach (ProductQuantity item in cart.ProductQuantities.Values)
         {
-            
             saleOrderDTO.OrderLines.Add(new OrderLineDTO() { Quantity = item.Quantity, UnitPrice = item.Price, ProductDTO = new ProductDTO { ProductId = item.Id, CurrentStock = 0, Description = "", Name = "", ProductType = "", Color = "", SalesPrice = 100, Size = "", Weight = 2 }});
-
         }
         return saleOrderDTO;
     }
